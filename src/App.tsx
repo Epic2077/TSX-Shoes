@@ -1,9 +1,9 @@
-import Loading from "./components/loading/Loading";
+import Onboarding from "./pages/onboarding/Oboarding";
 
 function App() {
   return (
     <>
-      <Loading />
+      <Onboarding />
     </>
   );
 }

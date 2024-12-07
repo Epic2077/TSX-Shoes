@@ -5,6 +5,10 @@ interface LoadingProps {
 }
 
 const Loading: React.FC<LoadingProps> = ({ setPage }) => {
+  setTimeout(() => {
+    setPage(1);
+  }, 3000);
+
   return (
     <div className="w-screen min-h-screen flex flex-col bg-slate-100 justify-center items-center">
       <div className="flex gap-4 items-center mb-[79px]">
