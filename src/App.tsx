@@ -1,5 +1,11 @@
+import Loading from "./components/loading/Loading";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Loading />
+    </>
+  );
 }
 
 export default App;
