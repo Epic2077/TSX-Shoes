@@ -5,6 +5,9 @@ interface WelcomeProps {
 }
 
 const WelcomePage: React.FC<WelcomeProps> = ({ setPage }) => {
+  setTimeout(() => {
+    setPage(2);
+  }, 3000);
   return (
     <div className="w-screen h-screen bg-[url('../../../src/assets/images/welcome-image.png')] grid items-end">
       <img

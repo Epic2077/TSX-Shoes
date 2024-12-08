@@ -1,14 +1,16 @@
 import { useState } from "react";
-import Loading from "../../components/loading/Loading";
-import WelcomePage from "../../components/welcome/Welcome";
+import Loading from "../../modules/loading/Loading";
+import WelcomePage from "../../modules/welcome/Welcome";
+import Boarding from "../../modules/boarding/Boarding";
 
 const Onboarding = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
 
   return (
     <>
       {page === 0 && <Loading setPage={setPage} />}
       {page === 1 && <WelcomePage setPage={setPage} />}
+      {page === 2 && <Boarding setPage={setPage} />}
     </>
   );
 };
