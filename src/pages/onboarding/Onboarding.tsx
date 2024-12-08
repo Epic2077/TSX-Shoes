@@ -4,7 +4,7 @@ import WelcomePage from "../../modules/welcome/Welcome";
 import Boarding from "../../modules/boarding/Boarding";
 
 const Onboarding = () => {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
 
   return (
     <>

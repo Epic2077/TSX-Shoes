@@ -1,9 +1,9 @@
-import Onboarding from "./pages/onboarding/Oboarding";
+import RouterPage from "./router/Router";
 
 function App() {
   return (
     <>
-      <Onboarding />
+      <RouterPage />
     </>
   );
 }
