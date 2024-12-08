@@ -37,7 +37,7 @@ const Boarding: React.FC<boardingProps> = ({ setPage }) => {
         ))}
       </div>
       <button
-        className="absolute bottom-0 mb-8 px-4 py-2 w-[380px] bg-black text-white rounded-full"
+        className="absolute bottom-0 mb-8 px-4 py-2 w-[380px] h-[47px] grid items-center justify-center bg-black text-white rounded-full"
         onClick={handleNextSlide}
       >
         {currentSlide === Slides.length - 1 ? "Get Started!" : "Next"}
