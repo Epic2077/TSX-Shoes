@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { Slides } from "../../components/slides/slide";
+import { useNavigate } from "react-router-dom";
 
 interface boardingProps {
   setPage: (value: number) => void;
 }
 
-const Boarding: React.FC<boardingProps> = ({ setPage }) => {
+const Boarding: React.FC<boardingProps> = () => {
+  const navigate = useNavigate();
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const handleNextSlide = () => {
     if (currentSlide < Slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
-      setPage(1);
+      navigate("/Login");
     }
   };
 
