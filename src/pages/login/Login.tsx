@@ -70,6 +70,32 @@ const LoginPage: React.FC = () => {
             onClick={togglePasswordVisibility}
           />
         </div>
+        <div className="flex justify-between w-full mt-[21px]">
+          <div className="flex gap-2">
+            <input
+              type="checkbox"
+              name="remember"
+              id="remember"
+              className="accent-black rounded"
+            />
+            <label htmlFor="remember" className="text-base font-normal">
+              Remember me
+            </label>
+          </div>
+          <p className="text-base">Forgot Password?</p>
+        </div>
+        <div className="absolute bottom-0 grid justify-center mb-4">
+          <button
+            name="submit"
+            id="submit"
+            className="bg-black opacity-50 text-white grid justify-center items-center w-[380px] h-12 rounded-full mb-5"
+          >
+            Sign In
+          </button>
+          <div className="flex justify-center gap-5">
+            <p className="">Don</p>
+          </div>
+        </div>
       </form>
     </div>
   );
