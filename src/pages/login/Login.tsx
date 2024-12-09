@@ -130,7 +130,10 @@ const LoginPage: React.FC = () => {
           </button>
           <div className="flex justify-center gap-5">
             <p className="text-base opacity-50">Don't have an account?</p>
-            <p className="text-base" onClick={navigate("/Signup")}>
+            <p
+              className="text-base cursor-pointer"
+              onClick={() => navigate("/Signup")}
+            >
               Register Now
             </p>
           </div>
