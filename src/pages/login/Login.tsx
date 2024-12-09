@@ -1,8 +1,16 @@
 import React, { useRef, useState } from "react";
 import Back from "../../layout/header.tsx/back";
+import {
+  handleChange,
+  handleSubmit,
+} from "../../components/loginFunction/FormHandler";
 
 const LoginPage: React.FC = () => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState<{ email?: string; password?: string }>({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
@@ -32,43 +40,65 @@ const LoginPage: React.FC = () => {
       <h1 className="text-center font-semibold text-[32px] text-black">
         Login to Your Account
       </h1>
-      <form action="" className="mt-11">
+      <form
+        action=""
+        className="mt-11"
+        onSubmit={(e) => handleSubmit(e, formData, setError)}
+      >
         {/* Email Input */}
-        <div
-          className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded mb-[21px]"
-          onFocus={() => handleFocus(emailInputRef)}
-          onBlur={() => handleBlur(emailInputRef)}
-          ref={emailInputRef}
-        >
-          <img src="../../../src/assets/icons/email.svg" alt="email" />
-          <input
-            type="email"
-            name="email"
-            className="p-[4px] bg-transparent h-[24px] w-full outline-none"
-            placeholder="Email"
-          />
+        <div className="mb-4">
+          <div
+            className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded mb-[21px]"
+            onFocus={() => handleFocus(emailInputRef)}
+            onBlur={() => handleBlur(emailInputRef)}
+            ref={emailInputRef}
+          >
+            <img src="../../../src/assets/icons/email.svg" alt="email" />
+            <input
+              type="text"
+              name="email"
+              value={formData.email}
+              onChange={(e) =>
+                handleChange(e, setFormData, setError, setIsButtonEnabled)
+              }
+              className="p-[4px] bg-transparent h-[24px] w-full outline-none"
+              placeholder="Email"
+            />
+          </div>
+          {error.email && (
+            <p className="text-red-500 text-sm mt-1">{error.email}</p>
+          )}
         </div>
 
         {/* Password Input */}
-        <div
-          className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded"
-          onFocus={() => handleFocus(passwordInputRef)}
-          onBlur={() => handleBlur(passwordInputRef)}
-          ref={passwordInputRef}
-        >
-          <img src="../../../src/assets/icons/lock.svg" alt="pass" />
-          <input
-            type={isPasswordVisible ? "text" : "password"}
-            name="password"
-            className="p-[4px] bg-transparent h-[24px] w-full outline-none"
-            placeholder="Password"
-          />
-          <img
-            src="../../../src/assets/icons/eye.svg"
-            alt="toggle visibility"
-            className="cursor-pointer"
-            onClick={togglePasswordVisibility}
-          />
+        <div className="mb-4">
+          <div
+            className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded"
+            onFocus={() => handleFocus(passwordInputRef)}
+            onBlur={() => handleBlur(passwordInputRef)}
+            ref={passwordInputRef}
+          >
+            <img src="../../../src/assets/icons/lock.svg" alt="pass" />
+            <input
+              type={isPasswordVisible ? "text" : "password"}
+              name="password"
+              value={formData.password}
+              onChange={(e) =>
+                handleChange(e, setFormData, setError, setIsButtonEnabled)
+              }
+              className="p-[4px] bg-transparent h-[24px] w-full outline-none"
+              placeholder="Password"
+            />
+            <img
+              src="../../../src/assets/icons/eye.svg"
+              alt="toggle visibility"
+              className="cursor-pointer"
+              onClick={togglePasswordVisibility}
+            />
+          </div>
+          {error.password && (
+            <p className="text-red-500 text-sm mt-1">{error.password}</p>
+          )}
         </div>
         <div className="flex justify-between w-full mt-[21px]">
           <div className="flex gap-2">
@@ -88,7 +118,13 @@ const LoginPage: React.FC = () => {
           <button
             name="submit"
             id="submit"
-            className="bg-black opacity-50 text-white grid justify-center items-center w-[380px] h-12 rounded-full mb-5"
+            type="submit"
+            disabled={!isButtonEnabled}
+            className={`${
+              isButtonEnabled
+                ? "bg-black text-white cursor-pointer"
+                : "bg-gray-300 text-gray-600 cursor-not-allowed"
+            } grid justify-center items-center w-[380px] h-12 rounded-full mb-5`}
           >
             Sign In
           </button>
