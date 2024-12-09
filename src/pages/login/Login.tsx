@@ -93,7 +93,8 @@ const LoginPage: React.FC = () => {
             Sign In
           </button>
           <div className="flex justify-center gap-5">
-            <p className="">Don</p>
+            <p className="text-base opacity-50">Don't have an account?</p>
+            <p className="text-base">Register Now</p>
           </div>
         </div>
       </form>
