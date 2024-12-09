@@ -35,6 +35,9 @@ const LoginPage: React.FC = () => {
   return (
     <div className="px-6 py-[12px]">
       <LoginHeader />
+      <h1 className="text-center font-semibold text-[32px] text-black">
+        Login to Your Account
+      </h1>
       <form
         action=""
         className="mt-11"
