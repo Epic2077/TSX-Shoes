@@ -4,6 +4,7 @@ import {
   handleChange,
   handleSubmit,
 } from "../../components/loginFunction/FormHandler";
+import LoginHeader from "../../layout/loginHeader/LoginHeader";
 
 const LoginPage: React.FC = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -33,13 +34,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="px-6 py-[12px]">
-      <Back address="/" />
-      <div className="mt-[76px] mb-[118px] grid justify-center items-center">
-        <img src="../../../src/assets/icons/black-logo.svg" alt="Logo" />
-      </div>
-      <h1 className="text-center font-semibold text-[32px] text-black">
-        Login to Your Account
-      </h1>
+      <LoginHeader />
       <form
         action=""
         className="mt-11"
