@@ -1,12 +1,14 @@
 import React, { useRef, useState } from "react";
-import Back from "../../layout/header.tsx/back";
 import {
   handleChange,
   handleSubmit,
 } from "../../components/loginFunction/FormHandler";
 import LoginHeader from "../../layout/loginHeader/LoginHeader";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState<{ email?: string; password?: string }>({});
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -64,7 +66,7 @@ const LoginPage: React.FC = () => {
             />
           </div>
           {error.email && (
-            <p className="text-red-500 text-sm mt-1">{error.email}</p>
+            <p className="text-[#C50A0A] text-sm mt-1">{error.email}</p>
           )}
         </div>
 
@@ -95,7 +97,7 @@ const LoginPage: React.FC = () => {
             />
           </div>
           {error.password && (
-            <p className="text-red-500 text-sm mt-1">{error.password}</p>
+            <p className="text-[#C50A0A] text-sm mt-1">{error.password}</p>
           )}
         </div>
         <div className="flex justify-between w-full mt-[21px]">
@@ -128,7 +130,9 @@ const LoginPage: React.FC = () => {
           </button>
           <div className="flex justify-center gap-5">
             <p className="text-base opacity-50">Don't have an account?</p>
-            <p className="text-base">Register Now</p>
+            <p className="text-base" onClick={navigate("/Signup")}>
+              Register Now
+            </p>
           </div>
         </div>
       </form>
