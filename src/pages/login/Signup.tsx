@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LoginHeader from "../../layout/loginHeader/LoginHeader";
+import { Input } from "../../layout/loginInput/input";
 
 const SignupPage: React.FC = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -7,6 +8,7 @@ const SignupPage: React.FC = () => {
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
   };
+
   return (
     <div className="px-6 py-[12px]">
       <LoginHeader />
@@ -14,67 +16,66 @@ const SignupPage: React.FC = () => {
         Lets Create An Account
       </h1>
       <form className="grid gap-[24px]">
-        <div
-          className="flex w-full h-9 items-center gap-1 bg-[#FAFAFA] p-[13px] rounded"
+        <Input
+          icon="user"
+          placeholder="Username"
+          name="user"
+          type="text"
           id="userName"
-        >
-          <img src="../../../src/assets/icons/user.svg" alt="user" />
-          <input
-            className="bg-transparent w-full h-9 outline-none"
-            type="text"
-            placeholder="Username"
-            name="user"
-          />
-        </div>
-        <div
-          className="flex w-full h-9 items-center gap-1 bg-[#FAFAFA] p-[13px] rounded"
+        />
+        <Input
+          icon="email"
+          placeholder="Email"
+          name="email"
+          type="email"
           id="email"
-        >
-          <img src="../../../src/assets/icons/email.svg" alt="email" />
-          <input
-            className="bg-transparent w-full h-9 outline-none"
+        />
+        <div className="flex gap-[12px]">
+          <Input
+            icon="user"
+            placeholder="First name"
+            name="firstName"
             type="text"
-            placeholder="Email"
-            name="email"
+            id="FirstName"
+          />
+          <Input
+            icon="user"
+            placeholder="Last name"
+            name="lastName"
+            type="text"
+            id="lastName"
           />
         </div>
-        <div className="flex"></div>
-        <div
-          className="flex w-full h-9 items-center gap-1 bg-[#FAFAFA] p-[13px] rounded"
+        <Input
+          icon="lock"
+          placeholder="Password"
+          name="pass"
+          type={isPasswordVisible ? "text" : "password"}
           id="password"
-        >
-          <img src="../../../src/assets/icons/lock.svg" alt="pass" />
-          <input
-            className="bg-transparent w-full h-9 outline-none"
-            placeholder="Password"
-            name="pass"
-            type={isPasswordVisible ? "text" : "password"}
-          />
-          <img
-            src="../../../src/assets/icons/eye.svg"
-            alt="toggle visibility"
-            className="cursor-pointer"
-            onClick={togglePasswordVisibility}
-          />
-        </div>
-        <div
-          className="flex w-full h-9 items-center gap-1 bg-[#FAFAFA] p-[13px] rounded"
+          customChildren={
+            <img
+              src="../../../src/assets/icons/eye.svg"
+              alt="toggle visibility"
+              className="cursor-pointer"
+              onClick={togglePasswordVisibility}
+            />
+          }
+        />
+        <Input
+          icon="lock"
+          placeholder="Confirm Password"
+          name="confirmPass"
+          type={isPasswordVisible ? "text" : "password"}
           id="confirmPassword"
-        >
-          <img src="../../../src/assets/icons/lock.svg" alt="pass" />
-          <input
-            className="bg-transparent w-full h-9 outline-none"
-            type={isPasswordVisible ? "text" : "password"}
-            placeholder="Confirm Password"
-            name="confirmPass"
-          />
-          <img
-            src="../../../src/assets/icons/eye.svg"
-            alt="toggle visibility"
-            className="cursor-pointer"
-            onClick={togglePasswordVisibility}
-          />
-        </div>
+          customChildren={
+            <img
+              src="../../../src/assets/icons/eye.svg"
+              alt="toggle visibility"
+              className="cursor-pointer"
+              onClick={togglePasswordVisibility}
+            />
+          }
+        />
       </form>
     </div>
   );
