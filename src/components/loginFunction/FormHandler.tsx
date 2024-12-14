@@ -1,5 +1,6 @@
 import React from "react";
 import { LoginSchema } from "./LoginSchema";
+import { SignupSchema } from "./SignupSchema";
 
 // Define the form data structure
 type FormData = {
@@ -32,12 +33,19 @@ export const handleChange = (
 export const handleSubmit = (
   e: React.FormEvent,
   formData: FormData,
-  setError: React.Dispatch<React.SetStateAction<ErrorType>>
+  setError: React.Dispatch<React.SetStateAction<ErrorType>>,
+  type: string
 ) => {
   e.preventDefault();
 
   // Validate the form data using Zod schema
-  const validResult = LoginSchema.safeParse(formData);
+  let authType;
+  if (type === "Login") {
+    authType = LoginSchema;
+  } else {
+    authType = SignupSchema;
+  }
+  const validResult = authType.safeParse(formData);
   if (!validResult.success) {
     const fieldError: { [key: string]: string } = {};
     validResult.error.errors.forEach((error) => {

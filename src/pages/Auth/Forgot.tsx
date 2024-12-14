@@ -26,7 +26,7 @@ const Forgot: React.FC = () => {
         name="submit"
         id="submit"
         type="submit"
-        className={` absolute bottom-0 mb-[60px] bg-black text-white cursor-pointer grid justify-center items-center w-[380px] h-12 rounded-full`}
+        className={`absolute bottom-0 mb-[60px] bg-black text-white cursor-pointer grid justify-center items-center w-[380px] h-12 rounded-full`}
       >
         Send
       </button>

@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
       <form
         action=""
         className="mt-11"
-        onSubmit={(e) => handleSubmit(e, formData, setError)}
+        onSubmit={(e) => handleSubmit(e, formData, setError, "Login")}
       >
         {/* Email Input */}
         <div className="mb-4">

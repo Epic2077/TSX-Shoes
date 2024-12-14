@@ -24,7 +24,7 @@ export const Input: React.FC<InputProps> = ({
   customChildren,
 }) => {
   return (
-    <div className="flex w-full h-9 items-center gap-1 bg-[#FAFAFA] p-[13px] rounded">
+    <div className="flex w-full h-9 items-center gap-1 bg-[#FAFAFA] p-[13px] rounded mt-6">
       <img src={`../../../src/assets/icons/${icon}.svg`} alt={icon} />
       <input
         placeholder={placeholder}
