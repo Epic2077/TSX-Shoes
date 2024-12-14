@@ -131,7 +131,7 @@ const LoginPage: React.FC = () => {
             <p className="text-base opacity-50">Don't have an account?</p>
             <p
               className="text-base cursor-pointer"
-              onClick={() => navigate("/Signup")}
+              onClick={() => navigate("/Auth/Signup")}
             >
               Register Now
             </p>
