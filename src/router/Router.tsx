@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Onboarding from "../pages/onboarding/Onboarding";
 import LoginPage from "../pages/login/Login";
 import SignupPage from "../pages/login/Signup";
+import AuthLayout from "../layout/auth-layout/AuthLayout";
 
 const RouterPage: React.FC = () => {
   return (
@@ -10,8 +11,10 @@ const RouterPage: React.FC = () => {
       <Routes>
         {/* Define routes here */}
         <Route path="/" element={<Onboarding />} />
-        <Route path="/Login" element={<LoginPage />} />
-        <Route path="/Signup" element={<SignupPage />} />
+        <Route path="/Auth" element={<AuthLayout />}>
+          <Route path="/Auth/Login" element={<LoginPage />} />
+          <Route path="/Auth/Signup" element={<SignupPage />} />
+        </Route>
       </Routes>
     </Router>
   );

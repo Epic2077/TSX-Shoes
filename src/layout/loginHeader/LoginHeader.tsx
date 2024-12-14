@@ -1,5 +1,5 @@
 import React from "react";
-import Back from "../header.tsx/back";
+import Back from "../../components/header.tsx/back";
 
 const LoginHeader: React.FC = () => {
   return (
