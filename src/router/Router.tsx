@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Onboarding from "../pages/onboarding/Onboarding";
-import LoginPage from "../pages/login/Login";
-import SignupPage from "../pages/login/Signup";
+import LoginPage from "../pages/Auth/Login";
+import SignupPage from "../pages/Auth/Signup";
 import AuthLayout from "../layout/auth-layout/AuthLayout";
 
 const RouterPage: React.FC = () => {
