@@ -2,15 +2,21 @@ import React from "react";
 import LoginHeader from "../loginHeader/LoginHeader";
 import { Outlet } from "react-router-dom";
 
-function AuthLayout() {
+interface AuthProps {
+  address: string;
+}
+
+const AuthLayout: React.FC<AuthProps> = ({ address }) => {
   return (
     <div>
-      <LoginHeader />
+      <header className="pt-[12px] px-6">
+        <LoginHeader address={address} />
+      </header>
       <main>
         <Outlet />
       </main>
     </div>
   );
-}
+};
 
 export default AuthLayout;

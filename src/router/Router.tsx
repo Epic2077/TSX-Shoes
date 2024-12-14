@@ -11,7 +11,7 @@ const RouterPage: React.FC = () => {
       <Routes>
         {/* Define routes here */}
         <Route path="/" element={<Onboarding />} />
-        <Route path="/Auth" element={<AuthLayout />}>
+        <Route path="/Auth" element={<AuthLayout address="Auth/Login" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
           <Route path="/Auth/Signup" element={<SignupPage />} />
         </Route>
