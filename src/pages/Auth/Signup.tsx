@@ -1,5 +1,4 @@
 import React from "react";
-import LoginHeader from "../../layout/loginHeader/LoginHeader";
 import FormLayout from "../../components/signup-form/Form";
 
 const SignupPage: React.FC = () => {

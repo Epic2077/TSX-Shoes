@@ -14,6 +14,7 @@ const RouterPage: React.FC = () => {
         <Route path="/Auth" element={<AuthLayout address="Auth/Login" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
           <Route path="/Auth/Signup" element={<SignupPage />} />
+          <Route path="/Auth/ForgotPassword" />
         </Route>
       </Routes>
     </Router>

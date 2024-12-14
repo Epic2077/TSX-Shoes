@@ -3,7 +3,6 @@ import {
   handleChange,
   handleSubmit,
 } from "../../components/loginFunction/FormHandler";
-import LoginHeader from "../../layout/loginHeader/LoginHeader";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
