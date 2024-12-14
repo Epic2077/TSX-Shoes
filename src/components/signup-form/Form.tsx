@@ -111,7 +111,7 @@ const FormLayout: React.FC = () => {
           name="submit"
           id="submit"
           type="submit"
-          className={`bg-black text-white cursor-pointergrid justify-center items-center w-[380px] h-12 rounded-full mb-5`}
+          className={`bg-black text-white cursor-pointer grid justify-center items-center w-[380px] h-12 rounded-full mb-5`}
         >
           Sign Up
         </button>
@@ -119,7 +119,7 @@ const FormLayout: React.FC = () => {
           <p className="text-base opacity-50">Have an account?</p>
           <p
             className="text-base cursor-pointer"
-            onClick={() => navigate("/Login")}
+            onClick={() => navigate("/Auth/Login")}
           >
             Login Now
           </p>

@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="px-6">
+    <div className="px-6 py-[67px]">
       <h1 className="text-center font-semibold text-[32px] text-black">
         Login to Your Account
       </h1>
@@ -110,7 +110,12 @@ const LoginPage: React.FC = () => {
               Remember me
             </label>
           </div>
-          <p className="text-base">Forgot Password?</p>
+          <p
+            className="text-base cursor-pointer"
+            onClick={() => navigate("/Auth/Forgot")}
+          >
+            Forgot Password?
+          </p>
         </div>
         <div className="absolute bottom-0 grid justify-center mb-4">
           <button

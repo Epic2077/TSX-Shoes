@@ -4,6 +4,7 @@ import Onboarding from "../pages/onboarding/Onboarding";
 import LoginPage from "../pages/Auth/Login";
 import SignupPage from "../pages/Auth/Signup";
 import AuthLayout from "../layout/auth-layout/AuthLayout";
+import Forgot from "../pages/Auth/Forgot";
 
 const RouterPage: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const RouterPage: React.FC = () => {
         <Route path="/Auth" element={<AuthLayout address="Auth/Login" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
           <Route path="/Auth/Signup" element={<SignupPage />} />
-          <Route path="/Auth/ForgotPassword" />
+          <Route path="/Auth/Forgot" element={<Forgot />} />
         </Route>
       </Routes>
     </Router>
