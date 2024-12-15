@@ -1,7 +1,8 @@
 import React from "react";
 import HomeHeader from "../../components/home-components/header/header";
 import HomeSearch from "../../components/home-components/search/Search";
-import HomeBrand from "../../components/home-components/brandPage/Brands";
+import HomeBrand from "../../components/home-components/brandPage/brands";
+import HomeProducts from "../../components/home-components/products/Product";
 
 const Home: React.FC = () => {
   return (
@@ -9,6 +10,7 @@ const Home: React.FC = () => {
       <HomeHeader />
       <HomeSearch />
       <HomeBrand />
+      <HomeProducts />
     </div>
   );
 };
