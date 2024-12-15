@@ -1,6 +1,5 @@
 import React from "react";
 import { BrandArray } from "./brandArray";
-import { useNavigate } from "react-router-dom";
 
 const HomeBrand: React.FC = () => {
   return (
