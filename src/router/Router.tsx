@@ -14,8 +14,10 @@ const RouterPage: React.FC = () => {
         {/* Define routes here */}
         <Route path="/" element={<Onboarding />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/Auth" element={<AuthLayout address="Auth/Login" />}>
+        <Route path="/Auth" element={<AuthLayout address="Home" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
+        </Route>
+        <Route path="/Auth" element={<AuthLayout address="Auth/Login" />}>
           <Route path="/Auth/Signup" element={<SignupPage />} />
           <Route path="/Auth/Forgot" element={<Forgot />} />
         </Route>
