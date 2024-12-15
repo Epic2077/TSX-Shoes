@@ -5,7 +5,7 @@ import LoginPage from "../pages/Auth/Login";
 import SignupPage from "../pages/Auth/Signup";
 import AuthLayout from "../layout/auth-layout/AuthLayout";
 import Forgot from "../pages/Auth/Forgot";
-import Home from "../pages/home";
+import Home from "../pages/home/Index";
 
 const RouterPage: React.FC = () => {
   return (
