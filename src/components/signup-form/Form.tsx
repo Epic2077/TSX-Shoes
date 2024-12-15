@@ -1,18 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "../loginInput/input";
 import { useNavigate } from "react-router-dom";
-import { handleChange, handleSubmit } from "../loginFunction/FormHandler";
 
 const FormLayout: React.FC = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState<{
-    username?: string;
-    email?: string;
-    password?: string;
-  }>({});
-
-  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -21,23 +12,14 @@ const FormLayout: React.FC = () => {
   };
 
   return (
-    <form
-      className=""
-      onSubmit={(e) => handleSubmit(e, formData, setError, "Signup")}
-    >
+    <form className="grid">
       <Input
         icon="user"
         placeholder="Username"
         name="user"
         type="text"
         id="userName"
-        onChange={(e) =>
-          handleChange(e, setFormData, setError, setIsButtonEnabled)
-        }
       />
-      {error.username && (
-        <p className="text-[#C50A0A] text-sm">{error.username}</p>
-      )}
       <Input
         icon="email"
         placeholder="Email"
