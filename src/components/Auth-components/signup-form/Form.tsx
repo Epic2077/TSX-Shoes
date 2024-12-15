@@ -73,8 +73,8 @@ const FormLayout: React.FC = () => {
           />
         }
       />
-      <div className="flex gap-2">
-        <div className="min-w-[115px] h-[37px] bg-[#FAFAFA] text-[#6C757D] px-[12px] flex items-center gap-1 rounded">
+      <div className="flex gap-2 ">
+        <div className="min-w-[115px] h-[37px] bg-[#FAFAFA] text-[#6C757D] px-[12px] flex items-center gap-1 rounded mt-6">
           <img src="../../../src/assets/icons/gender.svg" alt="gender" />
           <select
             name="gender"
@@ -95,7 +95,7 @@ const FormLayout: React.FC = () => {
           id="phone"
         />
       </div>
-      <div className="flex gap-2 w-full items-start">
+      <div className="flex gap-2 w-full items-start mt-4">
         <input
           type="checkbox"
           name="policy"
@@ -103,7 +103,7 @@ const FormLayout: React.FC = () => {
           className="accent-black mt-[6px]"
         />
         <label htmlFor="policy">
-          I have read and accept the User Aggrement and Privacy Policy.
+          I have read and accept the User Agreement and Privacy Policy.
         </label>
       </div>
       <div className="absolute bottom-0 grid justify-center mb-4">

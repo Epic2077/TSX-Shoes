@@ -15,7 +15,7 @@ const Boarding: React.FC<boardingProps> = () => {
     if (currentSlide < Slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
-      navigate("/Auth/Login");
+      navigate("/Home");
     }
   };
 

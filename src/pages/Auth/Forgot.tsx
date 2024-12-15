@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "../../components/loginInput/input";
+import { Input } from "../../components/Auth-components/loginInput/input";
 import { useNavigate } from "react-router-dom";
 
 const Forgot: React.FC = () => {

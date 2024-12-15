@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import {
   handleChange,
   handleSubmit,
-} from "../../components/loginFunction/FormHandler";
+} from "../../components/Auth-components/loginFunction/FormHandler";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
       <form
         action=""
         className="mt-11"
-        onSubmit={(e) => handleSubmit(e, formData, setError, "Login")}
+        onSubmit={(e) => handleSubmit(e, formData, setError)}
       >
         {/* Email Input */}
         <div className="mb-4">

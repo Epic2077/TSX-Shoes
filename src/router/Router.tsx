@@ -5,6 +5,7 @@ import LoginPage from "../pages/Auth/Login";
 import SignupPage from "../pages/Auth/Signup";
 import AuthLayout from "../layout/auth-layout/AuthLayout";
 import Forgot from "../pages/Auth/Forgot";
+import Home from "../pages/home";
 
 const RouterPage: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const RouterPage: React.FC = () => {
       <Routes>
         {/* Define routes here */}
         <Route path="/" element={<Onboarding />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/Auth" element={<AuthLayout address="Auth/Login" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
           <Route path="/Auth/Signup" element={<SignupPage />} />
