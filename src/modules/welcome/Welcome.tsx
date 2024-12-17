@@ -9,14 +9,14 @@ const WelcomePage: React.FC<WelcomeProps> = ({ setPage }) => {
     setPage(2);
   }, 3000);
   return (
-    <div className="w-screen h-screen bg-[url('../../../src/assets/images/welcome-image.png')] grid items-end">
+    <div className="w-[428px] min-h-[926px] bg-[url('../../../src/assets/images/welcome-image.png')] grid items-end">
       <img
         src="../../../src/assets/Images/dark-layer.png"
         alt="layer"
-        className="w-screen h-screen absolute top-0"
+        className="w-[428px] h-[950px] absolute top-0"
       />
       <div className="pb-[74px] pl-6 z-10">
-        <h2 className="font-semibold text-[40px] text-white mb-4">
+        <h2 className="font-semibold text-[40px] text-white mt-[-16px]">
           Welcome to 👋
         </h2>
         <h1 className="font-bold text-7xl text-white mb-7">Shoea</h1>

@@ -10,7 +10,7 @@ const Loading: React.FC<LoadingProps> = ({ setPage }) => {
   }, 3000);
 
   return (
-    <div className="w-screen min-h-screen flex flex-col bg-slate-100 justify-center items-center">
+    <div className="w-[428px] min-h-[926px] flex flex-col bg-slate-100 justify-center items-center">
       <div className="flex gap-4 items-center mb-[79px]">
         <div className="w-[59px] h-[59px] grid justify-center items-center bg-black rounded-full">
           <img
