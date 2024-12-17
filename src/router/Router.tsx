@@ -6,6 +6,7 @@ import SignupPage from "../pages/Auth/Signup";
 import AuthLayout from "../layout/auth-layout/AuthLayout";
 import Forgot from "../pages/Auth/Forgot";
 import Home from "../pages/home/Index";
+import ProductFilterLayout from "../layout/product-filter-layout/ProductFilterLayout";
 
 const RouterPage: React.FC = () => {
   return (
@@ -20,6 +21,12 @@ const RouterPage: React.FC = () => {
         <Route path="/Auth" element={<AuthLayout address="Auth/Login" />}>
           <Route path="/Auth/Signup" element={<SignupPage />} />
           <Route path="/Auth/Forgot" element={<Forgot />} />
+        </Route>
+        <Route
+          path="/Products/:ProductName"
+          element={<ProductFilterLayout address="/Home" />}
+        >
+          {/* <Route index element={<ProductBrandFilter />} /> */}
         </Route>
       </Routes>
     </Router>
