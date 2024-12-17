@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { Product } from "../types/type";
+import { Product } from "../types/Product.type";
 import { getProductById, getProducts } from "./Api";
-import { useApi } from "./UseApi";
+import { useApi } from "../hooks/UseApi";
 
 export function useProducts() {
   const getAllProducts = useCallback(() => getProducts(), []);

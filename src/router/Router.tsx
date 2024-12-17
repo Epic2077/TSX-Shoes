@@ -28,6 +28,7 @@ const RouterPage: React.FC = () => {
           <Route path="/Auth/Signup" element={<SignupPage />} />
           <Route path="/Auth/Forgot" element={<Forgot />} />
         </Route>
+        {/* <Route path="/products/:id" element={<ProductPage />} /> */}
         <Route path="/Products/:ProductName" element={<ProductFilterLayout />}>
           <Route index element={<ProductBrandFilter />} />
         </Route>

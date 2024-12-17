@@ -20,7 +20,7 @@ const ProductsContainer = ({ products: propProducts }: Props) => {
   if (!products || products.length === 0) return <div>No products found.</div>;
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center">
+    <div className="flex flex-wrap gap-4 justify-center mt-4">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

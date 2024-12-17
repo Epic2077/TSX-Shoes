@@ -1,4 +1,4 @@
-import { Product } from "../types/type";
+import { Product } from "../types/Product.type";
 import Api from "./Base";
 
 export async function getProducts(params?: { id: number }) {

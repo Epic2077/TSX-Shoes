@@ -16,7 +16,7 @@ const PagesLayout: React.FC = () => {
       <main>
         <Outlet />
       </main>
-      <footer>
+      <footer className="sticky bottom-0">
         <HomeFooter />
       </footer>
     </div>
