@@ -8,7 +8,11 @@ interface filterLayoutProps {
 
 const ProductFilterLayout: React.FC<filterLayoutProps> = ({ address }) => {
   const { ProductName } = useParams<{ ProductName: string }>();
-  return <Back address={address} name={ProductName} />;
+  return (
+    <div className="pt-[12px] px-9 w-full">
+      <Back address={address} name={ProductName} />
+    </div>
+  );
 };
 
 export default ProductFilterLayout;

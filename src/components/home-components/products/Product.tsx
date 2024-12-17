@@ -19,7 +19,7 @@ const HomeProducts: React.FC = () => {
         {BrandArray.map((brand) => (
           <FilterBtn
             key={brand.name}
-            text={brand.name}
+            text={brand.fullName}
             isActive={activeFilter === brand.name}
             onClick={() => handleFilterClick(brand.name)}
           />

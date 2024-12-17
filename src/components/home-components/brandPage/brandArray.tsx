@@ -27,7 +27,7 @@ export const BrandArray = [
   {
     name: "New Ba..",
     images: "../../../../src/assets/brands/New-Balance.png",
-    fullName: "New-Balance",
+    fullName: "NewBalance",
   },
   {
     name: "Converse",
