@@ -2,17 +2,18 @@ import React from "react";
 
 interface tagProps {
   name: string;
+  active: boolean;
 }
 
-const Tag: React.FC<tagProps> = ({ name }) => {
+const Tag: React.FC<tagProps> = ({ name, active }) => {
   return (
     <div className="grid gap-[2px]">
       <img
         src={`../../../../src/assets/icons/${name}.svg`}
         alt={name}
-        className={`w-6 h-6`}
+        className={`mx-auto ${active ? "brightness-0" : "brightness-0 invert"}`}
       />
-      <p className="font-semibold text-[10px] text-center">{name}</p>
+      <p className="font-semibold text-xs text-center">{name}</p>
     </div>
   );
 };
