@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface tagProps {
   name: string;
@@ -6,8 +7,9 @@ interface tagProps {
 }
 
 const Tag: React.FC<tagProps> = ({ name, active }) => {
+  const navigate = useNavigate();
   return (
-    <div className="grid gap-[2px]">
+    <div className="grid gap-[2px]" onClick={() => navigate(`/${name}`)}>
       <img
         src={`../../../../src/assets/icons/${name}.svg`}
         alt={name}

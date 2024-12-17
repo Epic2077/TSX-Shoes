@@ -1,7 +1,9 @@
 import React from "react";
 import Tag from "./Tags";
+import { useNavigate } from "react-router-dom";
 
 const HomeFooter: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="px-6 flex items-center justify-between bg-white h-[66px] sticky bottom-0">
       <Tag name="Home" active={true} />

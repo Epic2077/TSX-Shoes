@@ -28,7 +28,11 @@ const HomeHeader: React.FC = () => {
       </div>
       <div className="flex gap-4 w-16 h-6">
         <img src="../../../src/assets/icons/bell.svg" alt="bell" />
-        <img src="../../../src/assets/icons/heart.svg" alt="heart" />
+        <img
+          src="../../../src/assets/icons/heart.svg"
+          alt="heart"
+          onClick={() => navigate("/Products/Wishlist")}
+        />
       </div>
     </header>
   );
