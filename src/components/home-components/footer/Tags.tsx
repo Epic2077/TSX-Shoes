@@ -11,9 +11,11 @@ const Tag: React.FC<tagProps> = ({ name, active }) => {
   return (
     <div className="grid gap-[2px]" onClick={() => navigate(`/${name}`)}>
       <img
-        src={`../../../../src/assets/icons/${name}.svg`}
+        src={`../../../../src/assets/footer-icons/${
+          active ? name : name + "-de"
+        }.svg`}
         alt={name}
-        className={`mx-auto ${active ? "brightness-0" : "brightness-0 invert"}`}
+        className={`mx-auto  w-6 h-6`}
       />
       <p className="font-semibold text-xs text-center">{name}</p>
     </div>
