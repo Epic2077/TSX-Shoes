@@ -13,7 +13,7 @@ const WelcomePage: React.FC<WelcomeProps> = ({ setPage }) => {
       <img
         src="../../../src/assets/Images/dark-layer.png"
         alt="layer"
-        className="w-[428px] h-[950px] absolute top-0"
+        className="w-[428px] h-[926px] absolute top-0"
       />
       <div className="pb-[74px] pl-6 z-10">
         <h2 className="font-semibold text-[40px] text-white mt-[-16px]">
