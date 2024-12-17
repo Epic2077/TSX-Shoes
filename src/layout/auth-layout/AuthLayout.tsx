@@ -2,15 +2,11 @@ import React from "react";
 import LoginHeader from "../loginHeader/LoginHeader";
 import { Outlet } from "react-router-dom";
 
-interface AuthProps {
-  address: string;
-}
-
-const AuthLayout: React.FC<AuthProps> = ({ address }) => {
+const AuthLayout: React.FC = () => {
   return (
     <div>
       <header className="pt-[12px] px-6">
-        <LoginHeader address={address} />
+        <LoginHeader />
       </header>
       <main>
         <Outlet />

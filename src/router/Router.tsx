@@ -21,17 +21,14 @@ const RouterPage: React.FC = () => {
           <Route path="/Cart" />
           <Route path="/Orders" />
         </Route>
-        <Route path="/Auth" element={<AuthLayout address="Home" />}>
+        <Route path="/Auth" element={<AuthLayout />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
         </Route>
-        <Route path="/Auth" element={<AuthLayout address="Auth/Login" />}>
+        <Route path="/Auth" element={<AuthLayout />}>
           <Route path="/Auth/Signup" element={<SignupPage />} />
           <Route path="/Auth/Forgot" element={<Forgot />} />
         </Route>
-        <Route
-          path="/Products/:ProductName"
-          element={<ProductFilterLayout address="/Home" />}
-        >
+        <Route path="/Products/:ProductName" element={<ProductFilterLayout />}>
           <Route index element={<ProductBrandFilter />} />
         </Route>
       </Routes>

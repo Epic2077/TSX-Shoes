@@ -1,14 +1,10 @@
 import React from "react";
 import Back from "../../components/Auth-components/header.tsx/back";
 
-interface HeaderProps {
-  address: string;
-}
-
-const LoginHeader: React.FC<HeaderProps> = ({ address }) => {
+const LoginHeader: React.FC = () => {
   return (
     <>
-      <Back address={`/${address}`} />
+      <Back />
       <div className="mt-[76px] mb-[52px] grid justify-center items-center">
         <img src="../../../src/assets/icons/black-logo.svg" alt="Logo" />
       </div>

@@ -2,15 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface backProps {
-  address: string;
   name?: string;
 }
 
-const Back: React.FC<backProps> = ({ address, name }) => {
+const Back: React.FC<backProps> = ({ name }) => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
-    navigate(address);
+    navigate(-1);
   };
 
   return (
