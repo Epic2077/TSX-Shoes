@@ -8,7 +8,7 @@ import Forgot from "../pages/Auth/Forgot";
 import Home from "../pages/home/Index";
 import ProductFilterLayout from "../layout/product-filter-layout/ProductFilterLayout";
 import ProductBrandFilter from "../pages/productBrand/ProductBrand";
-import Pageslayout from "../layout/pages-layout/Layout";
+import PagesLayout from "../layout/pages-layout/Layout";
 
 const RouterPage: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const RouterPage: React.FC = () => {
       <Routes>
         {/* Define routes here */}
         <Route path="/" element={<Onboarding />} />
-        <Route path="" element={<Pageslayout />}>
+        <Route path="" element={<PagesLayout />}>
           <Route path="/Home" element={<Home />} />
           <Route path="/Cart" />
           <Route path="/Orders" />
