@@ -10,7 +10,7 @@ const HomeBrand: React.FC = () => {
         {BrandArray.map((brand) => (
           <div
             className="grid gap-[13px] justify-center cursor-pointer"
-            onClick={() => navigate(`/Products/${brand.fullName.split(" ")}`)}
+            onClick={() => navigate(`/home/${brand.fullName}`)}
           >
             <div className="w-[60px] h-[60px] flex justify-center items-center bg-[#ECECEC] rounded-full">
               <img src={brand.images} alt={brand.fullName} />

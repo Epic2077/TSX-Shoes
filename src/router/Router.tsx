@@ -9,6 +9,8 @@ import Home from "../pages/home/Index";
 import ProductFilterLayout from "../layout/product-filter-layout/ProductFilterLayout";
 import ProductBrandFilter from "../pages/productBrand/ProductBrand";
 import PagesLayout from "../layout/pages-layout/Layout";
+import BrandPage from "../modules/brand-page/BrandPage.modules";
+import AllProducts from "../modules/all-products/AllProducts.module";
 
 const RouterPage: React.FC = () => {
   return (
@@ -29,9 +31,10 @@ const RouterPage: React.FC = () => {
           <Route path="/Auth/Forgot" element={<Forgot />} />
         </Route>
         {/* <Route path="/products/:id" element={<ProductPage />} /> */}
-        <Route path="/Products/:ProductName" element={<ProductFilterLayout />}>
+        <Route path="/home/:brandName" element={<BrandPage />}>
           <Route index element={<ProductBrandFilter />} />
         </Route>
+          <Route path="/Home/products" element={<AllProducts />} />
       </Routes>
     </Router>
   );
