@@ -11,6 +11,7 @@ const HomeBrand: React.FC = () => {
           <div
             className="grid gap-[13px] justify-center cursor-pointer"
             onClick={() => navigate(`/home/${brand.fullName}`)}
+            key={brand.fullName}
           >
             <div className="w-[60px] h-[60px] flex justify-center items-center bg-[#ECECEC] rounded-full">
               <img src={brand.images} alt={brand.fullName} />
