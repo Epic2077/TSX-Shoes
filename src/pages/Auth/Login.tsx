@@ -78,7 +78,10 @@ const LoginPage: React.FC = () => {
         ? localStorage
         : sessionStorage;
 
-      storage?.setItem("user", JSON.stringify(user));
+      storage?.setItem(
+        "user",
+        JSON.stringify({ id: user.id, name: user.name })
+      );
 
       // Redirect to the homepage or other route
       navigate("/Home");
