@@ -11,6 +11,7 @@ import PagesLayout from "../layout/pages-layout/Layout";
 import BrandPage from "../modules/brand-page/BrandPage.modules";
 import AllProducts from "../modules/all-products/AllProducts.module";
 import ProductPage from "../modules/product page/ProductPage.layout";
+import ChangePassword from "../pages/Auth/change";
 
 const RouterPage: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const RouterPage: React.FC = () => {
         <Route path="/Auth" element={<AuthLayout />}>
           <Route path="/Auth/Signup" element={<SignupPage />} />
           <Route path="/Auth/Forgot" element={<Forgot />} />
+          <Route path="/Auth/ChangePassword" element={<ChangePassword />} />
         </Route>
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/home/:brandName" element={<BrandPage />}>
