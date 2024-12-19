@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../api/Query";
 import Back from "../../components/Auth-components/header.tsx/back";
+import ProductDetails from "./ProductDetails.modules";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -12,6 +13,7 @@ const ProductPage = () => {
 
   return (
     <>
+      {/* ==== product Img ========= */}
       <div className="w-full h-96">
         <img
           src={product.images}
@@ -22,6 +24,8 @@ const ProductPage = () => {
       <div className="absolute top-5 left-6">
         <Back />
       </div>
+      {/* ==== product Title & description ========= */}
+
       <div className="p-6">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-[#152536]">{product.title}</h1>
@@ -52,9 +56,13 @@ const ProductPage = () => {
           <h2 className="text-2xl font-bold text-[#152536]">Description</h2>
           <p className="text-base font-normal text-[#68717A]">
             In ultricies fermentum aliquet. Pellentesque dui magna, condimentum
-            non ullamcorp <span className="font-bold text-[#152536]">view more...</span>
+            non ullamcorp{" "}
+            <span className="font-bold text-[#152536]">view more...</span>
           </p>
         </div>
+
+        {/* ==== product Color & Size ========= */}
+        <ProductDetails product={product}/>
       </div>
     </>
   );
