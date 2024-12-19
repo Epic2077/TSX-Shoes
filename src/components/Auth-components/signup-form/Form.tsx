@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { SignupSchema } from "../loginFunction/SignupSchema";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Api from "../../../api/Base";
+import { getUsers } from "../../../api/users";
 
 const FormLayout: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    id: "",
     username: "",
     email: "",
     name: "",
@@ -40,13 +43,18 @@ const FormLayout: React.FC = () => {
     setError((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    console.log("Before Getting users");
+    const users = await getUsers();
+    console.log("After getting users", users);
+    const newId = `${users.length + 1}`;
+    setFormData((prev) => ({ ...prev, id: newId }));
     e.preventDefault();
     if (formData.password !== formData.confirmPass) {
       if (formData.password !== formData.confirmPass) {
         setError((prev) => ({
           ...prev,
-          confirmPass: "Passwords do not match",
+          confirmPass: "Passwords does not match",
         }));
         return; // Stop further processing if passwords do not match
       }
@@ -63,16 +71,54 @@ const FormLayout: React.FC = () => {
       return;
     }
     console.log("Form data is valid:", formData);
-    toast.success("Signup successful!", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "dark",
-      transition: Bounce,
-    });
+    try {
+      // Check if email already exists
+
+      const emailExists = users.find((user) => user.email === formData.email);
+
+      if (emailExists) {
+        toast.error("Email already exists. Please use a different email.", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition: Bounce,
+        });
+        return;
+      }
+
+      // If email doesn't exist, proceed with signup
+      await Api.post("/users", formData);
+
+      toast.success("Signup successful!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+
+      // Redirect to login or another page
+      navigate("/Auth/Login");
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred. Please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
   };
 
   return (

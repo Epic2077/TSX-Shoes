@@ -6,7 +6,7 @@ export const getUsers = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching users:", error);
-    throw error;
+    return []; // Returning an empty array in case of error
   }
 };
 
