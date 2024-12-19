@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrandArray } from "../brandPage/brandArray";
 import FilterBtn from "../filter-button/btn";
+import ProductsContainer from "./products-container/ProductsContainer.components";
 
 const HomeProducts: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string[]>([]);
@@ -28,11 +29,12 @@ const HomeProducts: React.FC = () => {
           <FilterBtn
             key={brand.name}
             text={brand.fullName}
-            isActive={activeFilter.includes(brand.name)}
-            onClick={() => handleFilterClick(brand.name)}
+            isActive={activeFilter.includes(brand.name.toLowerCase())}
+            onClick={() => handleFilterClick(brand.name.toLowerCase())}
           />
         ))}
       </div>
+      <ProductsContainer activeFilter={activeFilter} />
     </>
   );
 };
