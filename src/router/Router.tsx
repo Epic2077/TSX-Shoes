@@ -38,7 +38,7 @@ const RouterPage: React.FC = () => {
           <Route index element={<ProductBrandFilter />} />
         </Route>
         <Route path="/Home/products" element={<AllProducts />} />
-        <Route path="/home/search" element={<SearchBox />} />
+        <Route path="/Home/search" element={<SearchBox />} />
       </Routes>
     </Router>
   );

@@ -33,6 +33,7 @@ export const Input: React.FC<InputProps> = ({
         id={id}
         value={value}
         onChange={onChange}
+        onClick={onClick}
         className="bg-transparent w-full h-9 outline-none"
       />
       {customChildren && <div>{customChildren}</div>}
