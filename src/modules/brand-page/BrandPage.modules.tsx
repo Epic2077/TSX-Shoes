@@ -58,7 +58,6 @@ const BrandPage = () => {
 
   return (
     <div>
-
       <div className="py-4 px-8 flex items-center justify-start">
         <Back />
         <p className="text-xl font-semibold">{filteredBrand.name}</p>

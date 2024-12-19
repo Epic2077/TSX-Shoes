@@ -38,7 +38,7 @@ const ProductPage = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
+        <div className="flex items-center justify-start gap-4 py-3 pb-4 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2 w-fit">
             <p className="font-normal text-base text-[#152536]">5/765 sold</p>
           </div>
@@ -62,7 +62,7 @@ const ProductPage = () => {
         </div>
 
         {/* ==== product Color & Size ========= */}
-        <ProductDetails product={product}/>
+        <ProductDetails product={product} />
       </div>
     </>
   );

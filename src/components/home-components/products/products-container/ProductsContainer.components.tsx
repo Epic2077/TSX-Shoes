@@ -4,7 +4,7 @@ import ProductCard from "../product-card/ProductCard.components";
 
 interface Props {
   products?: Product[];
-  activeFilter: string[];
+  activeFilter?: string[];
 }
 
 const ProductsContainer = ({ products: propProducts, activeFilter }: Props) => {
