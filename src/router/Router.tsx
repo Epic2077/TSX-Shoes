@@ -12,6 +12,7 @@ import BrandPage from "../modules/brand-page/BrandPage.modules";
 import AllProducts from "../modules/all-products/AllProducts.module";
 import ProductPage from "../modules/product page/ProductPage.layout";
 import ChangePassword from "../pages/Auth/change";
+import SearchBox from "../layout/search-box/searchBox";
 
 const RouterPage: React.FC = () => {
   return (
@@ -37,6 +38,7 @@ const RouterPage: React.FC = () => {
           <Route index element={<ProductBrandFilter />} />
         </Route>
         <Route path="/Home/products" element={<AllProducts />} />
+        <Route path="/home/search" element={<SearchBox />} />
       </Routes>
     </Router>
   );
