@@ -29,8 +29,8 @@ const HomeProducts: React.FC = () => {
           <FilterBtn
             key={brand.name}
             text={brand.fullName}
-            isActive={activeFilter.includes(brand.name.toLowerCase())}
-            onClick={() => handleFilterClick(brand.name.toLowerCase())}
+            isActive={activeFilter.includes(brand.fullName.toLowerCase())}
+            onClick={() => handleFilterClick(brand.fullName.toLowerCase())}
           />
         ))}
       </div>
