@@ -62,19 +62,18 @@ const FormLayout: React.FC = () => {
       setError(fieldError);
       return;
     }
+    console.log("Form data is valid:", formData);
+    toast.success("Signup successful!", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+      transition: Bounce,
+    });
   };
-  console.log("Form data is valid:", formData);
-
-  toast.success("Signup successful!", {
-    position: "top-center",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-    transition: Bounce,
-  });
 
   return (
     <>
