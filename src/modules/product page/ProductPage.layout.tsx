@@ -7,7 +7,16 @@ const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
 
-  if (isLoadingProduct) return <div>Loading...</div>;
+  if (isLoadingProduct)
+    return (
+      <div className="w-full flex justify-center my-40">
+        <img
+          src="../../../../../src/assets/icons/spinner-atom.svg"
+          alt="loading"
+          className="animate-spin"
+        />
+      </div>
+    );
   if (isErrorProduct) return <div>Error loading product.</div>;
   if (!product) return <div>No product found.</div>;
 

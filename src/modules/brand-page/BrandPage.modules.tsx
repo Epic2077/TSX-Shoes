@@ -49,7 +49,15 @@ const BrandPage = () => {
   }
 
   if (isLoading) {
-    return <p className="text-center text-xl">Loading...</p>;
+    return (
+      <div className="w-full flex justify-center my-40">
+        <img
+          src="../../../../../src/assets/icons/spinner-atom.svg"
+          alt="loading"
+          className="animate-spin"
+        />
+      </div>
+    );
   }
 
   if (error) {

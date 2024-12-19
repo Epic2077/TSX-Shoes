@@ -16,7 +16,16 @@ const ProductsContainer = ({ products: propProducts, activeFilter }: Props) => {
 
   const products = propProducts || apiProducts;
 
-  if (isLoadingProducts) return <div>Loading...</div>;
+  if (isLoadingProducts)
+    return (
+      <div className="w-full flex justify-center my-40">
+        <img
+          src="../../../../../src/assets/icons/spinner-atom.svg"
+          alt="loading"
+          className="animate-spin"
+        />
+      </div>
+    );
   if (isErrorProducts) return <div>Error loading products.</div>;
   if (!products || products.length === 0) return <div>No products found.</div>;
 
