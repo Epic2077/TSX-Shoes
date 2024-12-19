@@ -24,7 +24,7 @@ const RouterPage: React.FC = () => {
           <Route path="/Cart" />
           <Route path="/Orders" />
         </Route>
-        <Route path="/Auth" element={<AuthLayout />}>
+        <Route path="/Auth" element={<AuthLayout address="/Home" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
         </Route>
         <Route path="/Auth" element={<AuthLayout />}>
