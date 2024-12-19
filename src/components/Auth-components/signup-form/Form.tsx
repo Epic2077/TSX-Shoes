@@ -44,6 +44,7 @@ const FormLayout: React.FC = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     console.log("Before Getting users");
     const users = await getUsers();
     console.log("After getting users", users);
@@ -76,6 +77,8 @@ const FormLayout: React.FC = () => {
 
       const emailExists = users.find((user) => user.email === formData.email);
 
+      console.log(emailExists);
+
       if (emailExists) {
         toast.error("Email already exists. Please use a different email.", {
           position: "top-center",
@@ -91,7 +94,7 @@ const FormLayout: React.FC = () => {
       }
 
       // If email doesn't exist, proceed with signup
-      await Api.post("/users", formData);
+      await Api.post("users", formData);
 
       toast.success("Signup successful!", {
         position: "top-center",
