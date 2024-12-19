@@ -34,5 +34,4 @@ export const SignupSchema = z.object({
     .string()
     .regex(/^\d{11}$/, "Phone number must be exactly 11 digits.")
     .nonempty("Phone number is required."),
-  gender: z.enum(["Male", "Female", "Other", "Rather not say"]),
 });

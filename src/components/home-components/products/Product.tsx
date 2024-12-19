@@ -6,6 +6,7 @@ const HomeProducts: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>("All");
 
   const handleFilterClick = (filter: string) => {
+    //Array
     setActiveFilter(filter);
   };
   return (

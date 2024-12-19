@@ -4,6 +4,8 @@ import {
   handleSubmit,
 } from "../../components/Auth-components/loginFunction/FormHandler";
 import { useNavigate } from "react-router-dom";
+import { authenticateUser } from "../../api/users";
+import { Bounce, toast } from "react-toastify";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -33,16 +35,78 @@ const LoginPage: React.FC = () => {
     setIsPasswordVisible((prev) => !prev);
   };
 
+  const validateForm = (): boolean => {
+    let isValid = true;
+    const errors: { email?: string; password?: string } = {};
+
+    if (!formData.email) {
+      errors.email = "Email is required";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Please enter a valid email address";
+      isValid = false;
+    }
+
+    if (!formData.password) {
+      errors.password = "Password is required";
+      isValid = false;
+    }
+
+    setError(errors);
+    return isValid;
+  };
+
+  const handleLogin = async (
+    e: React.FormEvent,
+    formData: any,
+    setError: any
+  ) => {
+    e.preventDefault();
+
+    // Validate the form
+    if (!validateForm(formData, setError)) {
+      return;
+    }
+
+    const { email, password } = formData;
+
+    try {
+      // Authenticate the user
+      const user = await authenticateUser(email, password);
+
+      // Handle successful login (store user data, navigate, etc.)
+      const storage = document.getElementById("remember")?.checked
+        ? localStorage
+        : sessionStorage;
+
+      storage?.setItem(
+        "user",
+        JSON.stringify({ id: user.id, name: user.name })
+      );
+
+      // Redirect to the homepage or other route
+      navigate("/Home");
+    } catch (err: any) {
+      if (err.message === "Email not found") {
+        setError({ ...error, email: "Email not found" });
+      } else if (err.message === "Incorrect password") {
+        setError({ ...error, password: "Incorrect password" });
+      }
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent form submission
+
+    // Directly call handleLogin and pass the necessary arguments
+    handleLogin(e, formData, setError);
+  };
   return (
     <div className="px-6 py-[67px]">
       <h1 className="text-center font-semibold text-[32px] text-black">
         Login to Your Account
       </h1>
-      <form
-        action=""
-        className="mt-11"
-        onSubmit={(e) => handleSubmit(e, formData, setError)}
-      >
+      <form action="" className="mt-11" onSubmit={handleSubmit}>
         {/* Email Input */}
         <div className="mb-4">
           <div
