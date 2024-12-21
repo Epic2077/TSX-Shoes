@@ -70,13 +70,13 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
             <div className="w-full h-[1px] bg-gray-300"></div>
             <div className="flex gap-2">
               <div
-                className="w-full bg-gray-300 grid justify-center items-center h-11 text-lg font-semibold rounded-full cursor-pointer"
+                className="w-full bg-gray-300 grid justify-center items-center h-12 text-lg font-semibold rounded-full cursor-pointer"
                 onClick={handleCloseModal}
               >
                 Cancel
               </div>
               <div
-                className="w-full bg-black grid justify-center items-center h-11 text-lg font-semibold text-white rounded-full cursor-pointer"
+                className="w-full bg-black grid justify-center items-center h-12 text-lg font-semibold text-white rounded-full cursor-pointer"
                 onClick={() => setDeleteCart(true)}
               >
                 Yes, Remove
