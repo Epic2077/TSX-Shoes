@@ -8,6 +8,7 @@ const CartContainer: React.FC = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [cartPrice, setCartPrice] = useState<number>(0);
 
   const navigate = useNavigate();
 
@@ -31,6 +32,13 @@ const CartContainer: React.FC = () => {
         try {
           const foundUser = await findUserById(userId);
           setUser(foundUser);
+
+          // Calculate total cart price
+          const totalPrice = foundUser.carts?.reduce(
+            (total: number, item: number) => total + item.price,
+            0
+          );
+          setCartPrice(totalPrice || 0);
         } catch (error) {
           console.error("Error fetching user:", error);
         } finally {
@@ -69,7 +77,7 @@ const CartContainer: React.FC = () => {
       <div className="absolute bottom-0 mb-[66px] rounded-t-3xl h-[100px] w-full border-slate-400 border border-b-0 px-4 flex items-center gap-6 z-0">
         <div className="grid">
           <p className="text-[15px] text-slate-400">Total Price</p>
-          <p className="font-semibold text-[30px]">$000.00</p>
+          <p className="font-semibold text-[30px]">${cartPrice.toFixed(2)}</p>
         </div>
         <div className="w-full bg-black h-[65px] rounded-full text-white text-xl font-semibold grid justify-center items-center ">
           Checkout
