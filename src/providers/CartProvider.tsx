@@ -13,8 +13,9 @@ export const CartContext = createContext<{
 
 const CartProvider = ({ children }: PropsWithChildren) => {
   const [cart, dispatch] = useReducer(CartReducer, [], () => {
-    return getFromStorage<CartItem[]>("cart", []);
+    return getFromStorage<CartItem[]>("cart", []) || [];
   });
+
   return (
     <CartContext.Provider
       value={{

@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import { useProduct } from "../../api/Query";
 import Back from "../../components/Auth-components/header.tsx/back";
 import ProductDetails from "./ProductDetails.modules";
+import ProductQuantity from "./ProductQuantity.modules";
+import HomeFooter from "../../components/home-components/footer/Footer";
+import ProductTotalPrice from "./ProductTotalPrice.modules";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -72,6 +75,15 @@ const ProductPage = () => {
 
         {/* ==== product Color & Size ========= */}
         <ProductDetails product={product} />
+
+        {/* ======= Product Quentity */}
+        <ProductQuantity product={product} />
+
+        {/* ======= Price ANd Add to cart button */}
+        <ProductTotalPrice product={product}/>
+
+        {/* ======= Footer ======= */}
+        <HomeFooter />
       </div>
     </>
   );

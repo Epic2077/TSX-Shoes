@@ -10,7 +10,7 @@ import ProductBrandFilter from "../pages/productBrand/ProductBrand";
 import PagesLayout from "../layout/pages-layout/Layout";
 import BrandPage from "../modules/brand-page/BrandPage.modules";
 import AllProducts from "../modules/all-products/AllProducts.module";
-import ProductPage from "../modules/product page/ProductPage.layout";
+import ProductPage from "../modules/product page/ProductPage.modules";
 import ChangePassword from "../pages/Auth/change";
 import CartPage from "../pages/cart/Cart";
 

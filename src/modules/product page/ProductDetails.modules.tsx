@@ -65,26 +65,6 @@ const ProductDetails = ({ product }: Props) => {
             ></button>
           ))}
         </div>
-<<<<<<< HEAD
-=======
-      </div> */}
-
-      <div className="flex flex-col items-start justify-start gap-3">
-        <p className="font-bold text-[#152536] text-xl">Color</p>
-        <div className="flex items-center justify-start gap-2">
-          {product.color.map((color) => (
-            <button
-              key={color}
-              onClick={() => setSelectedColor(color)}
-              className={`w-10 h-10 border-2 rounded-full ${
-                selectedColor === color
-                  ? "border-gray-400 ring-2 ring-gray-400"
-                  : "border-gray-400 hover:ring-2 hover:ring-gray-400"
-              } ${colorClasses[color] || "bg-gray-300"}`}
-            ></button>
-          ))}
-        </div>
->>>>>>> Develop
       </div>
     </div>
   );

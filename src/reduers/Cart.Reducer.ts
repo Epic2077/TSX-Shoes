@@ -6,7 +6,11 @@ export type CartAction = {
   type: "ADD" | "REMOVE";
   payload: Product;
 };
-export function CartReducer(state: CartItem[], action: CartAction): CartItem[] {
+
+export function CartReducer(
+  state: CartItem[] = [],
+  action: CartAction
+): CartItem[] {
   const { type, payload } = action;
   switch (type) {
     case "ADD": {
@@ -28,8 +32,10 @@ export function CartReducer(state: CartItem[], action: CartAction): CartItem[] {
       const item = state.find((item) => item.product.id === payload.id);
 
       if (!item) {
-        throw new Error("wrong product id");
+        console.error("wrong product id:", payload.id);
+        return state;
       }
+
       const shouldRemove = item.count <= 1;
       if (shouldRemove) {
         return saveCartToStorage(
@@ -45,7 +51,8 @@ export function CartReducer(state: CartItem[], action: CartAction): CartItem[] {
       );
     }
     default:
-      throw new Error("undefined action on cart");
+      console.error("undefined action on cart:", action.type);
+      return state;
   }
 }
 
