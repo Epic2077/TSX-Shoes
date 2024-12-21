@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../api/Query";
 import Back from "../../components/Auth-components/header.tsx/back";
@@ -5,10 +6,13 @@ import ProductDetails from "./ProductDetails.modules";
 import ProductQuantity from "./ProductQuantity.modules";
 import HomeFooter from "../../components/home-components/footer/Footer";
 import ProductTotalPrice from "./ProductTotalPrice.modules";
+import ProductButton from "./ProductButton.modules";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
+  const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   if (isLoadingProduct)
     return (
@@ -37,8 +41,7 @@ const ProductPage = () => {
         <Back />
       </div>
       {/* ==== product Title & description ========= */}
-
-      <div className="p-6">
+      <div className="px-6 py-3">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-[#152536]">{product.title}</h1>
           <div className="w-7 h-7">
@@ -50,7 +53,7 @@ const ProductPage = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-start gap-4 py-3 pb-4 border-b-2 border-[#ECECEC]">
+        <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2 w-fit">
             <p className="font-normal text-base text-[#152536]">5/765 sold</p>
           </div>
@@ -64,7 +67,7 @@ const ProductPage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-1 mt-2">
+        <div className="flex flex-col items-start justify-between gap-1 mt-1">
           <h2 className="text-2xl font-bold text-[#152536]">Description</h2>
           <p className="text-base font-normal text-[#68717A]">
             In ultricies fermentum aliquet. Pellentesque dui magna, condimentum
@@ -74,13 +77,26 @@ const ProductPage = () => {
         </div>
 
         {/* ==== product Color & Size ========= */}
-        <ProductDetails product={product} />
+        <ProductDetails
+          product={product}
+          selectedSize={selectedSize}
+          selectedColor={selectedColor}
+          setSelectedSize={setSelectedSize}
+          setSelectedColor={setSelectedColor}
+        />
 
-        {/* ======= Product Quentity */}
+        {/* ======= Product Quantity */} 
         <ProductQuantity product={product} />
 
-        {/* ======= Price ANd Add to cart button */}
-        <ProductTotalPrice product={product}/>
+        {/* ======= Price And Add to cart button */}
+        <div className="flex items-center justify-between mb-2 pb-1">
+          <ProductTotalPrice product={product} />
+          <ProductButton
+            product={product}
+            selectedSize={selectedSize}
+            selectedColor={selectedColor}
+          />
+        </div>
 
         {/* ======= Footer ======= */}
         <HomeFooter />

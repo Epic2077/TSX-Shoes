@@ -17,7 +17,7 @@ const ProductQuantity = ({ product }: Props) => {
   const productInCart = productCartIndex !== -1 ? cartSafe[productCartIndex] : null;
 
   return (
-    <div className="flex items-center justify-start gap-5 pt-4 pb-5 border-b-2 border-[#ECECEC]">
+    <div className="flex items-center justify-start gap-5 pt-2 pb-3 border-b-2 border-[#ECECEC]">
       <p className="text-2xl font-bold text-[#152536]">Quantity</p>
       <div className="py-1 px-5 flex items-center gap-5 justify-center rounded-full bg-[#ECECEC]">
         <button

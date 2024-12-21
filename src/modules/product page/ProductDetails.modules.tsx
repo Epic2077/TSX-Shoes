@@ -1,34 +1,32 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Product } from "../../types/Product.type";
 
 interface Props {
   product: Product;
+  selectedSize: number | null;
+  selectedColor: string | null;
+  setSelectedSize: Dispatch<SetStateAction<number | null>>;
+  setSelectedColor: Dispatch<SetStateAction<string | null>>;
 }
 
-const colorClasses: { [key: string]: string } = {
-  rose: "bg-rose-700",
-  emerald: "bg-emerald-700",
-  red: "bg-red-700",
-  gray: "bg-gray-700",
-  teal: "bg-teal-700",
-};
-
-const ProductDetails = ({ product }: Props) => {
-  const [selectedSize, setSelectedSize] = useState<number | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
-
-  // if (!selectedSize || !selectedColor) {
-  //   alert("Please select both size and color before proceeding to buy.");
-  //   return;
-  // }
-  // alert(
-  //   `You selected size ${selectedSize} and color ${selectedColor}. Proceeding to checkout...`
-  // );
+const ProductDetails = ({
+  product,
+  selectedSize,
+  selectedColor,
+  setSelectedSize,
+  setSelectedColor,
+}: Props) => {
+  const colorClasses: { [key: string]: string } = {
+    rose: "bg-rose-700",
+    emerald: "bg-emerald-700",
+    red: "bg-red-700",
+    gray: "bg-gray-700",
+    teal: "bg-teal-700",
+  };
 
   return (
     <div className="flex items-center justify-between gap-6 py-4">
       {/* ======== Set Size ======== */}
-
       <div className="flex flex-col items-start gap-3">
         <p className="font-bold text-[#152536] text-xl">Size</p>
         <div className="flex items-center justify-start gap-2">
@@ -49,7 +47,6 @@ const ProductDetails = ({ product }: Props) => {
       </div>
 
       {/* ======== Set Color ======== */}
-
       <div className="flex flex-col items-start justify-start gap-3">
         <p className="font-bold text-[#152536] text-xl">Color</p>
         <div className="flex items-center justify-start gap-2">
