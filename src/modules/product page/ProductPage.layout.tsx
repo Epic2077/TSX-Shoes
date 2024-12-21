@@ -7,7 +7,16 @@ const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
 
-  if (isLoadingProduct) return <div>Loading...</div>;
+  if (isLoadingProduct)
+    return (
+      <div className="w-full flex justify-center my-40">
+        <img
+          src="../../../../../src/assets/icons/spinner-atom.svg"
+          alt="loading"
+          className="animate-spin"
+        />
+      </div>
+    );
   if (isErrorProduct) return <div>Error loading product.</div>;
   if (!product) return <div>No product found.</div>;
 
@@ -38,7 +47,7 @@ const ProductPage = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
+        <div className="flex items-center justify-start gap-4 py-3 pb-4 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2 w-fit">
             <p className="font-normal text-base text-[#152536]">5/765 sold</p>
           </div>
@@ -62,7 +71,7 @@ const ProductPage = () => {
         </div>
 
         {/* ==== product Color & Size ========= */}
-        <ProductDetails product={product}/>
+        <ProductDetails product={product} />
       </div>
     </>
   );

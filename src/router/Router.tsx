@@ -12,6 +12,7 @@ import BrandPage from "../modules/brand-page/BrandPage.modules";
 import AllProducts from "../modules/all-products/AllProducts.module";
 import ProductPage from "../modules/product page/ProductPage.layout";
 import ChangePassword from "../pages/Auth/change";
+import CartPage from "../pages/cart/Cart";
 
 const RouterPage: React.FC = () => {
   return (
@@ -21,7 +22,7 @@ const RouterPage: React.FC = () => {
         <Route path="/" element={<Onboarding />} />
         <Route path="" element={<PagesLayout />}>
           <Route path="/Home" element={<Home />} />
-          <Route path="/Cart" />
+          <Route path="/Cart" element={<CartPage />} />
           <Route path="/Orders" />
         </Route>
         <Route path="/Auth" element={<AuthLayout address="/Home" />}>
