@@ -1,13 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface LoadingProps {
   setPage: (value: number) => void;
 }
 
 const Loading: React.FC<LoadingProps> = ({ setPage }) => {
-  setTimeout(() => {
-    setPage(1);
-  }, 3000);
+  const navigate = useNavigate();
+  const loggedIn =
+    localStorage.getItem("user") || sessionStorage.getItem("user");
+
+  if (loggedIn) {
+    setTimeout(() => {
+      navigate("/Home");
+    }, 3000);
+  } else {
+    setTimeout(() => {
+      setPage(1);
+    }, 3000);
+  }
 
   return (
     <div className="w-[428px] min-h-[926px] flex flex-col bg-slate-100 justify-center items-center">
