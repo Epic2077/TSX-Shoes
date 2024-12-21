@@ -11,6 +11,7 @@ import PagesLayout from "../layout/pages-layout/Layout";
 import BrandPage from "../modules/brand-page/BrandPage.modules";
 import AllProducts from "../modules/all-products/AllProducts.module";
 import ProductPage from "../modules/product page/ProductPage.layout";
+import Wishlist from "../components/wishlist/wishlist";
 
 const RouterPage: React.FC = () => {
   return (
@@ -34,6 +35,7 @@ const RouterPage: React.FC = () => {
         <Route path="/home/:brandName" element={<BrandPage />}>
           <Route index element={<ProductBrandFilter />} />
         </Route>
+          <Route path="/Home/Wishlist" element={<Wishlist  />} />
         <Route path="/Home/products" element={<AllProducts />} />
       </Routes>
     </Router>
