@@ -56,7 +56,7 @@ const CartContainer: React.FC = () => {
   const userCart = user?.carts ?? []; // Default to an empty array if no carts
 
   return (
-    <div className="px-6 grid">
+    <div className="px-6 grid gap-6">
       {userCart.length > 0 ? (
         userCart.map((product) => (
           <CartCard key={product.id} product={product} />

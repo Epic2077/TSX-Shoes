@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Product } from "../../types/Product.type";
+import DeleteProductFromCart from "./deleting.product.cart";
 
 interface CartCardProps {
   product: Product;
@@ -22,6 +23,7 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
               src="../../../src/assets/icons/trash.svg"
               alt="trash"
               className="w-5"
+              onClick={() => DeleteProductFromCart(product)}
             />
           </div>
           <div className="flex gap-2 items-center">
