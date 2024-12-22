@@ -79,7 +79,10 @@ const CartContainer: React.FC = () => {
           <p className="text-[15px] text-slate-400">Total Price</p>
           <p className="font-semibold text-[30px]">${cartPrice.toFixed(2)}</p>
         </div>
-        <div className="w-full bg-black h-[65px] rounded-full text-white text-xl font-semibold grid justify-center items-center ">
+        <div
+          className="w-full bg-black h-[65px] rounded-full text-white text-xl font-semibold grid justify-center items-center "
+          onClick={() => navigate("/Checkout")}
+        >
           Checkout
         </div>
       </div>

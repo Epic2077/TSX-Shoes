@@ -13,6 +13,9 @@ import AllProducts from "../modules/all-products/AllProducts.module";
 import ProductPage from "../modules/product page/ProductPage.layout";
 import ChangePassword from "../pages/Auth/change";
 import CartPage from "../pages/cart/Cart";
+import CheckOutPage from "../pages/checkout/Checkout";
+import ShippingLayout from "../layout/Shipping-Layout/Shipping.layout";
+import ShippingAddress from "../modules/Shipping/Address";
 
 const RouterPage: React.FC = () => {
   return (
@@ -38,6 +41,10 @@ const RouterPage: React.FC = () => {
           <Route index element={<ProductBrandFilter />} />
         </Route>
         <Route path="/Home/products" element={<AllProducts />} />
+        <Route path="/Checkout" element={<CheckOutPage />} />
+        <Route path="" element={<ShippingLayout />}>
+          <Route path="/Checkout/Address" element={<ShippingAddress />} />
+        </Route>
       </Routes>
     </Router>
   );
