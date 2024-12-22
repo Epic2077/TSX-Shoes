@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useProduct } from "../../api/Query";
 import Back from "../../components/Auth-components/header.tsx/back";
-
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
+  const navigate = useNavigate();
 
   if (isLoadingProduct) return <div>Loading...</div>;
   if (isErrorProduct) return <div>Error loading product.</div>;
@@ -27,9 +27,9 @@ const ProductPage = () => {
           <h1 className="text-3xl font-bold text-[#152536]">{product.title}</h1>
           <div className="w-7 h-7">
             <img
-              src="/src/assets/icons/heart.svg"
-              alt="add-to-wishlist"
-              className="w-full h-full cursor-pointer"
+              src="../../../src/assets/icons/heart.svg"
+              alt="heart"
+              onClick={() => navigate("/Cart/Wishlist")}
             />
           </div>
         </div>
@@ -52,7 +52,8 @@ const ProductPage = () => {
           <h2 className="text-2xl font-bold text-[#152536]">Description</h2>
           <p className="text-base font-normal text-[#68717A]">
             In ultricies fermentum aliquet. Pellentesque dui magna, condimentum
-            non ullamcorp <span className="font-bold text-[#152536]">view more...</span>
+            non ullamcorp{" "}
+            <span className="font-bold text-[#152536]">view more...</span>
           </p>
         </div>
       </div>

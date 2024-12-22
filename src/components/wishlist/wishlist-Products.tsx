@@ -16,9 +16,11 @@ const ProductWishlist = ({ product }: Props) => {
           src={product.images}
           alt={product.title}
           className="w-full h-full rounded-3xl"
+        />
+        <div className="absolute top-0 right-0 mt-4 mr-4 rounded-full bg-black p-2">
+        <img  src="../../../src/assets/icons/wishheart.svg"
               />
-              <img className="absolute top-0 right-0 mt-4 mr-4" src="../../../src/assets/icons/heart.svg"
-              />
+        </div>
       </div>
       <h1 className="font-bold text-xl text-[#152536] mt-2">{product.title}</h1>
       <div className="flex flex-row	">
