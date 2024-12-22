@@ -20,7 +20,6 @@ const RouterPage: React.FC = () => {
         <Route path="/" element={<Onboarding />} />
         <Route path="" element={<PagesLayout />}>
           <Route path="/Home" element={<Home />} />
-          <Route path="/Cart" element={<ProductPage />} />
           <Route path="/Orders" />
         </Route>
         <Route path="/Auth" element={<AuthLayout />}>
@@ -36,9 +35,6 @@ const RouterPage: React.FC = () => {
         </Route>
         <Route path="/Home/Wishlist" element={<Wishlist />} />
         <Route path="/Home/products" element={<AllProducts />} />
-        <Route>
-        <Route path="/Cart/Wishlist" element={<Wishlist />} />
-      </Route>
       </Routes>
     </Router>
   );
