@@ -99,7 +99,7 @@ const ProductPage = () => {
         <ProductQuantity product={product || { id: 0, title: "", images: [] }} />
 
         {/* ======== Price and Add to Cart ======== */}
-        <div className="flex items-center justify-between mb-2 pb-1 w-full">
+        <div className="flex items-center justify-around my-2 pb-1 w-full">
 
           <ProductTotalPrice product={product} />
 

@@ -17,8 +17,9 @@ const ProductButton = ({ product, selectedSize, selectedColor }: Props) => {
 
 const notifyA = () => {
     toast.success('Product Added to Cart Successfully', {
-        position: "top-center",
+        position: "bottom-center",
         autoClose: 3000,
+        containerId: "A",
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -31,8 +32,9 @@ const notifyA = () => {
 
 const notifyB = () => {
     toast.warn('Please Select Size and Color !', {
-        position: "top-center",
+        position: "bottom-center",
         autoClose: 3000,
+        containerId: "B",
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -57,7 +59,7 @@ const notifyB = () => {
   return (
     <>
     <button
-      className="flex items-center justify-center text rounded-full px-10 py-3 gap-3 bg-[#152536]"
+      className="flex items-center justify-center text rounded-full px-10 py-3 gap-3 bg-[#152536] ml-auto"
       onClick={handleAddToCart}
     >
       <div className="w-6 h-6">
