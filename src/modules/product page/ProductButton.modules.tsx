@@ -1,29 +1,61 @@
 import { useContext } from "react";
 import { CartContext } from "../../providers/CartProvider";
 import { Product } from "../../types/Product.type";
+import { saveToStorage } from "../../utils/Utils";
+import { Flip, toast, ToastContainer } from "react-toastify";
 
-interface Props {
+type Props = {
   product: Product;
   selectedSize: number | null;
   selectedColor: string | null;
-}
+};
 
 const ProductButton = ({ product, selectedSize, selectedColor }: Props) => {
-  const { dispatch } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
+
+//   ======== React Toastify ==========
+
+const notifyA = () => {
+    toast.success('Product Added to Cart Successfully', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Flip,
+        });
+}
+
+const notifyB = () => {
+    toast.warn('Please Select Size and Color !', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Flip,
+        });
+}
+
+// =========== Handlers ============
 
   const handleAddToCart = () => {
     if (selectedSize === null || selectedColor === null) {
-      alert("Please select both size and color before proceeding to buy.");
+        notifyB()
       return;
     }
-
-    dispatch({
-      type: "ADD",
-      payload: { product, selectedSize, selectedColor },
-    });
+    saveToStorage("cart", cart);
+    notifyA()
   };
 
   return (
+    <>
     <button
       className="flex items-center justify-center text rounded-full px-10 py-3 gap-3 bg-[#152536]"
       onClick={handleAddToCart}
@@ -37,6 +69,9 @@ const ProductButton = ({ product, selectedSize, selectedColor }: Props) => {
       </div>
       <p className="text-2xl font-normal text-white">Add to Cart</p>
     </button>
+    <ToastContainer containerId="A" />
+    <ToastContainer containerId="B" />
+    </>
   );
 };
 

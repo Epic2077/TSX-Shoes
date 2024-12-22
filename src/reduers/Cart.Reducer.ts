@@ -1,6 +1,5 @@
 import { CartItem } from "../types/CartItem.type";
 import { Product } from "../types/Product.type";
-import { saveToStorage } from "../utils/Utils";
 
 export type CartAction = {
   type: "ADD" | "REMOVE";
@@ -23,17 +22,15 @@ export function CartReducer(state: CartItem[] = [], action: CartAction): CartIte
       ) !== -1;
 
       if (isExist) {
-        return saveCartToStorage(
-          state.map((item) =>
-            item.product.id === payload.product.id &&
-            item.selectedSize === payload.selectedSize &&
-            item.selectedColor === payload.selectedColor
-              ? { ...item, count: item.count + 1 }
-              : item
-          )
+        return state.map((item) =>
+          item.product.id === payload.product.id &&
+          item.selectedSize === payload.selectedSize &&
+          item.selectedColor === payload.selectedColor
+            ? { ...item, count: item.count + 1 }
+            : item
         );
       } else {
-        return saveCartToStorage([
+        return [
           ...state,
           {
             product: payload.product,
@@ -41,7 +38,7 @@ export function CartReducer(state: CartItem[] = [], action: CartAction): CartIte
             selectedSize: payload.selectedSize,
             selectedColor: payload.selectedColor,
           },
-        ]);
+        ];
       }
     }
     case "REMOVE": {
@@ -59,34 +56,23 @@ export function CartReducer(state: CartItem[] = [], action: CartAction): CartIte
 
       const shouldRemove = item.count <= 1;
       if (shouldRemove) {
-        return saveCartToStorage(
-          state.filter(
-            (item) =>
-              item.product.id !== payload.product.id ||
-              item.selectedSize !== payload.selectedSize ||
-              item.selectedColor !== payload.selectedColor
-          )
+        return state.filter(
+          (item) =>
+            item.product.id !== payload.product.id ||
+            item.selectedSize !== payload.selectedSize ||
+            item.selectedColor !== payload.selectedColor
         );
       }
-      return saveCartToStorage(
-        state.map((item) =>
-          item.product.id === payload.product.id &&
-          item.selectedSize === payload.selectedSize &&
-          item.selectedColor === payload.selectedColor
-            ? { ...item, count: item.count - 1 }
-            : item
-        )
+      return state.map((item) =>
+        item.product.id === payload.product.id &&
+        item.selectedSize === payload.selectedSize &&
+        item.selectedColor === payload.selectedColor
+          ? { ...item, count: item.count - 1 }
+          : item
       );
     }
     default:
       console.error("undefined action on cart:", action.type);
       return state;
   }
-}
-
-// ======== Save Cart To Storage
-
-function saveCartToStorage(cart: CartItem[]): CartItem[] {
-  saveToStorage("cart", cart);
-  return cart;
 }
