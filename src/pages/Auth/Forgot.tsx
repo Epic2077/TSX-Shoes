@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "../../components/Auth-components/loginInput/input";
 import { useNavigate } from "react-router-dom";
 import { getUsers } from "../../api/users";
 
 const Forgot: React.FC = () => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
 
@@ -17,7 +16,7 @@ const Forgot: React.FC = () => {
     e.preventDefault();
 
     try {
-      const users = await getUsers();
+      const users = await getUsers(); // Fetch all users
       const user = users.find(
         (user: { email: string }) => user.email === email
       );
@@ -34,7 +33,7 @@ const Forgot: React.FC = () => {
   };
 
   return (
-    <form action="" onSubmit={checkEmail} className="px-6 py-[67px]">
+    <form onSubmit={checkEmail} className="px-6 py-[67px]">
       <h1 className="font-semibold text-[32px] text-center mb-12">
         Forgot Password
       </h1>
@@ -60,11 +59,12 @@ const Forgot: React.FC = () => {
         name="submit"
         id="submit"
         type="submit"
-        className={`absolute bottom-0 mb-[60px] bg-black text-white cursor-pointer grid justify-center items-center w-[380px] h-12 rounded-full`}
+        className="absolute bottom-0 mb-[60px] bg-black text-white cursor-pointer grid justify-center items-center w-[380px] h-12 rounded-full"
       >
         Send
       </button>
     </form>
   );
 };
+
 export default Forgot;

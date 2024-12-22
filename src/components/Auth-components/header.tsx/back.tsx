@@ -2,19 +2,24 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface backProps {
+  address?: string;
   name?: string;
 }
 
-const Back: React.FC<backProps> = ({ name }) => {
+const Back: React.FC<backProps> = ({ address, name }) => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
-    navigate(-1);
+    if (!address) {
+      navigate(-1);
+    } else {
+      navigate(address);
+    }
   };
 
   return (
     <div
-      className="w-8 h-8 flex justify-center items-center cursor-pointer"
+      className="w-8 h-8 flex justify-center items-center cursor-pointer w-full"
       onClick={handleNavigation}
     >
       <img src="../../../src/assets/icons/back.svg" alt="back" />

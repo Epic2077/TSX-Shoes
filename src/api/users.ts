@@ -2,7 +2,7 @@ import Api from "./Base";
 
 export const getUsers = async () => {
   try {
-    const response = await Api.get("/users");
+    const response = await Api.get("users");
     return response.data;
   } catch (error) {
     console.error("Error fetching users:", error);
