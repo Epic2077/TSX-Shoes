@@ -10,8 +10,7 @@ const Wishlist: React.FC = () => {
           <p className="text-xl font-semibold">Wishlist</p>
         <img className="mx-60"
           src="../../../src/assets/icons/search.svg"
-                        alt="search" />
-                    
+alt="search" />                 
             </div>
             <HomeProducts />
         <div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../api/Query";
 import Back from "../../components/Auth-components/header.tsx/back";
 import ProductDetails from "./ProductDetails.modules";
@@ -28,25 +28,41 @@ const ErrorComponent = ({ message }: { message: string }) => (
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const isLoggedIn = false;
 
   if (isLoadingProduct) return <LoadingSpinner />;
-  if (isErrorProduct) return <ErrorComponent message="Error loading product." />;
+  if (isErrorProduct)
+    return <ErrorComponent message="Error loading product." />;
   if (!product) return <ErrorComponent message="No product found." />;
+
+  const handleHeartClick = () => {
+    if (isLoggedIn) {
+      navigate("/products/Wishlist");
+    } else {
+      navigate("/Auth/Login");
+    }
+  };
 
   return (
     <>
       {/* ======== Product Image ======== */}
       <div className="w-full h-96">
-        <img src={product.images} alt={product.title} className="w-full h-full" />
+        <img
+          src={product.images}
+          alt={product.title}
+          className="w-full h-full"
+        />
       </div>
       <div className="absolute top-5 left-6">
         <Back />
       </div>
 
       {/* ======== Product Details ======== */}
+
       <div className="px-6 py-3">
         {/* Title and Wishlist */}
         <div className="flex items-center justify-between">
@@ -56,6 +72,7 @@ const ProductPage = () => {
               src="/src/assets/icons/heart.svg"
               alt="add-to-wishlist"
               className="w-full h-full"
+              onClick={handleHeartClick}
             />
           </div>
         </div>
@@ -96,11 +113,12 @@ const ProductPage = () => {
 
         {/* ======== Product Quantity ======== */}
         {/* <ProductQuantity product={product} /> */}
-        <ProductQuantity product={product || { id: 0, title: "", images: [] }} />
+        <ProductQuantity
+          product={product || { id: 0, title: "", images: [] }}
+        />
 
         {/* ======== Price and Add to Cart ======== */}
         <div className="flex items-center justify-around my-2 pb-1 w-full">
-
           <ProductTotalPrice product={product} />
 
           <ProductButton
