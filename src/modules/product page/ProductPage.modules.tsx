@@ -32,7 +32,7 @@ const ProductPage = () => {
   const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  const isLoggedIn = false;
+  const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
 
   if (isLoadingProduct) return <LoadingSpinner />;
   if (isErrorProduct)
@@ -109,6 +109,7 @@ const ProductPage = () => {
           setSelectedSize={setSelectedSize}
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}
+          setisLoggedIn={setisLoggedIn}
         />
 
         {/* ======== Product Quantity ======== */}

@@ -7,6 +7,7 @@ interface Props {
   selectedColor: string | null;
   setSelectedSize: Dispatch<SetStateAction<number | null>>;
   setSelectedColor: Dispatch<SetStateAction<string | null>>;
+  setisLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ProductDetails = ({
@@ -15,6 +16,7 @@ const ProductDetails = ({
   selectedColor,
   setSelectedSize,
   setSelectedColor,
+  setisLoggedIn,
 }: Props) => {
   const colorClasses: { [key: string]: string } = {
     rose: "bg-rose-700",
