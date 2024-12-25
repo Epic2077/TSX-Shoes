@@ -42,7 +42,7 @@ const ShippingAddress: React.FC = () => {
           onClick={() => handleCardClick("Parent's House")} // Update active card
         />
       </div>
-      <div className="w-full h-12 bg-gray-300 grid justify-center items-center rounded-full ">
+      <div className="w-full h-12 bg-gray-300 grid justify-center items-center rounded-full mt-4">
         Add New Address
       </div>
     </div>

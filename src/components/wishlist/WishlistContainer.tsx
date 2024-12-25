@@ -1,6 +1,7 @@
 import { useProducts } from "../../api/Query";
 import { Product } from "../../types/Product.type";
 import ProductWishlist from "./wishlist-Products";
+
 interface Props {
   products?: Product[];
 }
@@ -21,7 +22,7 @@ const WishlistContainer = ({ products: propProducts }: Props) => {
   return (
     <div className="flex flex-wrap gap-4 justify-center mt-4">
       {products.map((product) => (
-        < ProductWishlist key={product.id} product={product} />
+        <ProductWishlist key={product.id} product={product} />
       ))}
     </div>
   );

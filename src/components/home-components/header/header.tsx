@@ -49,7 +49,7 @@ const HomeHeader: React.FC = () => {
         <img
           src="../../../src/assets/icons/heart.svg"
           alt="heart"
-          onClick={() => navigate("/Home/Wishlist")}
+          onClick={() => navigate("/Wishlist")}
         />
       </div>
     </header>

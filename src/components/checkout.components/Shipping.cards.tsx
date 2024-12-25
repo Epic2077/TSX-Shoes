@@ -6,6 +6,7 @@ interface addressProps {
   def?: boolean;
   icon: string;
   active: boolean;
+  cost?: number;
   onClick: () => void;
 }
 
@@ -15,6 +16,7 @@ const ShippingCard: React.FC<addressProps> = ({
   def,
   icon,
   active,
+  cost,
   onClick,
 }) => {
   return (
@@ -24,7 +26,11 @@ const ShippingCard: React.FC<addressProps> = ({
     >
       <div className="w-16 h-16 bg-slate-200 rounded-full grid justify-center items-center">
         <div className="h-11 w-11 bg-black rounded-full grid justify-center items-center">
-          <img src={`../../../src/assets/icons/${icon}.svg`} alt={icon} />
+          <img
+            src={`../../../src/assets/icons/${icon}.svg`}
+            alt={icon}
+            className="w-6"
+          />
         </div>
       </div>
       <div className="grid justify-between gap-2">
@@ -40,8 +46,11 @@ const ShippingCard: React.FC<addressProps> = ({
         </p>
         <p className="text-base text-gray-500">{address}</p>
       </div>
-      <div className="w-6 h-6 border-[3px] border-black grid justify-center items-center rounded-full ml-auto">
-        {active && <div className="w-3 h-3 bg-black rounded-full"></div>}
+      <div className="flex gap-4 ml-auto items-center">
+        {cost && <p className="font-semibold text-lg">${cost}</p>}
+        <div className="w-6 h-6 border-[3px] border-black grid justify-center items-center rounded-full">
+          {active && <div className="w-3 h-3 bg-black rounded-full"></div>}
+        </div>
       </div>
     </div>
   );

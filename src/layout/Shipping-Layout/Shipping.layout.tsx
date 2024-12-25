@@ -7,7 +7,7 @@ const ShippingLayout: React.FC = () => {
 
   const addressTitle: boolean = url.includes("address");
 
-  const title = addressTitle ? "Shipping Address" : "Choose Shipping";
+  const title = addressTitle ? "Shipping_Address" : "Choose_Shipping";
 
   return (
     <div>
