@@ -1,5 +1,5 @@
 import ProductsContainer from "../../components/home-components/products/products-container/ProductsContainer.components";
-import Back from "../../components/Auth-components/header.tsx/back";
+import Back from "../../components/Auth-components/header/back";
 
 const AllProducts = () => {
   return (

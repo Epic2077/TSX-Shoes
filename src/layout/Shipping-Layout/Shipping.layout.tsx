@@ -1,5 +1,5 @@
 import React from "react";
-import Back from "../../components/Auth-components/header.tsx/back";
+import Back from "../../components/Auth-components/header/back";
 import { Outlet } from "react-router-dom";
 
 const ShippingLayout: React.FC = () => {

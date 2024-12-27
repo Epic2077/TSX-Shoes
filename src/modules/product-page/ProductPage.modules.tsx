@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../api/Query";
-import Back from "../../components/Auth-components/header.tsx/back";
+import Back from "../../components/Auth-components/header/back";
 import ProductDetails from "./ProductDetails.modules";
 import ProductQuantity from "./ProductQuantity.modules";
 import HomeFooter from "../../components/home-components/footer/Footer";
