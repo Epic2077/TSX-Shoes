@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
-import { Brands } from "../../types/Brands.type";
 import ProductsContainer from "../../components/home-components/products/products-container/ProductsContainer.components";
 import Back from "../../components/Auth-components/header/back";
 import { useEffect, useState } from "react";
 import { Product } from "../../types/Product.type";
-import { getProducts } from "../../api/Api";
+import { getProductByBrand } from "../../api/Api";
 
 const BrandPage = () => {
   const { brandName } = useParams();
@@ -13,24 +12,17 @@ const BrandPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const filteredBrand = Brands.find(
-    (brand) => brand.name.toLowerCase() === brandName?.toLowerCase()
-  );
+  const filteredBrand = brandName ? brandName.toLowerCase() : "";
 
+  // const filteredBrand = getProductByBrand(searchedBrand);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
         setError(null);
 
-        const allProducts = await getProducts();
-
-        const filteredProducts = allProducts.filter((product) => {
-          if (!product.brand || !brandName) {
-            return false;
-          }
-          return product.brand.toLowerCase() === brandName.toLowerCase();
-        });
+        const filteredProducts = await getProductByBrand(filteredBrand);
+        console.log(filteredBrand);
 
         setProducts(filteredProducts);
       } catch (err) {
@@ -68,7 +60,7 @@ const BrandPage = () => {
     <div>
       <div className="py-4 px-8 flex items-center justify-start">
         <Back />
-        <p className="text-xl font-semibold">{filteredBrand.name}</p>
+        <p className="text-xl font-semibold">{filteredBrand}</p>
       </div>
 
       <div>

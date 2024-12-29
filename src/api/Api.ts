@@ -13,3 +13,8 @@ export async function getProductById(id: number) {
   const res = await Api.get<Product>("api/products/" + id);
   return res.data;
 }
+
+export async function getProductByBrand(brand: string) {
+  const res = await Api.get<Product>("api/products?brands=" + brand);
+  return res.data;
+}
