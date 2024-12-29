@@ -40,7 +40,7 @@ const ProductPage = () => {
     <>
       {/* ======== Product Image ======== */}
       <div className="w-full h-96">
-        <img src={product.images} alt={product.name} className="w-full h-full" />
+        <img src={product.images[0]} alt={product.name} className="w-full h-full" />
       </div>
       <div className="absolute top-5 left-6">
         <Back />
