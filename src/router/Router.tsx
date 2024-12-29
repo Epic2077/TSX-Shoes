@@ -10,8 +10,14 @@ import ProductBrandFilter from "../pages/productBrand/ProductBrand";
 import PagesLayout from "../layout/pages-layout/Layout";
 import BrandPage from "../modules/brand-page/BrandPage.modules";
 import AllProducts from "../modules/all-products/AllProducts.module";
-import ProductPage from "../modules/product page/ProductPage.layout";
+import ProductPage from "../modules/product page/ProductPage.modules";
 import ChangePassword from "../pages/Auth/change";
+import CartPage from "../pages/cart/Cart";
+import CheckOutPage from "../pages/checkout/Checkout";
+import ShippingLayout from "../layout/Shipping-Layout/Shipping.layout";
+import ShippingAddress from "../modules/Shipping/Address";
+import Wishlist from "../components/wishlist/wishlist";
+import ShippingDelivery from "../modules/Shipping/Delivery";
 import SearchBox from "../layout/search-box/searchBox";
 
 const RouterPage: React.FC = () => {
@@ -22,9 +28,10 @@ const RouterPage: React.FC = () => {
         <Route path="/" element={<Onboarding />} />
         <Route path="" element={<PagesLayout />}>
           <Route path="/Home" element={<Home />} />
-          <Route path="/Cart" />
+          <Route path="/Cart" element={<CartPage />} />
           <Route path="/Orders" />
         </Route>
+        <Route path="/Home/search" element={<SearchBox />} />
         <Route path="/Auth" element={<AuthLayout address="/Home" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
         </Route>
@@ -38,7 +45,12 @@ const RouterPage: React.FC = () => {
           <Route index element={<ProductBrandFilter />} />
         </Route>
         <Route path="/Home/products" element={<AllProducts />} />
-        <Route path="/Home/search" element={<SearchBox />} />
+        <Route path="/Checkout" element={<CheckOutPage />} />
+        <Route path="" element={<ShippingLayout />}>
+          <Route path="/Checkout/Address" element={<ShippingAddress />} />
+          <Route path="/Checkout/Delivery" element={<ShippingDelivery />} />
+        </Route>
+        <Route path="/Wishlist" element={<Wishlist />} />
       </Routes>
     </Router>
   );

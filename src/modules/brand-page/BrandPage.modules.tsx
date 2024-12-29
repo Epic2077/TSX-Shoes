@@ -49,7 +49,15 @@ const BrandPage = () => {
   }
 
   if (isLoading) {
-    return <p className="text-center text-xl">Loading...</p>;
+    return (
+      <div className="w-full flex justify-center my-40">
+        <img
+          src="../../../../../src/assets/icons/spinner-atom.svg"
+          alt="loading"
+          className="animate-spin"
+        />
+      </div>
+    );
   }
 
   if (error) {
@@ -58,7 +66,6 @@ const BrandPage = () => {
 
   return (
     <div>
-
       <div className="py-4 px-8 flex items-center justify-start">
         <Back />
         <p className="text-xl font-semibold">{filteredBrand.name}</p>

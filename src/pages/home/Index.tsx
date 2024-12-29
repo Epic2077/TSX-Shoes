@@ -3,7 +3,6 @@ import HomeHeader from "../../components/home-components/header/header";
 import HomeSearch from "../../components/home-components/search/Search";
 import HomeBrand from "../../components/home-components/brandPage/brands";
 import HomeProducts from "../../components/home-components/products/Product";
-import ProductsContainer from "../../components/home-components/products/products-container/ProductsContainer.components";
 
 const Home: React.FC = () => {
   return (
@@ -12,7 +11,6 @@ const Home: React.FC = () => {
       <HomeSearch />
       <HomeBrand />
       <HomeProducts />
-      <ProductsContainer />
     </div>
   );
 };
