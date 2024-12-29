@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { isUserLoggedIn } from "../../../api/UserAuth";
 
 const HomeHeader: React.FC = () => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const isLoggedIn = await isUserLoggedIn();
+      if (isLoggedIn) {
+        const storedUser =
+          localStorage.getItem("user") || sessionStorage.getItem("user");
+
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          setUserName(parsedUser.name);
+        }
+      }
+    };
+    checkLoginStatus();
+  }, []);
 
   return (
     <header className="flex justify-between items-center">
@@ -22,7 +40,7 @@ const HomeHeader: React.FC = () => {
             className="font-bold text-base cursor-pointer"
             onClick={() => navigate("/Auth/Login")}
           >
-            Sign In
+            {userName ? userName : "Sign In"}
           </p>
         </div>
       </div>
@@ -31,7 +49,7 @@ const HomeHeader: React.FC = () => {
         <img
           src="../../../src/assets/icons/heart.svg"
           alt="heart"
-          onClick={() => navigate("/Products/Wishlist")}
+          onClick={() => navigate("/Wishlist")}
         />
       </div>
     </header>

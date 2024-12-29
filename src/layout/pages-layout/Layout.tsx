@@ -5,18 +5,18 @@ import CartOrderHeader from "../../components/pages-coponents/CartOrderHeader";
 
 const PagesLayout: React.FC = () => {
   const location = useLocation();
-  const name = location.pathname;
+  const name = location.pathname.toLowerCase();
   return (
     <div>
-      <header className={`${name.includes("Home") ? "hidden" : "block"}`}>
+      <header className={`${name.includes("home") ? "hidden" : "block"}`}>
         <CartOrderHeader
-          name={name.includes("Cart") ? "My Cart" : "My Orders"}
+          name={name.includes("cart") ? "My Cart" : "My Orders"}
         />
       </header>
       <main>
         <Outlet />
       </main>
-      <footer>
+      <footer className="sticky bottom-0">
         <HomeFooter />
       </footer>
     </div>

@@ -10,7 +10,8 @@ const HomeBrand: React.FC = () => {
         {BrandArray.map((brand) => (
           <div
             className="grid gap-[13px] justify-center cursor-pointer"
-            onClick={() => navigate(`/Products/${brand.fullName.split(" ")}`)}
+            onClick={() => navigate(`/home/${brand.fullName}`)}
+            key={brand.fullName}
           >
             <div className="w-[60px] h-[60px] flex justify-center items-center bg-[#ECECEC] rounded-full">
               <img src={brand.images} alt={brand.fullName} />
@@ -20,16 +21,10 @@ const HomeBrand: React.FC = () => {
         ))}
       </div>
       <div className="flex justify-between mt-4 items-center">
-        <p
-          className="font-semibold text-xl cursor-pointer"
-          onClick={() => navigate("/Products/MostPopular")}
-        >
-          {" "}
-          Most Popular
-        </p>
+        <p className="font-semibold text-xl"> Most Popular</p>
         <p
           className="text-base font-semibold cursor-pointer"
-          onClick={() => navigate("/Products/All")}
+          onClick={() => navigate("/Mostpopular")}
         >
           See All
         </p>
