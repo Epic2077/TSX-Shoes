@@ -34,3 +34,16 @@ export function useProduct(productId: number) {
     isLoadingProduct,
   };
 }
+
+// export const useLogin = () => {
+//   return useMutation(authenticateUser, {
+//     onSuccess: (data) => {
+//       const { accessToken } = data;
+//       setAuthHeader(accessToken);
+//       // Store token in memory, cookie
+//     },
+//     onError: (error) => {
+//       console.error("Login failed: ", error);
+//     },
+//   });
+// };

@@ -1,17 +1,19 @@
 import React, { useRef, useState } from "react";
 import { handleChange } from "../../components/Auth-components/loginFunction/FormHandler";
 import { useNavigate } from "react-router-dom";
-import { authenticateUser } from "../../api/users";
+import { loginUser } from "../../api/UserAuth";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState<{ email?: string; password?: string }>({});
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [error, setError] = useState<{ username?: string; password?: string }>(
+    {}
+  );
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
-  const emailInputRef = useRef<HTMLInputElement>(null);
+  const usernameInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const handleFocus = (inputRef: React.RefObject<HTMLInputElement>) => {
@@ -33,13 +35,10 @@ const LoginPage: React.FC = () => {
 
   const validateForm = (): boolean => {
     let isValid = true;
-    const errors: { email?: string; password?: string } = {};
+    const errors: { username?: string; password?: string } = {};
 
-    if (!formData.email) {
-      errors.email = "Email is required";
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Please enter a valid email address";
+    if (!formData.username) {
+      errors.username = "Username is required";
       isValid = false;
     }
 
@@ -52,50 +51,41 @@ const LoginPage: React.FC = () => {
     return isValid;
   };
 
-  const handleLogin = async (
-    e: React.FormEvent,
-    formData: any,
-    setError: any
-  ) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); //prevent default form submission
 
-    // Validate the form
-    if (!validateForm(formData, setError)) {
+    if (!validateForm()) {
       return;
     }
 
-    const { email, password } = formData;
-
     try {
-      // Authenticate the user
-      const user = await authenticateUser(email, password);
+      // Call API to Login
+      const { accessToken } = await loginUser(
+        formData.username,
+        formData.password
+      );
 
-      // Handle successful login (store user data, navigate, etc.)
       const storage = document.getElementById("remember")?.checked
         ? localStorage
         : sessionStorage;
 
-      storage?.setItem(
-        "user",
-        JSON.stringify({ id: user.id, name: user.name })
-      );
+      storage.setItem("user", formData.username);
+      storage.setItem("accessToken", accessToken);
 
-      // Redirect to the homepage or other route
       navigate("/Home");
     } catch (err: any) {
-      if (err.message === "Email not found") {
-        setError({ ...error, email: "Email not found" });
-      } else if (err.message === "Incorrect password") {
-        setError({ ...error, password: "Incorrect password" });
+      //Handle Errors
+
+      if (err.message === "Invalid credentials") {
+        setError((prev) => ({
+          ...prev,
+          username: "Invalid credentials",
+          password: "Invalid credentials",
+        }));
+      } else {
+        console.error("An unexpected error occurred: ", err);
       }
     }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent form submission
-
-    // Directly call handleLogin and pass the necessary arguments
-    handleLogin(e, formData, setError);
   };
   return (
     <div className="px-6 py-[67px]">
@@ -103,28 +93,28 @@ const LoginPage: React.FC = () => {
         Login to Your Account
       </h1>
       <form action="" className="mt-11" onSubmit={handleSubmit}>
-        {/* Email Input */}
+        {/* username Input */}
         <div className="mb-4">
           <div
             className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded mb-[21px]"
-            onFocus={() => handleFocus(emailInputRef)}
-            onBlur={() => handleBlur(emailInputRef)}
-            ref={emailInputRef}
+            onFocus={() => handleFocus(usernameInputRef)}
+            onBlur={() => handleBlur(usernameInputRef)}
+            ref={usernameInputRef}
           >
-            <img src="../../../src/assets/icons/email.svg" alt="email" />
+            <img src="../../../src/assets/icons/email.svg" alt="username" />
             <input
               type="text"
-              name="email"
-              value={formData.email}
+              name="username"
+              value={formData.username}
               onChange={(e) =>
                 handleChange(e, setFormData, setError, setIsButtonEnabled)
               }
               className="p-[4px] bg-transparent h-[24px] w-full outline-none"
-              placeholder="Email"
+              placeholder="Username"
             />
           </div>
-          {error.email && (
-            <p className="text-[#C50A0A] text-sm mt-1">{error.email}</p>
+          {error.username && (
+            <p className="text-[#C50A0A] text-sm mt-1">{error.username}</p>
           )}
         </div>
 

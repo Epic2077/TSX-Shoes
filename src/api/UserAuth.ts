@@ -1,3 +1,4 @@
+import axios from "axios";
 import { getUsers } from "./users";
 
 export const isUserLoggedIn = async (): Promise<boolean> => {
@@ -20,4 +21,25 @@ export const isUserLoggedIn = async (): Promise<boolean> => {
     console.error("error checking user login:", error);
     return false;
   }
+};
+
+const BASE_URL = "http://localhost:8000";
+
+export const loginUser = async (username: string, password: string) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/auth/login`, {
+      username,
+      password,
+    });
+    return response.data;
+  } catch (err: any) {
+    if (err.response && err.response.status === 401) {
+      throw new Error("Invalid credentials"); // Explicitly throw error for 401
+    }
+    throw err; // Rethrow other errors
+  }
+};
+
+export const setAuthHeader = (token: string) => {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
