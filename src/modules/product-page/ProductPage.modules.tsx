@@ -7,17 +7,7 @@ import ProductQuantity from "./ProductQuantity.modules";
 import HomeFooter from "../../components/home-components/footer/Footer";
 import ProductTotalPrice from "./ProductTotalPrice.modules";
 import ProductButton from "./ProductButton.modules";
-
-// ======== Loading Spinner ========
-const LoadingSpinner = () => (
-  <div className="w-full flex justify-center my-40">
-    <img
-      src="/src/assets/icons/spinner-atom.svg"
-      alt="loading"
-      className="animate-spin"
-    />
-  </div>
-);
+import { LoadingSpinner } from "../../components/loading-spinner/loading";
 
 // ======== Error Component ========
 const ErrorComponent = ({ message }: { message: string }) => (
@@ -33,14 +23,19 @@ const ProductPage = () => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   if (isLoadingProduct) return <LoadingSpinner />;
-  if (isErrorProduct) return <ErrorComponent message="Error loading product." />;
+  if (isErrorProduct)
+    return <ErrorComponent message="Error loading product." />;
   if (!product) return <ErrorComponent message="No product found." />;
 
   return (
     <>
       {/* ======== Product Image ======== */}
       <div className="w-full h-96">
-        <img src={product.images[0]} alt={product.name} className="w-full h-full" />
+        <img
+          src={product.images[0]}
+          alt={product.name}
+          className="w-full h-full"
+        />
       </div>
       <div className="absolute top-5 left-6">
         <Back />
@@ -63,7 +58,9 @@ const ProductPage = () => {
         {/* Product Stats */}
         <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2">
-            <p className="font-normal text-base text-[#152536]">{product.sold_quantity} sold</p>
+            <p className="font-normal text-base text-[#152536]">
+              {product.sold_quantity} sold
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <img src="/src/assets/icons/star.svg" alt="star-icon" />
@@ -96,11 +93,12 @@ const ProductPage = () => {
 
         {/* ======== Product Quantity ======== */}
         {/* <ProductQuantity product={product} /> */}
-        <ProductQuantity product={product || { id: 0, title: "", images: [] }} />
+        <ProductQuantity
+          product={product || { id: 0, title: "", images: [] }}
+        />
 
         {/* ======== Price and Add to Cart ======== */}
         <div className="flex items-center justify-around my-2 pb-1 w-full">
-
           <ProductTotalPrice product={product} />
 
           <ProductButton
