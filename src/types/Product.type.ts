@@ -2,15 +2,19 @@ export type Product = {
   id: number;
   name: string;
   price: number;
+  sold_quantity: number;
+  view_count: number;
+  rating: number;
+  description: string;
+  is_popular: boolean;
   order: number;
-  size: number[];
-  color: string[];
-  selectedColor?: string;
-  selectedSize?: number;
-  quantity?: number;
-  brand: string;
+  sizes: number[];
+  colors: string[];
+  brand: {
+    id: number;
+    name: string;
+    icon: string;
+  };
   images: string[];
-  popular: boolean;
-  rate: number;
-  sold: number;
+  isFavorite: boolean;
 };

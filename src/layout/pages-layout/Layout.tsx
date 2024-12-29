@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import HomeFooter from "../../components/home-components/footer/Footer";
-import CartOrderHeader from "../../components/pages-coponents/CartOrderHeader";
+import CartOrderHeader from "../../components/pages-components/CartOrderHeader";
 
 const PagesLayout: React.FC = () => {
   const location = useLocation();
