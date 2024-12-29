@@ -1,5 +1,5 @@
 import React from "react";
-import Back from "../Auth-components/header.tsx/back";
+import Back from "../Auth-components/header/back";
 
 const CheckoutHeader: React.FC = () => {
   return (

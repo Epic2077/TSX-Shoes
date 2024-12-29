@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Back from "../../components/Auth-components/header.tsx/back";
+import Back from "../../components/Auth-components/header/back";
 import { Product } from "../../types/Product.type";
 import { getProducts } from "../../api/Api";
 import ProductCard from "../../components/home-components/products/product-card/ProductCard.components";

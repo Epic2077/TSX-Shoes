@@ -1,5 +1,5 @@
 import React from "react";
-import Back from "../../components/Auth-components/header.tsx/back";
+import Back from "../../components/Auth-components/header/back";
 
 interface LoginHeaderProps {
   address?: string;
