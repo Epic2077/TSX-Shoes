@@ -1,6 +1,5 @@
 import React from "react";
 import Back from "../Auth-components/header/back";
-import HomeProducts from "../home-components/products/Product";
 import WishlistContainer from "./WishlistContainer";
 
 const Wishlist: React.FC = () => {

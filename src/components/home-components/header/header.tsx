@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isUserLoggedIn } from "../../../api/UserAuth";
+// import { isUserLoggedIn } from "../../../api/UserAuth";
 
 const HomeHeader: React.FC = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    const checkLoginStatus = async () => {
-      const isLoggedIn = await isUserLoggedIn();
-      if (isLoggedIn) {
-        const storedUser =
-          localStorage.getItem("user") || sessionStorage.getItem("user");
+    const checkLoginStatus = () => {
+      const storedUser =
+        localStorage.getItem("user") || sessionStorage.getItem("user");
 
-        if (storedUser) {
-          const parsedUser = JSON.parse(storedUser);
-          setUserName(parsedUser.name);
-        }
+      if (storedUser) {
+        setUserName(storedUser);
       }
     };
     checkLoginStatus();

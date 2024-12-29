@@ -30,7 +30,7 @@ const ProductDetails = ({
       <div className="flex flex-col items-start gap-3">
         <p className="font-bold text-[#152536] text-xl">Size</p>
         <div className="flex items-center justify-start gap-2">
-          {product.size.map((size) => (
+          {product.sizes.map((size) => (
             <button
               key={size}
               onClick={() => setSelectedSize(size)}
@@ -50,7 +50,7 @@ const ProductDetails = ({
       <div className="flex flex-col items-start justify-start gap-3">
         <p className="font-bold text-[#152536] text-xl">Color</p>
         <div className="flex items-center justify-start gap-2">
-          {product.color.map((color) => (
+          {product.colors.map((color) => (
             <button
               key={color}
               onClick={() => setSelectedColor(color)}

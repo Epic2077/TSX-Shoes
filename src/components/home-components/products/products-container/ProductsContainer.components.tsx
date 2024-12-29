@@ -34,8 +34,6 @@ const ProductsContainer = ({ products: propProducts, activeFilter }: Props) => {
       ? products
       : products.filter((product) => activeFilter?.includes(product.brand));
 
-  console.log("active Filters", activeFilter);
-  console.log("Filtered Products:", filterProducts);
   return (
     <>
       <div className="flex flex-wrap gap-4 justify-center mt-4">

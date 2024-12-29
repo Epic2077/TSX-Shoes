@@ -40,7 +40,7 @@ const ProductPage = () => {
     <>
       {/* ======== Product Image ======== */}
       <div className="w-full h-96">
-        <img src={product.images} alt={product.title} className="w-full h-full" />
+        <img src={product.images[0]} alt={product.name} className="w-full h-full" />
       </div>
       <div className="absolute top-5 left-6">
         <Back />
@@ -50,7 +50,7 @@ const ProductPage = () => {
       <div className="px-6 py-3">
         {/* Title and Wishlist */}
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-[#152536]">{product.title}</h1>
+          <h1 className="text-3xl font-bold text-[#152536]">{product.name}</h1>
           <div className="w-7 h-7 cursor-pointer">
             <img
               src="/src/assets/icons/heart.svg"
@@ -63,12 +63,12 @@ const ProductPage = () => {
         {/* Product Stats */}
         <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2">
-            <p className="font-normal text-base text-[#152536]">5/765 sold</p>
+            <p className="font-normal text-base text-[#152536]">{product.sold_quantity} sold</p>
           </div>
           <div className="flex items-center gap-2">
             <img src="/src/assets/icons/star.svg" alt="star-icon" />
             <p className="font-medium text-base text-[#68717A]">
-              4.3 (5800 reviews)
+              {product.rating} {product.view_count}
             </p>
           </div>
         </div>
