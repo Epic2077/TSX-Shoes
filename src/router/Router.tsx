@@ -18,6 +18,7 @@ import ShippingLayout from "../layout/Shipping-Layout/Shipping.layout";
 import ShippingAddress from "../modules/Shipping/Address";
 import Wishlist from "../components/wishlist/wishlist";
 import ShippingDelivery from "../modules/Shipping/Delivery";
+import SearchBox from "../layout/search-box/searchBox";
 
 const RouterPage: React.FC = () => {
   return (
@@ -30,6 +31,7 @@ const RouterPage: React.FC = () => {
           <Route path="/Cart" element={<CartPage />} />
           <Route path="/Orders" />
         </Route>
+        <Route path="/Home/search" element={<SearchBox />} />
         <Route path="/Auth" element={<AuthLayout address="/Home" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
         </Route>
