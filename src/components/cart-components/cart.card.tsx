@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Product } from "../../types/Product.type";
 import DeleteProductFromCart from "./deleting.product.cart";
+import ProductQuantity from "../../modules/product page/ProductQuantity.modules";
+import { CartContext } from "../../providers/CartProvider";
 
 interface CartCardProps {
   product: Product;
@@ -10,6 +12,24 @@ interface CartCardProps {
 const CartCard: React.FC<CartCardProps> = ({ product }) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [deleteCart, setDeleteCart] = useState<boolean>(false);
+  const [ProductQuantity, setProductQuantity] = useState<number>();
+
+  // const cartLocal = localStorage.getItem("cart");
+  // if (!cartLocal) {
+  //   console.error("No cart in local storage");
+  // }
+
+  // console.log(cartLocal);
+
+  // const parsedCartLocal = JSON.parse(cartLocal);
+
+  // console.log(parsedCartLocal);
+
+  // const productInCart = parsedCartLocal?.find(
+  //   (p) => p?.product?.id === product.id
+  // );
+
+  // console.log(productInCart);
 
   const handleDeleteClick = () => {
     setShowDeleteModal(true);
@@ -18,6 +38,8 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
   const handleCloseModal = () => {
     setShowDeleteModal(false);
   };
+
+  const { cart, dispatch } = useContext(CartContext);
 
   return (
     <>
@@ -49,6 +71,11 @@ const CartCard: React.FC<CartCardProps> = ({ product }) => {
           </div>
           <div className="flex">
             <p className="text-xl font-semibold">${product.price}.00</p>
+            {/* <div className="flex">
+              <button onClick={() => dispatch({ type: "ADD" })}>+</button>
+              <p>{product.quantity}</p>
+              <button onClick={() => dispatch({ type: "REMOVE" })}>-</button>
+            </div> */}
           </div>
         </div>
       </div>

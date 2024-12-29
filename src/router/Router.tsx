@@ -16,6 +16,9 @@ import CartPage from "../pages/cart/Cart";
 import CheckOutPage from "../pages/checkout/Checkout";
 import ShippingLayout from "../layout/Shipping-Layout/Shipping.layout";
 import ShippingAddress from "../modules/Shipping/Address";
+import Wishlist from "../components/wishlist/wishlist";
+import ShippingDelivery from "../modules/Shipping/Delivery";
+import SearchBox from "../layout/search-box/searchBox";
 import MostPopular from "../modules/most popular/MostPopular.modules";
 
 const RouterPage: React.FC = () => {
@@ -29,6 +32,7 @@ const RouterPage: React.FC = () => {
           <Route path="/Cart" element={<CartPage />} />
           <Route path="/Orders" />
         </Route>
+        <Route path="/Home/search" element={<SearchBox />} />
         <Route path="/Auth" element={<AuthLayout address="/Home" />}>
           <Route path="/Auth/Login" element={<LoginPage />} />
         </Route>
@@ -46,7 +50,9 @@ const RouterPage: React.FC = () => {
         <Route path="/Mostpopular" element={<MostPopular />} />
         <Route path="" element={<ShippingLayout />}>
           <Route path="/Checkout/Address" element={<ShippingAddress />} />
+          <Route path="/Checkout/Delivery" element={<ShippingDelivery />} />
         </Route>
+        <Route path="/Wishlist" element={<Wishlist />} />
       </Routes>
     </Router>
   );

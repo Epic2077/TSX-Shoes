@@ -18,23 +18,22 @@ const ProductWishlist = ({ product }: Props) => {
           className="w-full h-full rounded-3xl"
         />
         <div className="absolute top-0 right-0 mt-4 mr-4 rounded-full bg-black p-2">
-        <img  src="../../../src/assets/icons/wishheart.svg"
-              />
+          <img src="../../../src/assets/icons/wishheart.svg" />
         </div>
       </div>
       <h1 className="font-bold text-xl text-[#152536] mt-2">{product.title}</h1>
       <div className="flex flex-row	">
-      <img src="../../../src/assets/icons/half-star.svg" alt="star" />
-      <p className="text-gray-500  ">4.6</p>
-      <p className="text-gray-500  mx-3 ">|</p>
-      <p className="rounded-md bg-slate-200 text-black font-sans mx-3">5,000 sold</p>
-
+        <img src="../../../src/assets/icons/half-star.svg" alt="star" />
+        <p className="text-gray-500  ">4.6</p>
+        <p className="text-gray-500  mx-3 ">|</p>
+        <p className="rounded-md bg-slate-200 text-black font-sans mx-3">
+          5,000 sold
+        </p>
       </div>
       <p className="text-base font-semibold text-[#152536] mt-2 mb-2">
         $ {product.price}
-        </p>
+      </p>
     </Link>
-    
   );
 };
 

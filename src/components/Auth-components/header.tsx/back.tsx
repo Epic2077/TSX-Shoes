@@ -19,7 +19,7 @@ const Back: React.FC<backProps> = ({ address, name }) => {
 
   return (
     <div
-      className="w-8 h-8 flex justify-center items-center cursor-pointer w-full"
+      className="w-8 h-8 flex justify-center items-center cursor-pointer"
       onClick={handleNavigation}
     >
       <img src="../../../src/assets/icons/back.svg" alt="back" />

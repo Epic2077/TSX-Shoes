@@ -7,12 +7,12 @@ const ShippingLayout: React.FC = () => {
 
   const addressTitle: boolean = url.includes("address");
 
-  const title = addressTitle ? "Shipping Address" : "Choose Shipping";
+  const title = addressTitle ? "Shipping_Address" : "Choose_Shipping";
 
   return (
     <div>
       <header className="px-8 py-5">
-        <Back address="/Cart" name={title} />
+        <Back address="/Checkout" name={title} />
       </header>
       <main>
         <Outlet />

@@ -20,12 +20,14 @@ const AddressCart: React.FC<addressProps> = ({ title, address }) => {
         <p className="text-lg font-semibold">{title}</p>
         <p className="text-base text-gray-500">{address}</p>
       </div>
-      <img
-        src="../../../src/assets/icons/pen.svg"
-        alt="pen"
-        className="w-7 h-7 ml-auto"
-        onClick={() => navigate("/Checkout/Address")}
-      />
+      <div className="ml-auto flex gap-2">
+        <img
+          src="../../../src/assets/icons/pen.svg"
+          alt="pen"
+          className="w-7 h-7"
+          onClick={() => navigate("/Checkout/Address")}
+        />
+      </div>
     </div>
   );
 };
