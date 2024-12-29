@@ -10,7 +10,7 @@ import ProductBrandFilter from "../pages/productBrand/ProductBrand";
 import PagesLayout from "../layout/pages-layout/Layout";
 import BrandPage from "../modules/brand-page/BrandPage.modules";
 import AllProducts from "../modules/all-products/AllProducts.module";
-import ProductPage from "../modules/product page/ProductPage.modules";
+import ProductPage from "../modules/product-page/ProductPage.modules";
 import ChangePassword from "../pages/Auth/change";
 import CartPage from "../pages/cart/Cart";
 import CheckOutPage from "../pages/checkout/Checkout";
@@ -19,6 +19,7 @@ import ShippingAddress from "../modules/Shipping/Address";
 import Wishlist from "../components/wishlist/wishlist";
 import ShippingDelivery from "../modules/Shipping/Delivery";
 import SearchBox from "../layout/search-box/searchBox";
+import MostPopular from "../modules/most-popular/MostPopular.modules";
 
 const RouterPage: React.FC = () => {
   return (
@@ -46,6 +47,7 @@ const RouterPage: React.FC = () => {
         </Route>
         <Route path="/Home/products" element={<AllProducts />} />
         <Route path="/Checkout" element={<CheckOutPage />} />
+        <Route path="/Mostpopular" element={<MostPopular />} />
         <Route path="" element={<ShippingLayout />}>
           <Route path="/Checkout/Address" element={<ShippingAddress />} />
           <Route path="/Checkout/Delivery" element={<ShippingDelivery />} />

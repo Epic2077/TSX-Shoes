@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Brands } from "../../types/Brands.type";
 import ProductsContainer from "../../components/home-components/products/products-container/ProductsContainer.components";
-import Back from "../../components/Auth-components/header.tsx/back";
+import Back from "../../components/Auth-components/header/back";
 import { useEffect, useState } from "react";
 import { Product } from "../../types/Product.type";
 import { getProducts } from "../../api/Api";

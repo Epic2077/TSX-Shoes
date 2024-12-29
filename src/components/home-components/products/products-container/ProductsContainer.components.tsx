@@ -32,7 +32,7 @@ const ProductsContainer = ({ products: propProducts, activeFilter }: Props) => {
   const filterProducts =
     (activeFilter || []).length === 0
       ? products
-      : products.filter((product) => activeFilter.includes(product.brand));
+      : products.filter((product) => activeFilter?.includes(product.brand));
 
   console.log("active Filters", activeFilter);
   console.log("Filtered Products:", filterProducts);
