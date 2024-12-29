@@ -1,6 +1,6 @@
 export type Product = {
   id: number;
-  title: string;
+  name: string;
   price: number;
   order: number;
   size: number[];
@@ -9,7 +9,7 @@ export type Product = {
   selectedSize?: number;
   quantity?: number;
   brand: string;
-  images: string;
+  images: string[];
   popular: boolean;
   rate: number;
   sold: number;

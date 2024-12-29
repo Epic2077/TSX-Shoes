@@ -13,12 +13,14 @@ const ProductCard = ({ product }: Props) => {
     >
       <div className="rounded-3xl w-[182px] h-[182px]">
         <img
-          src={product.images}
-          alt={product.title}
+          src={product.images[0]}
+          alt={product.name}
           className="w-full h-full rounded-3xl"
         />
       </div>
-      <h1 className="font-bold text-xl text-[#152536] mt-2">{product.title}</h1>
+      <h1 className="font-bold text-xl text-[#152536] mt-2 max-w-36 truncate">
+        {product.name}
+      </h1>
       <p className="text-base font-semibold text-[#152536] mb-2">
         $ {product.price}
       </p>
