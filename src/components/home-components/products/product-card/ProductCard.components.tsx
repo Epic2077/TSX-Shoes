@@ -18,11 +18,11 @@ const ProductCard = ({ product }: Props) => {
           className="w-full h-full rounded-3xl"
         />
       </div>
-      <h1 className="font-bold text-xl text-[#152536] mt-2 max-w-36 truncate">
+      <h1 className="font-bold text-xl text-[#152536] mt-2 max-w-40 truncate">
         {product.name}
       </h1>
-      <p className="text-base font-semibold text-[#152536] mb-2">
-        $ {product.price}
+      <p className="text-lg font-semibold text-[#152536] mb-2">
+        $ {product.price}.00
       </p>
     </Link>
   );
