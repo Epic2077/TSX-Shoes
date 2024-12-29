@@ -20,7 +20,7 @@ const DeliveryCard: React.FC = () => {
           <img
             src={`../../../src/assets/icons/${icon}.svg`}
             alt={icon}
-            className="w-9"
+            className="w-9 invert"
           />
           <h1 className="text-xl font-semibold">{title}</h1>
           <img

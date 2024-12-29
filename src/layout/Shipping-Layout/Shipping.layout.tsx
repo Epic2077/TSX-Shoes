@@ -12,7 +12,7 @@ const ShippingLayout: React.FC = () => {
   return (
     <div>
       <header className="px-8 py-5">
-        <Back address="/Cart" name={title} />
+        <Back address="/Checkout" name={title} />
       </header>
       <main>
         <Outlet />

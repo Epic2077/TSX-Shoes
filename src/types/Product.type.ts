@@ -6,7 +6,8 @@ export type Product = {
   size: number[];
   color: string[];
   selectedColor?: string;
-  selectedSize: number;
+  selectedSize?: number;
+  quantity?: number;
   brand: string;
   images: string;
   popular: boolean;

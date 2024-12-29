@@ -1,11 +1,7 @@
 import React, { useRef, useState } from "react";
-import {
-  handleChange,
-  handleSubmit,
-} from "../../components/Auth-components/loginFunction/FormHandler";
+import { handleChange } from "../../components/Auth-components/loginFunction/FormHandler";
 import { useNavigate } from "react-router-dom";
 import { authenticateUser } from "../../api/users";
-import { Bounce, toast } from "react-toastify";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
