@@ -12,7 +12,7 @@ const MostPopular = () => {
     const fetchProducts = async () => {
       try {
         const products = await getProducts();
-        const fiteredProducts = products.filter((product) => product.popular);
+        const fiteredProducts = products.filter((product) => product.is_popular);
         setPopularProducts(fiteredProducts);
       } catch (error) {
         console.log("Error Fetching Products", error);
