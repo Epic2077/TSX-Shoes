@@ -2,8 +2,12 @@ import React, { useRef, useState } from "react";
 import { handleChange } from "../../components/Auth-components/loginFunction/FormHandler";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../api/UserAuth";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../store/slices/AuthSlice";
 
 const LoginPage: React.FC = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -65,12 +69,18 @@ const LoginPage: React.FC = () => {
         formData.password
       );
 
+      dispatch(
+        setCredentials({
+          token: accessToken,
+          username: formData.username,
+        })
+      );
+
       const storage = document.getElementById("remember")?.checked
         ? localStorage
         : sessionStorage;
 
       storage.setItem("user", formData.username);
-      storage.setItem("accessToken", accessToken);
 
       navigate("/Home");
     } catch (err: any) {
