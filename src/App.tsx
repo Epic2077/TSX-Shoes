@@ -1,12 +1,16 @@
-import CartProvider from "./providers/CartProvider";
+import { Provider } from "react-redux";
 import RouterPage from "./router/Router";
+import { persistor, store } from "./store";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   return (
     <>
-      <CartProvider>
-        <RouterPage />
-      </CartProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterPage />
+        </PersistGate>
+      </Provider>
     </>
   );
 }
