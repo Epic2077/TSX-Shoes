@@ -26,13 +26,11 @@ const ChangePassword: React.FC = () => {
     if (newPassword !== confirmPassword) {
       validationErrors.password = "Passwords do not match.";
     }
-    if (Object.keys(validationErrors).length > 0) {
-      setError(validationErrors);
-      return;
-    }
 
     try {
+      console.log("here");
       await userChange(newPassword, token);
+      console.log("New Pass in try cycle:", newPassword);
 
       toast.success("Change successful!", {
         position: "top-center",
@@ -46,6 +44,7 @@ const ChangePassword: React.FC = () => {
       });
       navigate("/Auth/Login");
     } catch (err: any) {
+      console.log(err.message);
       if (err.fieldErrors) {
         setError(err.fieldErrors); // Expecting an object with field-specific error messages
         console.log(err.fieldErrors);
@@ -61,6 +60,12 @@ const ChangePassword: React.FC = () => {
           transition: Bounce,
         });
       }
+
+      if (Object.keys(validationErrors).length > 0) {
+        setError(validationErrors);
+        return;
+      }
+      console.log("New Pass:", newPassword);
     }
   };
 
