@@ -8,7 +8,8 @@ interface InputProps {
   id: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: () => void; // To handle events like password visibility toggle
+  onClick?: () => void;
+  onPaste?: (e: React.ClipboardEvent<HTMLInputElement>) => void; // To handle events like password visibility toggle
   customChildren?: ReactNode; // Allow additional custom children like the eye icon
 }
 
@@ -21,6 +22,7 @@ export const Input: React.FC<InputProps> = ({
   value,
   onChange,
   onClick,
+  onPaste,
   customChildren,
 }) => {
   return (
@@ -34,6 +36,7 @@ export const Input: React.FC<InputProps> = ({
         value={value}
         onChange={onChange}
         onClick={onClick}
+        onPaste={onPaste}
         className="bg-transparent w-full h-9 outline-none"
       />
       {customChildren && <div>{customChildren}</div>}

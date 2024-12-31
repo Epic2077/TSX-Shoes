@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Input } from "../loginInput/input";
 import { useNavigate } from "react-router-dom";
-import { SignupSchema } from "../loginFunction/SignupSchema";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Api from "../../../api/Base";
-import { getUsers } from "../../../api/users";
 import { userSignup } from "../../../api/UserAuth";
 
 const FormLayout: React.FC = () => {
@@ -71,6 +68,15 @@ const FormLayout: React.FC = () => {
     } catch (err: any) {
       if (err.fieldErrors) {
         setError(err.fieldErrors);
+      } else if (
+        err.status === 400 &&
+        err.message === "Email or username already exists."
+      ) {
+        // Handle specific server error messages
+        setError((prev) => ({
+          ...prev,
+          email: "Email or username already exists.",
+        }));
       } else {
         toast.error("An error occurred. Please try again.", {
           position: "top-center",

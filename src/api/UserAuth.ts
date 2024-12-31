@@ -46,6 +46,44 @@ export const userSignup = async (
       });
       throw { fieldErrors: errorMessages };
     }
+    if (err.response && err.response.status === 400) {
+      throw new Error("Email already Exists.");
+    }
     throw new Error("An unexpected error occurred");
+  }
+};
+
+export const userForgot = async (email: string) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/auth/forgot-password`, {
+      email,
+    });
+    return response.data;
+  } catch (err: any) {
+    if (err.response && err.response.status === 404) {
+      throw new Error("User not found.");
+    }
+    throw err;
+  }
+};
+
+export const userChange = async (password: string, token: string) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/auth/reset-password`, {
+      password,
+      token,
+    });
+    return response.data;
+  } catch (err: any) {
+    if (err.response?.data?.errors) {
+      const fieldErrors: Record<string, string> = {};
+      for (const error of err.response.data.errors) {
+        fieldErrors[error.path] = error.msg; // Adjust "path" and "msg" to match the server response fields.
+      }
+      throw { fieldErrors };
+    }
+    throw new Error(
+      err.response?.data?.message || "An unexpected error occurred"
+    );
   }
 };
