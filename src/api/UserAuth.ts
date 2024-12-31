@@ -1,28 +1,5 @@
 import axios from "axios";
-
-// export const isUserLoggedIn = async (): Promise<boolean> => {
-//   const storedUser =
-//     localStorage.getItem("user") || sessionStorage.getItem("user");
-
-//   if (!storedUser) {
-//     return false;
-//   }
-
-//   try {
-//     const parsedUser = JSON.parse(storedUser);
-//     const users = await getUsers(); // Fetch users from JSON-Server
-//     const foundUser = users.find(
-//       (user: { id: string }) => user.id === parsedUser.id
-//     );
-
-//     return !!foundUser; // return true if exist and false if it doesn't
-//   } catch (error) {
-//     console.error("error checking user login:", error);
-//     return false;
-//   }
-// };
-
-const BASE_URL = "http://localhost:8000";
+import { BASE_URL } from "./Base";
 
 export const loginUser = async (username: string, password: string) => {
   try {
@@ -41,4 +18,34 @@ export const loginUser = async (username: string, password: string) => {
 
 export const setAuthHeader = (token: string) => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+};
+
+export const userSignup = async (
+  username: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string,
+  phone: string
+) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/auth/register`, {
+      username,
+      email,
+      firstName,
+      lastName,
+      password,
+      phone,
+    });
+    return response.data;
+  } catch (err: any) {
+    if (err.response?.data?.errors) {
+      const errorMessages: Record<string, string> = {};
+      err.response.data.errors.forEach((error: any) => {
+        errorMessages[error.path] = error.msg;
+      });
+      throw { fieldErrors: errorMessages };
+    }
+    throw new Error("An unexpected error occurred");
+  }
 };
