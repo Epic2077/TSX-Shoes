@@ -6,6 +6,7 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Api from "../../../api/Base";
 import { getUsers } from "../../../api/users";
+import { userSignup } from "../../../api/UserAuth";
 
 const FormLayout: React.FC = () => {
   const navigate = useNavigate();
@@ -45,56 +46,16 @@ const FormLayout: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Before Getting users");
-    const users = await getUsers();
-    console.log("After getting users", users);
-    const newId = `${users.length + 1}`;
-    setFormData((prev) => ({ ...prev, id: newId }));
-    e.preventDefault();
-    if (formData.password !== formData.confirmPass) {
-      if (formData.password !== formData.confirmPass) {
-        setError((prev) => ({
-          ...prev,
-          confirmPass: "Passwords does not match",
-        }));
-        return; // Stop further processing if passwords do not match
-      }
-    }
-    const validResult = SignupSchema.safeParse(formData);
-    if (!validResult.success) {
-      const fieldError: { [key: string]: string } = {};
-      validResult.error.errors.forEach((error) => {
-        if (error.path[0]) {
-          fieldError[error.path[0] as string] = error.message;
-        }
-      });
-      setError(fieldError);
-      return;
-    }
-    console.log("Form data is valid:", formData);
+
     try {
-      // Check if email already exists
-
-      const emailExists = users.find((user) => user.email === formData.email);
-
-      console.log(emailExists);
-
-      if (emailExists) {
-        toast.error("Email already exists. Please use a different email.", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-          transition: Bounce,
-        });
-        return;
-      }
-
-      // If email doesn't exist, proceed with signup
-      await Api.post("users", formData);
+      await userSignup(
+        formData.username,
+        formData.email,
+        formData.name,
+        formData.lastName,
+        formData.password,
+        formData.phone
+      );
 
       toast.success("Signup successful!", {
         position: "top-center",
@@ -106,21 +67,22 @@ const FormLayout: React.FC = () => {
         theme: "dark",
         transition: Bounce,
       });
-
-      // Redirect to login or another page
       navigate("/Auth/Login");
-    } catch (error) {
-      console.error(error);
-      toast.error("An error occurred. Please try again.", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        transition: Bounce,
-      });
+    } catch (err: any) {
+      if (err.fieldErrors) {
+        setError(err.fieldErrors);
+      } else {
+        toast.error("An error occurred. Please try again.", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition: Bounce,
+        });
+      }
     }
   };
 
