@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "../../components/Auth-components/loginInput/input";
 import { useNavigate } from "react-router-dom";
-import { getUsers } from "../../api/users";
+import { userForgot } from "../../api/UserAuth";
 
 const Forgot: React.FC = () => {
   const navigate = useNavigate();
@@ -16,19 +16,11 @@ const Forgot: React.FC = () => {
     e.preventDefault();
 
     try {
-      const users = await getUsers(); // Fetch all users
-      const user = users.find(
-        (user: { email: string }) => user.email === email
-      );
+      await userForgot(email);
 
-      if (user) {
-        navigate("/Auth/ChangePassword", { state: { userId: user.id } });
-      } else {
-        setError("Email not found. Please try again.");
-      }
-    } catch (err) {
-      console.error("Error checking email:", err);
-      setError("An error occurred. Please try again later.");
+      navigate("/Auth/ChangePassword");
+    } catch (err: any) {
+      setError("User not Found");
     }
   };
 

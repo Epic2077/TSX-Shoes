@@ -1,65 +1,71 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getUsers } from "../../api/users";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Auth-components/loginInput/input";
+import { userChange } from "../../api/UserAuth";
+import { Bounce, toast } from "react-toastify";
 
 const ChangePassword: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const userId = location.state?.userId; // Retrieve userId passed in navigate state
-  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
   const [newPassword, setNewPassword] = useState<string>("");
+  const [token, setToken] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [error, setError] = useState<Record<string, string>>({});
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const users = await getUsers();
-        const foundUser = users.find(
-          (user: { id: string }) => user.id === userId
-        );
-
-        if (foundUser) {
-          setUser(foundUser);
-        } else {
-          setError("User not found.");
-        }
-      } catch (err) {
-        console.error("Error fetching user:", err);
-        setError("An error occurred. Please try again later.");
-      }
-    };
-
-    if (userId) fetchUser();
-  }, [userId]);
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prev) => !prev);
+  };
 
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const validationErrors: Record<string, string> = {};
+    if (!token) {
+      validationErrors.token = "Token is required.";
+    }
     if (newPassword !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
+      validationErrors.password = "Passwords do not match.";
     }
 
     try {
-      // Make a PATCH request to update the password
-      const response = await fetch(`http://localhost:3000/users/${userId}`, {
-        method: "PATCH", // Use PATCH to update only the password
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password: newPassword }),
-      });
+      console.log("here");
+      await userChange(newPassword, token);
+      console.log("New Pass in try cycle:", newPassword);
 
-      if (response.ok) {
-        console.log("Password successfully updated!");
-        navigate("/Auth/Login");
+      toast.success("Change successful!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+      navigate("/Auth/Login");
+    } catch (err: any) {
+      console.log(err.message);
+      if (err.fieldErrors) {
+        setError(err.fieldErrors); // Expecting an object with field-specific error messages
+        console.log(err.fieldErrors);
       } else {
-        setError("Failed to update the password. Please try again.");
+        toast.error(err.message || "An error occurred. Please try again.", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition: Bounce,
+        });
       }
-    } catch (err) {
-      console.error("Error updating password:", err);
-      setError("An error occurred. Please try again later.");
+
+      if (Object.keys(validationErrors).length > 0) {
+        setError(validationErrors);
+        return;
+      }
+      console.log("New Pass:", newPassword);
     }
   };
 
@@ -68,34 +74,66 @@ const ChangePassword: React.FC = () => {
       <h1 className="font-semibold text-[32px] text-center mb-12">
         Change Password
       </h1>
-      {user ? (
-        <p>
-          Changing password for <strong>{user.email}</strong>
-        </p>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <p className="text-center">
+        Please Check Your Email For Change Password Token
+      </p>
       <form onSubmit={handlePasswordChange} className="grid mt-4">
         <Input
           icon="lock"
-          name="password"
-          type="password"
+          name="newPassword"
+          type={isPasswordVisible ? "text" : "password"}
           id="password"
           placeholder="Password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
+          customChildren={
+            <img
+              src="../../../src/assets/icons/eye.svg"
+              alt="toggle visibility"
+              className="cursor-pointer"
+              onClick={togglePasswordVisibility}
+            />
+          }
         />
+        {error.newPassword && (
+          <p className="text-red-500 text-sm">{error.newPassword}</p>
+        )}
 
         <Input
           icon="lock"
           name="confirm-password"
-          type="password"
+          type={isPasswordVisible ? "text" : "password"}
           id="confirm-password"
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          customChildren={
+            <img
+              src="../../../src/assets/icons/eye.svg"
+              alt="toggle visibility"
+              className="cursor-pointer"
+              onClick={togglePasswordVisibility}
+            />
+          }
         />
-        {error && <p className="text-red-500 text-sm mt-2 ">{error}</p>}
+
+        <div className="mt-4">
+          <Input
+            icon="user"
+            name="token"
+            type="text"
+            id="token"
+            placeholder="Token"
+            value={token}
+            onChange={(e) => setToken(e.target.value)}
+            onPaste={(e) => {
+              const pastedData = e.clipboardData.getData("text");
+              setToken(pastedData);
+            }}
+          />
+        </div>
+        {error.token && <p className="text-red-500 text-sm">{error.token}</p>}
+
         <button
           name="submit"
           id="submit"
