@@ -10,7 +10,6 @@ export function useProducts(params: Product[]) {
 }
 
 export function useProduct(productId: string) {
-  console.log(productId)
   return useQuery({
     queryKey: ["products", productId],
     queryFn: () => getProductById(productId),
