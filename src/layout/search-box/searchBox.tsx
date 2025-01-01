@@ -9,14 +9,14 @@ const SearchBox: React.FC = () => {
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   useEffect(() => {
-    fetch("http://localhost:3000/products")
+    fetch("http://localhost:8000/api/products")
       .then((Response) => Response.json())
-      .then((title) => setProducts(title));
+      .then((name) => setProducts(name));
   }, []);
 
   useEffect(() => {
     const newFilteredProducts = products.filter((product) => {
-      return product.title.toLocaleLowerCase().includes(searchField);
+      return product.name.toLocaleLowerCase().includes(searchField);
 
     });
     setFilteredProducts(newFilteredProducts);
