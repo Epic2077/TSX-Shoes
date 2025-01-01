@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { useProducts } from "../../api/Query";
+import { useEffect, useState } from "react"; // اضافه شده: برای مدیریت وضعیت و بارگذاری
+import { useSelector } from "react-redux"; // اضافه شده: برای دسترسی به توکن
+import axios from "axios"; // اضافه شده: برای ارسال درخواست‌های HTTP
+import { useProducts } from "../../api/Query"; // حفظ شده: برای استفاده از محصولات API
 import { Product } from "../../types/Product.type";
 import ProductWishlist from "./wishlist-Products";
 import { BASE_URL } from "../../api/Base";
@@ -17,11 +17,12 @@ interface Props {
 }
 
 const WishlistContainer = ({ products: propProducts }: Props) => {
-  const accessToken = useSelector((state: RootState) => state.auth.token);
-  const [wishlistProducts, setWishlistProducts] = useState<Product[]>([]);
+  const accessToken = useSelector((state: RootState) => state.auth.token); // Specify the type for state
+  const [wishlistProducts, setWishlistProducts] = useState<Product[]>([]); // اضافه شده: وضعیت برای محصولات ویند لیست
   const [isLoading, setIsLoading] = useState(true); // اضافه شده: وضعیت بارگذاری
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false); // اضافه شده: وضعیت خطا
 
+  // بارگذاری محصولات ویند لیست
   useEffect(() => {
     const fetchWishlistProducts = async () => {
       try {
@@ -30,8 +31,8 @@ const WishlistContainer = ({ products: propProducts }: Props) => {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        setWishlistProducts(response.data);
-      } catch (error) {
+        setWishlistProducts(response.data); // Use setWishlistProducts to update state
+      } catch (error: any) {
         setIsError(true);
         console.error("Error fetching wishlist products:", error);
       } finally {
@@ -39,25 +40,25 @@ const WishlistContainer = ({ products: propProducts }: Props) => {
       }
     };
 
-    fetchWishlistProducts();
-  }, [accessToken]);
+    fetchWishlistProducts(); // فراخوانی تابع برای بارگذاری محصولات
+  }, [accessToken]); // وابستگی به accessToken
 
   const {
-    products: apiProducts,
-    isLoadingProducts,
-    isErrorProducts,
+    data: apiProducts,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
   } = useProducts();
 
-  const products = propProducts || wishlistProducts || apiProducts;
+  const products = propProducts || wishlistProducts || apiProducts; // Use wishlistProducts in rendering
 
-  if (isLoading || isLoadingProducts) return <div>Loading...</div>;
-  if (isError || isErrorProducts) return <div>Error loading products.</div>;
-  if (!products || products.length === 0) return <div>No products found.</div>;
+  if (isLoading || isLoadingProducts) return <div>Loading...</div>; // نمایش پیام بارگذاری
+  if (isError || isErrorProducts) return <div>Error loading products.</div>; // نمایش پیام خطا
+  if (!products || products.length === 0) return <div>No products found.</div>; // نمایش پیام در صورت عدم وجود محصول
 
   return (
     <div className="flex flex-wrap gap-4 justify-center mt-4">
       {products.map((product) => (
-        <ProductWishlist key={product.id} product={product} />
+        <ProductWishlist key={product.id} product={product} /> // نمایش هر محصول
       ))}
     </div>
   );
