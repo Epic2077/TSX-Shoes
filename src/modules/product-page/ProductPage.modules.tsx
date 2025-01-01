@@ -9,6 +9,7 @@ import ProductTotalPrice from "./ProductTotalPrice.modules";
 import ProductButton from "./ProductButton.modules";
 import { LoadingSpinner } from "../../components/loading-spinner/loading";
 import WishlistEvent from "../../components/wishlist/wishlist-event";
+import ProductImages from "./ProductImages.modules";
 
 // ======== Error Component ========
 const ErrorComponent = ({ message }: { message: string }) => (
@@ -31,7 +32,8 @@ const ProductPage = () => {
   return (
     <>
       {/* ======== Product Image ======== */}
-      <div className="w-full h-96">
+      <ProductImages images={product.images}/>
+      {/* <div className="w-full h-96">
         <img
           src={product.images[0]}
           alt={product.name}
@@ -40,7 +42,7 @@ const ProductPage = () => {
       </div>
       <div className="absolute top-5 left-6">
         <Back />
-      </div>
+      </div> */}
 
       {/* ======== Product Details ======== */}
       <div className="px-6 py-3">

@@ -14,7 +14,6 @@ export async function getPopularProducts() {
 }
 
 export async function getProductById(id: string) {
-  console.log(id)
   const res = await Api.get<Product>(`api/products/${id}`);
   return res.data;
 }
