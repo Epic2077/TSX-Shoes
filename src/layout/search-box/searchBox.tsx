@@ -9,6 +9,13 @@ const SearchBox: React.FC = () => {
   const [products, setProducts] = useState([] as any[]);
   const [filteredProducts, setFilteredProducts] = useState(products);
 
+//  headers: {
+//      Authorization: `Bearer ${accessToken}`,
+//   const accessToken = useSelector((state) => state.auth.token);
+
+
+//  const { data: apiProducts, isLoading, isError } = useProducts(propProducts || []);
+
   useEffect(() => {
     fetch("http://localhost:8000/api/products")
       .then((Response) => Response.json())
@@ -26,6 +33,7 @@ const SearchBox: React.FC = () => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   };
+
 
   return (
     <>
