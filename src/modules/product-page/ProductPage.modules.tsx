@@ -8,6 +8,7 @@ import HomeFooter from "../../components/home-components/footer/Footer";
 import ProductTotalPrice from "./ProductTotalPrice.modules";
 import ProductButton from "./ProductButton.modules";
 import { LoadingSpinner } from "../../components/loading-spinner/loading";
+import WishlistEvent from "../../components/wishlist/wishlist-event";
 
 // ======== Error Component ========
 const ErrorComponent = ({ message }: { message: string }) => (
@@ -46,15 +47,8 @@ const ProductPage = () => {
         {/* Title and Wishlist */}
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-[#152536]">{product.name}</h1>
-          <div className="w-7 h-7 cursor-pointer">
-            <img
-              src="/src/assets/icons/heart.svg"
-              alt="add-to-wishlist"
-              className="w-full h-full"
-            />
-          </div>
+          <WishlistEvent product={product} />
         </div>
-
         {/* Product Stats */}
         <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2">
