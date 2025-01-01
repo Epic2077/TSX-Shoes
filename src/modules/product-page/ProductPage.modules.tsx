@@ -18,13 +18,13 @@ const ErrorComponent = ({ message }: { message: string }) => (
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
+
+  const { data: product, isLoading, isError } = useProduct(id);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
-  if (isLoadingProduct) return <LoadingSpinner />;
-  if (isErrorProduct)
-    return <ErrorComponent message="Error loading product." />;
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <ErrorComponent message="Error loading product." />;
   if (!product) return <ErrorComponent message="No product found." />;
 
   return (
@@ -43,7 +43,7 @@ const ProductPage = () => {
 
       {/* ======== Product Details ======== */}
       <div className="px-6 py-3">
-        {/* Title and Wishlist */}
+        {/*====== Title and Wishlist ==========*/}
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-[#152536]">{product.name}</h1>
           <div className="w-7 h-7 cursor-pointer">
@@ -55,7 +55,7 @@ const ProductPage = () => {
           </div>
         </div>
 
-        {/* Product Stats */}
+        {/*========== Product Stats ==========*/}
         <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2">
             <p className="font-normal text-base text-[#152536]">
@@ -70,7 +70,7 @@ const ProductPage = () => {
           </div>
         </div>
 
-        {/* Description */}
+        {/*========= Description =========*/}
         <div className="flex flex-col items-start gap-1 mt-1">
           <h2 className="text-2xl font-bold text-[#152536]">Description</h2>
           <p className="text-base font-normal text-[#68717A]">
@@ -92,7 +92,6 @@ const ProductPage = () => {
         />
 
         {/* ======== Product Quantity ======== */}
-        {/* <ProductQuantity product={product} /> */}
         <ProductQuantity
           product={product || { id: 0, title: "", images: [] }}
         />
