@@ -22,7 +22,7 @@ const ErrorComponent = ({ message }: { message: string }) => (
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
+  const { data: product, isLoading, isError } = useProduct(id);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
