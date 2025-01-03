@@ -20,23 +20,17 @@ export const setAuthHeader = (token: string) => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
-export const userSignup = async (
-  username: string,
-  email: string,
-  firstName: string,
-  lastName: string,
-  password: string,
-  phone: string
-) => {
+export type UserRegisterData = {
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  phone: string;
+};
+export const userSignup = async (data: UserRegisterData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/auth/register`, {
-      username,
-      email,
-      firstName,
-      lastName,
-      password,
-      phone,
-    });
+    const response = await axios.post(`${BASE_URL}/auth/register`, data);
     return response.data;
   } catch (err: any) {
     if (err.response?.data?.errors) {

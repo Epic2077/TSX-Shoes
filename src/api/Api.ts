@@ -1,7 +1,7 @@
 import { Product } from "../types/Product.type";
 import Api from "./Base";
 
-export async function getProducts(params?: { id: number }) {
+export async function getProducts(params?: object) {
   return (
     await Api.get<Product[]>("api/products", {
       params,
