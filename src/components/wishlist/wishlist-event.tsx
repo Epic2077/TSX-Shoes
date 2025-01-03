@@ -9,11 +9,7 @@ interface RootState {
 }
 interface ProductPageProps {
   product: {
-<<<<<<< HEAD
     id: string;
-=======
-    id: number;
->>>>>>> b5966e0d8eaa9c868073ef4fe847bc78474592b2
   };
 }
 

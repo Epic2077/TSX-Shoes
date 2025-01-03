@@ -30,17 +30,16 @@ const ProductPage = () => {
     mutationFn: (newCart: CartItem) => addToCart(newCart),
   });
 
-  if (isLoadingProduct) return <LoadingSpinner />;
-  if (isErrorProduct)
-    return <ErrorComponent message="Error loading product." />;
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <ErrorComponent message="Error loading product." />;
   if (!product) return <ErrorComponent message="No product found." />;
 
   const handleCartMutation = () => {
-    const newCartItem = {
-      productId: product.id,
+    const newCartItem: CartItem = {
+      productId: product.id.toString(),
       count: 1,
-      size: selectedSize,
-      color: selectedColor,
+      size: selectedSize !== null ? selectedSize.toString() : undefined,
+      color: selectedColor !== null ? selectedColor : undefined,
     };
 
     mutate(newCartItem, {
