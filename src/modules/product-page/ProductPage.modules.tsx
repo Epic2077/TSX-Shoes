@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../api/Query";
-import Back from "../../components/Auth-components/header/back";
 import ProductDetails from "./ProductDetails.modules";
 import ProductQuantity from "./ProductQuantity.modules";
 import HomeFooter from "../../components/home-components/footer/Footer";
@@ -23,7 +22,7 @@ const ErrorComponent = ({ message }: { message: string }) => (
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { product, isErrorProduct, isLoadingProduct } = useProduct(Number(id));
+  const { data: product, isError, isLoading } = useProduct(id);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 

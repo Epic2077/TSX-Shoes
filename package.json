@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
+    "clsx": "^2.1.1",
     "navigate": "^0.3.6",
     "navigo": "^8.11.1",
     "react": "^18.3.1",
@@ -21,6 +22,7 @@
     "react-router-dom": "^7.0.2",
     "react-toastify": "^11.0.2",
     "redux-persist": "^6.0.0",
+    "tailwind-merge": "^2.6.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

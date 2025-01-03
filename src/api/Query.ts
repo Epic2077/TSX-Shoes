@@ -1,11 +1,10 @@
-import { Product } from "../types/Product.type";
 import { getProductById, getProducts } from "./Api";
 import { useQuery } from "react-query";
 
-export function useProducts(params: Product[]) {
+export function useProducts(params: object) {
   return useQuery({
     queryKey: ["products", params],
-    queryFn: () => getProducts(),
+    queryFn: () => getProducts(params),
   });
 }
 

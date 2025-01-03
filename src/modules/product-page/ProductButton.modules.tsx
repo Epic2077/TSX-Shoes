@@ -4,13 +4,18 @@ import { Product } from "../../types/Product.type";
 import { Flip, toast, ToastContainer } from "react-toastify";
 
 type Props = {
-  product: Product;
+  productId: number | null;
   selectedSize: number | null;
   selectedColor: string | null;
-  onClick: () => void
+  onClick: () => void;
 };
 
-const ProductButton = ({ product, selectedSize, selectedColor, onClick }: Props) => {
+const ProductButton = ({
+  product,
+  selectedSize,
+  selectedColor,
+  onClick,
+}: Props) => {
   const { cart } = useContext(CartContext);
 
   //   ======== React Toastify ==========
@@ -52,7 +57,7 @@ const ProductButton = ({ product, selectedSize, selectedColor, onClick }: Props)
       notifyB();
       return;
     }
-    onClick()
+    onClick();
     notifyA();
   };
 
