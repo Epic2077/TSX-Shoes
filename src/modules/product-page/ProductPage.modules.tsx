@@ -9,6 +9,13 @@ import ProductTotalPrice from "./ProductTotalPrice.modules";
 import ProductButton from "./ProductButton.modules";
 import { LoadingSpinner } from "../../components/loading-spinner/loading";
 import WishlistEvent from "../../components/wishlist/wishlist-event";
+<<<<<<< HEAD
+=======
+import ProductImages from "./ProductImages.modules";
+import { useMutation } from "react-query";
+import { addToCart, useCartMutation } from "../../pages/cart/AddToCart";
+import { CartItem } from "../../types/CartItem.type";
+>>>>>>> b5966e0d8eaa9c868073ef4fe847bc78474592b2
 
 // ======== Error Component ========
 const ErrorComponent = ({ message }: { message: string }) => (
@@ -23,33 +30,53 @@ const ProductPage = () => {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
-  if (isLoadingProduct) return <LoadingSpinner />;
-  if (isErrorProduct)
-    return <ErrorComponent message="Error loading product." />;
+  const { mutate, isLoading: isMutating } = useMutation({
+    mutationFn: (newCart: CartItem) => addToCart(newCart),
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <ErrorComponent message="Error loading product." />;
   if (!product) return <ErrorComponent message="No product found." />;
 
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <ErrorComponent message="Error loading product." />;
+  if (!product) return <ErrorComponent message="No product found." />;
+
+  const handleCartMutation = () => {
+    const newCartItem = {
+      productId: product.id,
+      count: 1,
+      size: selectedSize,
+      color: selectedColor,
+    };
+
+    mutate(newCartItem, {
+      onSuccess: (data) => console.log("Item added to cart", data),
+      onError: (error) => console.error("Error adding item to cart", error),
+    });
+  };
   return (
     <>
       {/* ======== Product Image ======== */}
-      <div className="w-full h-96">
-        <img
-          src={product.images[0]}
-          alt={product.name}
-          className="w-full h-full"
-        />
-      </div>
-      <div className="absolute top-5 left-6">
-        <Back />
-      </div>
+      <ProductImages images={product.images} />
 
       {/* ======== Product Details ======== */}
       <div className="px-6 py-3">
-        {/* Title and Wishlist */}
+        {/*====== Title and Wishlist ==========*/}
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-[#152536]">{product.name}</h1>
+<<<<<<< HEAD
           <WishlistEvent product={product} />
         </div>
         {/* Product Stats */}
+=======
+          <div className="w-7 h-7 cursor-pointer">
+            <WishlistEvent product={product} />
+          </div>
+        </div>
+
+        {/*========== Product Stats ==========*/}
+>>>>>>> b5966e0d8eaa9c868073ef4fe847bc78474592b2
         <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2">
             <p className="font-normal text-base text-[#152536]">
@@ -64,7 +91,7 @@ const ProductPage = () => {
           </div>
         </div>
 
-        {/* Description */}
+        {/*========= Description =========*/}
         <div className="flex flex-col items-start gap-1 mt-1">
           <h2 className="text-2xl font-bold text-[#152536]">Description</h2>
           <p className="text-base font-normal text-[#68717A]">
@@ -86,7 +113,6 @@ const ProductPage = () => {
         />
 
         {/* ======== Product Quantity ======== */}
-        {/* <ProductQuantity product={product} /> */}
         <ProductQuantity
           product={product || { id: 0, title: "", images: [] }}
         />
@@ -95,10 +121,13 @@ const ProductPage = () => {
         <div className="flex items-center justify-around my-2 pb-1 w-full">
           <ProductTotalPrice product={product} />
 
+          {/* ======= Add To cart ======= */}
           <ProductButton
             product={product}
             selectedSize={selectedSize}
             selectedColor={selectedColor}
+            onClick={handleCartMutation}
+            isLoading={isMutating}
           />
         </div>
 

@@ -67,20 +67,20 @@ export const userForgot = async (email: string) => {
   }
 };
 
-export const userChange = async (password: string, token: string) => {
+export const userChange = async (newPassword: string, token: string) => {
   try {
     const response = await axios.post(`${BASE_URL}/auth/reset-password`, {
-      password,
+      newPassword,
       token,
     });
     return response.data;
   } catch (err: any) {
     if (err.response?.data?.errors) {
-      const fieldErrors: Record<string, string> = {};
-      for (const error of err.response.data.errors) {
-        fieldErrors[error.path] = error.msg; // Adjust "path" and "msg" to match the server response fields.
-      }
-      throw { fieldErrors };
+      const errorMessages: Record<string, string> = {};
+      err.response.data.errors.forEach((error: any) => {
+        errorMessages[error.path] = error.msg;
+      });
+      throw { fieldErrors: errorMessages };
     }
     throw new Error(
       err.response?.data?.message || "An unexpected error occurred"
