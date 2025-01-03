@@ -10,6 +10,9 @@ import ProductButton from "./ProductButton.modules";
 import { LoadingSpinner } from "../../components/loading-spinner/loading";
 import WishlistEvent from "../../components/wishlist/wishlist-event";
 import ProductImages from "./ProductImages.modules";
+import { useMutation } from "react-query";
+import { addToCart, useCartMutation } from "../../pages/cart/AddToCart";
+import { CartItem } from "../../types/CartItem.type";
 
 // ======== Error Component ========
 const ErrorComponent = ({ message }: { message: string }) => (
@@ -25,24 +28,35 @@ const ProductPage = () => {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
+  const { mutate, isLoading: isMutating } = useMutation({
+    mutationFn: (newCart: CartItem) => addToCart(newCart),
+  });
+
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <ErrorComponent message="Error loading product." />;
   if (!product) return <ErrorComponent message="No product found." />;
 
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <ErrorComponent message="Error loading product." />;
+  if (!product) return <ErrorComponent message="No product found." />;
+
+  const handleCartMutation = () => {
+    const newCartItem = {
+      productId: product.id,
+      count: 1,
+      size: selectedSize,
+      color: selectedColor,
+    };
+
+    mutate(newCartItem, {
+      onSuccess: (data) => console.log("Item added to cart", data),
+      onError: (error) => console.error("Error adding item to cart", error),
+    });
+  };
   return (
     <>
       {/* ======== Product Image ======== */}
-      <ProductImages images={product.images}/>
-      {/* <div className="w-full h-96">
-        <img
-          src={product.images[0]}
-          alt={product.name}
-          className="w-full h-full"
-        />
-      </div>
-      <div className="absolute top-5 left-6">
-        <Back />
-      </div> */}
+      <ProductImages images={product.images} />
 
       {/* ======== Product Details ======== */}
       <div className="px-6 py-3">
@@ -99,10 +113,13 @@ const ProductPage = () => {
         <div className="flex items-center justify-around my-2 pb-1 w-full">
           <ProductTotalPrice product={product} />
 
+          {/* ======= Add To cart ======= */}
           <ProductButton
             product={product}
             selectedSize={selectedSize}
             selectedColor={selectedColor}
+            onClick={handleCartMutation}
+            isLoading={isMutating}
           />
         </div>
 

@@ -22,3 +22,4 @@ export async function getProductByBrand(brand: string) {
   const res = await Api.get<Product>("api/products?brands=" + brand);
   return res.data;
 }
+
