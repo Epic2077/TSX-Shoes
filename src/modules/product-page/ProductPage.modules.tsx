@@ -9,13 +9,10 @@ import ProductTotalPrice from "./ProductTotalPrice.modules";
 import ProductButton from "./ProductButton.modules";
 import { LoadingSpinner } from "../../components/loading-spinner/loading";
 import WishlistEvent from "../../components/wishlist/wishlist-event";
-<<<<<<< HEAD
-=======
 import ProductImages from "./ProductImages.modules";
 import { useMutation } from "react-query";
-import { addToCart, useCartMutation } from "../../pages/cart/AddToCart";
+import { addToCart } from "../../pages/cart/AddToCart";
 import { CartItem } from "../../types/CartItem.type";
->>>>>>> b5966e0d8eaa9c868073ef4fe847bc78474592b2
 
 // ======== Error Component ========
 const ErrorComponent = ({ message }: { message: string }) => (
@@ -34,12 +31,9 @@ const ProductPage = () => {
     mutationFn: (newCart: CartItem) => addToCart(newCart),
   });
 
-  if (isLoading) return <LoadingSpinner />;
-  if (isError) return <ErrorComponent message="Error loading product." />;
-  if (!product) return <ErrorComponent message="No product found." />;
-
-  if (isLoading) return <LoadingSpinner />;
-  if (isError) return <ErrorComponent message="Error loading product." />;
+  if (isLoadingProduct) return <LoadingSpinner />;
+  if (isErrorProduct)
+    return <ErrorComponent message="Error loading product." />;
   if (!product) return <ErrorComponent message="No product found." />;
 
   const handleCartMutation = () => {
@@ -55,6 +49,7 @@ const ProductPage = () => {
       onError: (error) => console.error("Error adding item to cart", error),
     });
   };
+
   return (
     <>
       {/* ======== Product Image ======== */}
@@ -65,18 +60,12 @@ const ProductPage = () => {
         {/*====== Title and Wishlist ==========*/}
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-[#152536]">{product.name}</h1>
-<<<<<<< HEAD
-          <WishlistEvent product={product} />
-        </div>
-        {/* Product Stats */}
-=======
           <div className="w-7 h-7 cursor-pointer">
             <WishlistEvent product={product} />
           </div>
         </div>
 
         {/*========== Product Stats ==========*/}
->>>>>>> b5966e0d8eaa9c868073ef4fe847bc78474592b2
         <div className="flex items-center justify-start gap-4 py-3 border-b-2 border-[#ECECEC]">
           <div className="bg-[#ECECEC] rounded-lg py-1 px-2">
             <p className="font-normal text-base text-[#152536]">
