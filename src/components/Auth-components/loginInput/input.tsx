@@ -1,43 +1,31 @@
 import React, { ReactNode } from "react";
+import Cn from "../../../utils/cn";
 
-interface InputProps {
+interface InputProps extends React.ComponentProps<"input"> {
   icon: string;
-  placeholder: string;
-  name: string;
-  type: string;
-  id: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: () => void;
-  onPaste?: (e: React.ClipboardEvent<HTMLInputElement>) => void; // To handle events like password visibility toggle
+  parentClassName?: string;
   customChildren?: ReactNode; // Allow additional custom children like the eye icon
 }
 
 export const Input: React.FC<InputProps> = ({
   icon,
-  placeholder,
-  name,
-  type,
-  id,
-  value,
-  onChange,
-  onClick,
-  onPaste,
   customChildren,
+  className,
+  parentClassName,
+  ...inputProps
 }) => {
   return (
-    <div className="flex w-full h-9 items-center gap-1 bg-[#FAFAFA] p-[13px] rounded mt-6">
+    <div
+      className={Cn(
+        "flex w-full h-9 items-center gap-1 bg-[#FAFAFA] p-[13px] rounded mt-6",
+        "focus-within:border focus-within:border-black",
+        parentClassName
+      )}
+    >
       <img src={`../../../src/assets/icons/${icon}.svg`} alt={icon} />
       <input
-        placeholder={placeholder}
-        name={name}
-        type={type}
-        id={id}
-        value={value}
-        onChange={onChange}
-        onClick={onClick}
-        onPaste={onPaste}
-        className="bg-transparent w-full h-9 outline-none"
+        {...inputProps}
+        className={Cn("bg-transparent w-full h-9 outline-none", className)}
       />
       {customChildren && <div>{customChildren}</div>}
     </div>
