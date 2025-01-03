@@ -1,20 +1,20 @@
 import { useContext } from "react";
 import { CartContext } from "../../providers/CartProvider";
-import { saveToStorage } from "../../utils/Utils";
+import { Product } from "../../types/Product.type";
 import { Flip, toast, ToastContainer } from "react-toastify";
 
 type Props = {
   productId: number | null;
   selectedSize: number | null;
   selectedColor: string | null;
-  count?: number | null;
+  onClick: () => void;
 };
 
 const ProductButton = ({
-  productId,
+  product,
   selectedSize,
   selectedColor,
-  count,
+  onClick,
 }: Props) => {
   const { cart } = useContext(CartContext);
 
@@ -57,7 +57,7 @@ const ProductButton = ({
       notifyB();
       return;
     }
-    saveToStorage("cart", cart);
+    onClick();
     notifyA();
   };
 
