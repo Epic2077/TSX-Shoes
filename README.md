@@ -132,8 +132,6 @@ http://localhost:3000/
 
 ## 🤝 Contributors
 
-<a href="https://github.com/Epic2077">
-  <img src="https://github.com/Epic2077.png" width="100px" style="border-radius: 50%;" />
-  <br />
-  <sub><b>Epic2077</b></sub>
+<a href="https://github.com/Epic2077/TSX-Shoes/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Epic2077/TSX-Shoes" />
 </a>
