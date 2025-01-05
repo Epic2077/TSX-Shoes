@@ -139,3 +139,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <a href="https://github.com/Epic2077/TSX-Shoes/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Epic2077/TSX-Shoes" />
 </a>
+
+## 🙌 Special Thanks To
+
+- [Ali Ziaeijazi](https://github.com/ali-ziaeijazi) for the server.
