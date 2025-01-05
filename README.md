@@ -129,3 +129,7 @@ npm start
 ```bash
 http://localhost:3000/
 ```
+
+## 🤝 Contributors
+
+[<img src="https://github.com/Epic2077.png" width="100px">](https://github.com/Epic2077)
