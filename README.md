@@ -64,3 +64,68 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 - **Axios**: Simplifies HTTP requests for fetching and managing data.
 - **React-Query**: Enhances server state management with features like caching and retries.
+- **Zod**: Provides schema validation for API responses and input data.
+
+### Notifications
+
+- **React-Toastify**: Displays real-time notifications and feedback to the user.
+
+### Development Tools
+
+- **Vite**: Fast build tool for modern web development.
+- **ESLint**: Ensures code quality and consistency.
+- **Typescript ESLint**: Provides linting for TypeScript code.
+- **PostCSS & Autoprefixer**: For handling CSS prefixes and optimizations.
+
+### Version Control
+
+- **Git**: For managing version control and collaboration.
+- **GitHub**: For hosting the repository and managing issues and pull requests.
+
+---
+
+## 📦 Installation Guide
+
+Follow these steps to set up the project on your local machine:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Epic2077/TSX-Shoes.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd TSX-Shoes
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+5. Clone Server Repo:
+
+```bash
+git clone https://github.com/ali-ziaeijazi/shoesLandServer.git
+```
+
+6. Run Server:
+
+```bash
+npm start
+```
+
+7. Open the project in your browser:
+
+```bash
+http://localhost:3000/
+```
