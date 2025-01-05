@@ -132,4 +132,8 @@ http://localhost:3000/
 
 ## 🤝 Contributors
 
-<img src="https://github.com/Epic2077.png" width="100px" height="auto" border-radius="100%" /><br /><sub><a href="https://github.com/Epic2077" align="center" color="white" underline="none">Epic2077</a></sub>
+<a href="https://github.com/Epic2077">
+  <img src="https://github.com/Epic2077.png" width="100px" class="rounded-full" />
+  <br />
+  <sub><b>Epic2077</b></sub>
+</a>
