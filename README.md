@@ -82,7 +82,7 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 ### Development Tools
 
-![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white) ![TypeScript ESLint](https://img.shields.io/badge/TypeScript_ESLint-007ACC?style=for-the-badge&logo=typescript-eslint&logoColor=white) ![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white) ![TypeScript ESLint](https://img.shields.io/badge/TypeScript_ESLint-007ACC?style=for-the-badge&logo=typescript-eslint&logoColor=white) ![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white)
 
 - **Vite**: Fast build tool for modern web development.
 - **ESLint**: Ensures code quality and consistency.
