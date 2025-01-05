@@ -44,6 +44,8 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 ## 🛠️ Technologies Used
 
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white) ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) ![Zod](https://img.shields.io/badge/Zod-38B2AC?style=for-the-badge&logo=zod&logoColor=white) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![React Toastify](https://img.shields.io/badge/React_Toastify-38B2AC?style=for-the-badge&logo=react-toastify&logoColor=white) ![Clsx](https://img.shields.io/badge/Clsx-38B2AC?style=for-the-badge&logo=clsx&logoColor=white) ![Tailwind Merge](https://img.shields.io/badge/Tailwind_Merge-38B2AC?style=for-the-badge&logo=tailwind-merge&logoColor=white)
+
 ### Core Stack
 
 - **React**: For building dynamic and reusable UI components.
