@@ -34,7 +34,7 @@ const BrandPage = () => {
     };
 
     fetchProducts();
-  }, [brandName]);
+  }, [brandName, filteredBrand]);
 
   if (!filteredBrand) {
     return <p className="text-center text-xl">Brand not found!</p>;

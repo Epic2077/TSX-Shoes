@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 const SearchBox: React.FC = () => {
 
-
   const [searchField, setSearchField] = useState("");
   const [products, setProducts] = useState([] as any[]);
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -12,7 +11,8 @@ const SearchBox: React.FC = () => {
   useEffect(() => {
     fetch("http://localhost:8000/api/products")
       .then((Response) => Response.json())
-      .then((name) => setProducts(name));  }, []);
+      .then((name) => setProducts(name));
+  }, []);
 
   useEffect(() => {
     const newFilteredProducts = products.filter((product) => {
@@ -29,7 +29,6 @@ const SearchBox: React.FC = () => {
 
   return (
     <>
-
       <div className="flex h-9 items-center bg-[#FAFAFA] py-8 m-6 rounded-3xl border-2 hover:border-zinc-800">
         <img
           src="/src/assets/icons/search.svg"

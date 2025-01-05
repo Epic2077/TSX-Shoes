@@ -2,8 +2,12 @@ import React, { useRef, useState } from "react";
 import { handleChange } from "../../components/Auth-components/loginFunction/FormHandler";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../api/UserAuth";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../store/slices/AuthSlice";
 
 const LoginPage: React.FC = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -12,22 +16,6 @@ const LoginPage: React.FC = () => {
   );
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-
-  const usernameInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
-
-  const handleFocus = (inputRef: React.RefObject<HTMLInputElement>) => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.classList.add("border-2", "border-black");
-    }
-  };
-
-  const handleBlur = (inputRef: React.RefObject<HTMLInputElement>) => {
-    if (inputRef.current) {
-      inputRef.current.classList.remove("border-2", "border-black");
-    }
-  };
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
@@ -65,12 +53,18 @@ const LoginPage: React.FC = () => {
         formData.password
       );
 
+      dispatch(
+        setCredentials({
+          token: accessToken,
+          username: formData.username,
+        })
+      );
+
       const storage = document.getElementById("remember")?.checked
         ? localStorage
         : sessionStorage;
 
       storage.setItem("user", formData.username);
-      storage.setItem("accessToken", accessToken);
 
       navigate("/Home");
     } catch (err: any) {
@@ -95,19 +89,15 @@ const LoginPage: React.FC = () => {
       <form action="" className="mt-11" onSubmit={handleSubmit}>
         {/* username Input */}
         <div className="mb-4">
-          <div
-            className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded mb-[21px]"
-            onFocus={() => handleFocus(usernameInputRef)}
-            onBlur={() => handleBlur(usernameInputRef)}
-            ref={usernameInputRef}
-          >
+          <div className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded mb-[21px]">
             <img src="../../../src/assets/icons/email.svg" alt="username" />
             <input
               type="text"
               name="username"
               value={formData.username}
-              onChange={(e) =>
-                handleChange(e, setFormData, setError, setIsButtonEnabled)
+              onChange={
+                (e) =>
+                  handleChange(e, setFormData, setError, setIsButtonEnabled) //TODO: refactor => use react hook form
               }
               className="p-[4px] bg-transparent h-[24px] w-full outline-none"
               placeholder="Username"
@@ -120,12 +110,7 @@ const LoginPage: React.FC = () => {
 
         {/* Password Input */}
         <div className="mb-4">
-          <div
-            className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded"
-            onFocus={() => handleFocus(passwordInputRef)}
-            onBlur={() => handleBlur(passwordInputRef)}
-            ref={passwordInputRef}
-          >
+          <div className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded">
             <img src="../../../src/assets/icons/lock.svg" alt="pass" />
             <input
               type={isPasswordVisible ? "text" : "password"}

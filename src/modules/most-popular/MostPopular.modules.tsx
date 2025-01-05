@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Back from "../../components/Auth-components/header/back";
 import { Product } from "../../types/Product.type";
-import { getProducts } from "../../api/Api";
+import { getPopularProducts, getProducts } from "../../api/Api";
 import ProductCard from "../../components/home-components/products/product-card/ProductCard.components";
 import HomeProducts from "../../components/home-components/products/Product";
 
@@ -11,9 +11,11 @@ const MostPopular = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const products = await getProducts();
-        const fiteredProducts = products.filter((product) => product.is_popular);
-        setPopularProducts(fiteredProducts);
+        const products = await getPopularProducts();
+        console.log(products);
+        const allProducts = await getProducts();
+        console.log(allProducts);
+        setPopularProducts(products);
       } catch (error) {
         console.log("Error Fetching Products", error);
       }
@@ -30,7 +32,7 @@ const MostPopular = () => {
         <p className="text-xl font-semibold">Most Popular</p>
       </div>
       <div className="ml-2">
-      <HomeProducts />
+        <HomeProducts />
       </div>
       <div className="flex flex-wrap gap-4 justify-center mt-4">
         {popularProducts.map((product) => (

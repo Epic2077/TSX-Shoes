@@ -1,8 +1,8 @@
-import { Product } from "./Product.type";
 
 export type CartItem = {
-  product: Product;
+  productId: string;
   count: number;
-  selectedSize: number | null;
-  selectedColor: string | null;
-};
+  size?: string;
+  color?: string;
+  };
+  
