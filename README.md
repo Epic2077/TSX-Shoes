@@ -53,7 +53,7 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 ### State Management
 
-![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white) ![React Query](https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
+![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white) ![Redux-persist](https://img.shields.io/badge/Redux_Persist-764ABC?style=for-the-badge&logo=redux-persist&logoColor=white)
 
 - **@reduxjs/toolkit**: Simplifies state management with a clean, standardized approach.
 - **Redux-persist**: Persist and rehydrate the Redux state to the browser's localStorage.
@@ -68,11 +68,12 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 ### Data Handling
 
-![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white) ![Zod](https://img.shields.io/badge/Zod-8A2BE2?style=for-the-badge&logo=zod&logoColor=white) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white) ![React Query](https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white) ![Zod](https://img.shields.io/badge/Zod-8A2BE2?style=for-the-badge&logo=zod&logoColor=white) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
 - **Axios**: Simplifies HTTP requests for fetching and managing data.
 - **React-Query**: Enhances server state management with features like caching and retries.
 - **Zod**: Provides schema validation for API responses and input data.
+- **React Router**: For navigation between pages and routes.
 
 ### Notifications
 
