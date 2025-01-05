@@ -44,19 +44,23 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 ## 🛠️ Technologies Used
 
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white) ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) ![Axios](https://img.shields.io/badge/Axios-38B2AC?style=for-the-badge&logo=axios&logoColor=white) ![Zod](https://img.shields.io/badge/Zod-38B2AC?style=for-the-badge&logo=zod&logoColor=white) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![React Toastify](https://img.shields.io/badge/React_Toastify-38B2AC?style=for-the-badge&logo=react-toastify&logoColor=white) ![Clsx](https://img.shields.io/badge/Clsx-38B2AC?style=for-the-badge&logo=clsx&logoColor=white) ![Tailwind Merge](https://img.shields.io/badge/Tailwind_Merge-38B2AC?style=for-the-badge&logo=tailwind-merge&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-38B2AC?style=for-the-badge&logo=vite&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white) ![Typescript ESLint](https://img.shields.io/badge/Typescript_ESLint-38B2AC?style=for-the-badge&logo=typescript-eslint&logoColor=white) ![PostCSS](https://img.shields.io/badge/PostCSS-38B2AC?style=for-the-badge&logo=postcss&logoColor=white) ![Autoprefixer](https://img.shields.io/badge/Autoprefixer-38B2AC?style=for-the-badge&logo=autoprefixer&logoColor=white)
-
 ### Core Stack
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 
 - **React**: For building dynamic and reusable UI components.
 - **TypeScript**: Ensures type safety and better development scalability.
 
 ### State Management
 
+![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white) ![React Query](https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
+
 - **@reduxjs/toolkit**: Simplifies state management with a clean, standardized approach.
 - **Redux-persist**: Persist and rehydrate the Redux state to the browser's localStorage.
 
 ### Styling
+
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-0EA5E9?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Clsx](https://img.shields.io/badge/Clsx-FF6F61?style=for-the-badge&logo=clsx&logoColor=white) ![Tailwind Merge](https://img.shields.io/badge/Tailwind_Merge-0EA5E9?style=for-the-badge&logo=tailwind-merge&logoColor=white)
 
 - **Tailwind CSS**: For styling the components with a utility-first approach.
 - **Clsx**: For managing dynamic class names efficiently.
@@ -64,15 +68,21 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 ### Data Handling
 
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white) ![Zod](https://img.shields.io/badge/Zod-8A2BE2?style=for-the-badge&logo=zod&logoColor=white) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+
 - **Axios**: Simplifies HTTP requests for fetching and managing data.
 - **React-Query**: Enhances server state management with features like caching and retries.
 - **Zod**: Provides schema validation for API responses and input data.
 
 ### Notifications
 
+![React Toastify](https://img.shields.io/badge/React_Toastify-FFDD57?style=for-the-badge&logo=react-toastify&logoColor=black)
+
 - **React-Toastify**: Displays real-time notifications and feedback to the user.
 
 ### Development Tools
+
+![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white) ![TypeScript ESLint](https://img.shields.io/badge/TypeScript_ESLint-007ACC?style=for-the-badge&logo=typescript-eslint&logoColor=white) ![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white)
 
 - **Vite**: Fast build tool for modern web development.
 - **ESLint**: Ensures code quality and consistency.
@@ -81,8 +91,16 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 ### Version Control
 
+![Git](https://img.shields.io/badge/Git-F05033?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+
 - **Git**: For managing version control and collaboration.
 - **GitHub**: For hosting the repository and managing issues and pull requests.
+
+### Package Managers
+
+![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+
+- **NPM**: For managing dependencies and running scripts.
 
 ---
 
