@@ -130,6 +130,10 @@ npm start
 http://localhost:3000/
 ```
 
+## 🔗 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ## 🤝 Contributors
 
 <a href="https://github.com/Epic2077/TSX-Shoes/graphs/contributors">
