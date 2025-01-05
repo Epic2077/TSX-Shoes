@@ -38,8 +38,6 @@ With a robust architecture powered by React and TypeScript, TSX-Shoes demonstrat
 
 - **Notifications**: Real-time notifications and feedback with React-Toastify.
 
-- **Utility Helpers**: Clsx for conditional class names.
-
 ---
 
 ## 🛠️ Technologies Used
