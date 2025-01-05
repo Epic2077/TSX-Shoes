@@ -1,5 +1,12 @@
 # TSX-Shoes: A Modern E-Commerce Application
 
+<div align="center">
+<img alt="GitHub Created At" src="https://img.shields.io/github/created-at/Epic2077/TSX-Shoes"> <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Epic2077/TSX-Shoes"> <img alt="GitHub License" src="https://img.shields.io/github/license/Epic2077/TSX-Shoes"> <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Epic2077/TSX-Shoes">
+
+<img src="https://img.shields.io/github/languages/count/Epic2077/TSX-Shoes" alt="Languages Count"> <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Epic2077/TSX-Shoes">
+
+</div>
+
 **TSX-Shoes** is a modern, feature-rich e-commerce website for browsing and purchasing shoes. This project demonstrates the use of various advanced technologies in a React and TypeScript environment, creating a seamless and interactive user experience.
 
 ---
