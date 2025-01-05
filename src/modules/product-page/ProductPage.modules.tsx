@@ -10,7 +10,7 @@ import { LoadingSpinner } from "../../components/loading-spinner/loading";
 import WishlistEvent from "../../components/wishlist/wishlist-event";
 import ProductImages from "./ProductImages.modules";
 import { useMutation } from "react-query";
-import { addToCart, useCartMutation } from "../../pages/cart/AddToCart";
+import { addToCart } from "../../pages/cart/AddToCart";
 import { CartItem } from "../../types/CartItem.type";
 
 // ======== Error Component ========
@@ -22,7 +22,7 @@ const ErrorComponent = ({ message }: { message: string }) => (
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: product, isError, isLoading } = useProduct(id);
+  const { data: product, isError, isLoading } = useProduct(id ?? "");
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
