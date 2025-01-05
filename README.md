@@ -171,3 +171,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙌 Special Thanks To
 
 - [Ali Ziaeijazi](https://github.com/ali-ziaeijazi) for the server.
+- [Maktab Sharif](https://lms.maktabsharif.ir/) for helping us overcome the challenges of becoming a front-end developer.
