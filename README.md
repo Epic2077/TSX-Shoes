@@ -141,7 +141,7 @@ git clone https://github.com/ali-ziaeijazi/shoesLandServer.git
 
 6. Run Server:
 
-Repeat the steps 2 and 3 for the server repo.
+Repeat steps 2 and 3 for the server repo.
 
 ```bash
 npm start
