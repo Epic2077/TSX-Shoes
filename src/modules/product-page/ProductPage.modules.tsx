@@ -10,7 +10,7 @@ import { LoadingSpinner } from "../../components/loading-spinner/loading";
 import WishlistEvent from "../../components/wishlist/wishlist-event";
 import ProductImages from "./ProductImages.modules";
 import { useMutation } from "react-query";
-import { addToCart, useCartMutation } from "../../pages/cart/AddToCart";
+import { addToCart } from "../../pages/cart/AddToCart";
 import { CartItem } from "../../types/CartItem.type";
 
 // ======== Error Component ========

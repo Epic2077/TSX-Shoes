@@ -1,7 +1,19 @@
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { CartContext } from "../../providers/CartProvider";
-import { Product } from "../../types/Product.type";
-import { Flip, toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import {
+  notifyA,
+  notifyB,
+  notifyC,
+} from "../../components/cart-components/Cart.Toastifies";
+
+interface RootState {
+  auth: {
+    token: string;
+  };
+}
 
 type Props = {
   productId: number | null;
@@ -11,54 +23,34 @@ type Props = {
 };
 
 const ProductButton = ({
-  product,
+  productId,
   selectedSize,
   selectedColor,
   onClick,
 }: Props) => {
   const { cart } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  //   ======== React Toastify ==========
-
-  const notifyA = () => {
-    toast.success("Product Added to Cart Successfully", {
-      position: "bottom-center",
-      autoClose: 3000,
-      containerId: "A",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Flip,
-    });
-  };
-
-  const notifyB = () => {
-    toast.warn("Please Select Size and Color !", {
-      position: "bottom-center",
-      autoClose: 3000,
-      containerId: "B",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Flip,
-    });
-  };
+  const accessToken = useSelector((state: RootState) => state.auth.token);
 
   // =========== Handlers ============
 
   const handleAddToCart = () => {
-    if (selectedSize === null || selectedColor === null) {
-      notifyB();
+    if (!accessToken) {
+      notifyC();
+      setTimeout(() => {
+        navigate("/Auth/Login");
+      }, 3000);
       return;
+    } else {
+      if (selectedSize === null || selectedColor === null) {
+        notifyB();
+        return;
+      }
+
+      onClick();
+      notifyA();
     }
-    onClick();
-    notifyA();
   };
 
   return (
@@ -78,6 +70,7 @@ const ProductButton = ({
       </button>
       <ToastContainer containerId="A" />
       <ToastContainer containerId="B" />
+      <ToastContainer containerId="C" />
     </>
   );
 };
