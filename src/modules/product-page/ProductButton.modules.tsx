@@ -32,11 +32,12 @@ const ProductButton = ({
   const navigate = useNavigate();
 
   const accessToken = useSelector((state: RootState) => state.auth.token);
-
+  
   // =========== Handlers ============
 
   const handleAddToCart = () => {
     if (!accessToken) {
+      console.log("User is not authenticated");
       notifyC();
       setTimeout(() => {
         navigate("/Auth/Login");
@@ -44,10 +45,16 @@ const ProductButton = ({
       return;
     } else {
       if (selectedSize === null || selectedColor === null) {
+        console.log("Selected size or color is missing");
         notifyB();
         return;
       }
 
+      console.log("Adding product to cart:", {
+        productId,
+        selectedSize,
+        selectedColor,
+      });
       onClick();
       notifyA();
     }
