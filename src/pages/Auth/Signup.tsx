@@ -7,7 +7,7 @@ const SignupPage: React.FC = () => {
       <h1 className="mb-4 font-semibold text-[32px] text-center">
         Let's Create An Account
       </h1>
-      <FormLaسyout />
+      <FormLayout />
     </div>
   );
 };
