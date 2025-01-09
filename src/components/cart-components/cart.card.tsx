@@ -35,7 +35,9 @@ const CartCard: React.FC<CartCardProps> = ({
         <div className="flex flex-col justify-between w-full">
           {/* Title and Delete Button */}
           <div className="flex w-full items-center justify-between">
-            <h1 className="font-semibold text-[24px]">{product.name}</h1>
+            <h1 className="font-semibold text-[24px] truncate">
+              {product.name}
+            </h1>
             <button onClick={handleDeleteClick}>
               <img
                 src="/src/assets/icons/trash.svg"
