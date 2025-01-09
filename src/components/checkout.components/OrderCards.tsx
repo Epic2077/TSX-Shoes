@@ -53,7 +53,7 @@ const OrderCards: React.FC<CartCardProps> = ({
               ${(product.price * quantity).toFixed(2)}
             </p>
             <div className="flex items-center gap-3 bg-gray-200 rounded-full px-2 py-1">
-              <p className="text-sm text-black">{quantity}</p>
+              <p className="text-sm text-black p-2">{quantity}</p>
             </div>
           </div>
         </div>

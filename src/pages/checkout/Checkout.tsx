@@ -1,30 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
+import { useQuery } from "react-query";
+import axios from "axios";
+import { BASE_URL } from "../../api/Base";
+import { useSelector } from "react-redux";
 import CheckoutHeader from "../../components/checkout.components/checkout.hedear";
 import AddressCart from "../../components/checkout.components/Address.cart";
 import DeliveryCard from "../../components/checkout.components/delivery.card";
 import PromoCode from "../../components/checkout.components/PromoCode";
 import OrderList from "../../components/checkout.components/OrderList";
+import { RootState } from "../../store";
+
+interface Address {
+  name: string;
+  address: string;
+}
 
 const CheckOutPage: React.FC = () => {
-  const [title, setTitle] = useState<string>("Home");
-  const [shipAddress, setShipAddress] = useState<string>("Somewhere You Live");
+  const accessToken = useSelector((state: RootState) => state.auth.token);
 
-  const shippingAddress = localStorage.getItem("shipping");
+  const { data: addresses } = useQuery({
+    queryKey: ["addresses"],
+    queryFn: async () => {
+      const response = await axios.get<Address[]>(`${BASE_URL}/api/address`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      return response.data;
+    },
+  });
 
-  if (!shippingAddress) {
-    console.log("Using default address");
-  } else {
-    const parsedAddress = JSON.parse(shipAddress);
-    setTitle(parsedAddress.title);
-    setShipAddress(parsedAddress.shipAddress);
-  }
+  const defaultAddress =
+    addresses?.find((addr) => addr.name === "Home") || addresses?.[0];
 
   return (
     <div>
       <div className="mx-8 my-4 ">
         <CheckoutHeader />
         <h2 className="font-semibold text-2xl mt-9">Shipping Address</h2>
-        <AddressCart title={title} address={shipAddress} />
+        <AddressCart
+          title={defaultAddress?.name || "Home"}
+          address={defaultAddress?.address || "Add an address"}
+        />
         <hr className="w-[95%] mx-auto my-5" />
         <h2 className="font-semibold text-2xl">Order List</h2>
         <OrderList />
