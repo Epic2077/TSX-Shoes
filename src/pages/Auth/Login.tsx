@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { handleChange } from "../../components/Auth-components/loginFunction/FormHandler";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../../api/UserAuth";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/slices/AuthSlice";
@@ -15,6 +15,8 @@ const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const message = location.state?.message;
 
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState<{ username?: string; password?: string }>(
@@ -120,6 +122,11 @@ const LoginPage: React.FC = () => {
   };
   return (
     <div className="px-6 py-[67px]">
+      {message && (
+        <div className="mb-4 p-4 bg-yellow-100 text-yellow-800 rounded-lg">
+          {message}
+        </div>
+      )}
       <h1 className="text-center font-semibold text-[32px] text-black">
         Login to Your Account
       </h1>
