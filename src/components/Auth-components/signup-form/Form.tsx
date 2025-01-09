@@ -5,11 +5,16 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { userSignup } from "../../../api/UserAuth";
 
+type SignupError = {
+  fieldErrors?: Record<string, string>;
+  status?: number;
+  message?: string;
+};
+
 const FormLayout: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    id: "",
     username: "",
     email: "",
     name: "",
@@ -17,7 +22,6 @@ const FormLayout: React.FC = () => {
     password: "",
     confirmPass: "",
     phone: "",
-    gender: "",
   });
   const [error, setError] = useState<{
     username?: string;
@@ -45,14 +49,14 @@ const FormLayout: React.FC = () => {
     e.preventDefault();
 
     try {
-      await userSignup(
-        formData.username,
-        formData.email,
-        formData.name,
-        formData.lastName,
-        formData.password,
-        formData.phone
-      );
+      await userSignup({
+        username: formData.username,
+        email: formData.email,
+        firstName: formData.name,
+        lastName: formData.lastName,
+        password: formData.password,
+        phone: formData.phone,
+      });
 
       toast.success("Signup successful!", {
         position: "top-center",
@@ -65,12 +69,13 @@ const FormLayout: React.FC = () => {
         transition: Bounce,
       });
       navigate("/Auth/Login");
-    } catch (err: any) {
-      if (err.fieldErrors) {
-        setError(err.fieldErrors);
+    } catch (err: unknown) {
+      const error = err as SignupError;
+      if (error.fieldErrors) {
+        setError(error.fieldErrors);
       } else if (
-        err.status === 400 &&
-        err.message === "Email or username already exists."
+        error.status === 400 &&
+        error.message === "Email or username already exists."
       ) {
         // Handle specific server error messages
         setError((prev) => ({

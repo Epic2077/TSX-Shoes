@@ -35,16 +35,26 @@ const ProductPage = () => {
   if (!product) return <ErrorComponent message="No product found." />;
 
   const handleCartMutation = () => {
+    if (!selectedSize || !selectedColor) {
+      return; // Don't proceed if size or color isn't selected
+    }
+
     const newCartItem: CartItem = {
-      productId: product.id.toString(),
+      productId: Number(product.id),
       count: 1,
-      size: selectedSize !== null ? selectedSize.toString() : undefined,
-      color: selectedColor !== null ? selectedColor : undefined,
+      size: selectedSize,
+      color: selectedColor,
     };
 
     mutate(newCartItem, {
-      onSuccess: (data) => console.log("Item added to cart", data),
-      onError: (error) => console.error("Error adding item to cart", error),
+      onSuccess: (data) => {
+        console.log("Item added to cart", data);
+        // Add success toast notification here
+      },
+      onError: (error) => {
+        console.error("Error adding item to cart", error);
+        // Add error toast notification here
+      },
     });
   };
 

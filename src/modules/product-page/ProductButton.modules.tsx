@@ -1,23 +1,20 @@
-import { useContext } from "react";
-import { CartContext } from "../../providers/CartProvider";
 import { Product } from "../../types/Product.type";
 import { Flip, toast, ToastContainer } from "react-toastify";
 
 type Props = {
-  productId: number | null;
+  product: Product;
   selectedSize: number | null;
   selectedColor: string | null;
   onClick: () => void;
+  isLoading: boolean;
 };
 
 const ProductButton = ({
-  product,
   selectedSize,
   selectedColor,
   onClick,
+  isLoading,
 }: Props) => {
-  const { cart } = useContext(CartContext);
-
   //   ======== React Toastify ==========
 
   const notifyA = () => {
@@ -66,15 +63,22 @@ const ProductButton = ({
       <button
         className="flex items-center justify-center text rounded-full px-10 py-3 gap-3 bg-[#152536] ml-auto"
         onClick={handleAddToCart}
+        disabled={isLoading}
       >
-        <div className="w-6 h-6">
-          <img
-            src="/src/assets/icons/basket-white.svg"
-            alt="basket-icon"
-            className="w-full h-full"
-          />
-        </div>
-        <p className="text-2xl font-normal text-white">Add to Cart</p>
+        {isLoading ? (
+          <span className="text-white w-6 h-6">Adding...</span>
+        ) : (
+          <>
+            <div className="w-6 h-6">
+              <img
+                src="/src/assets/icons/basket-white.svg"
+                alt="basket-icon"
+                className="w-full h-full"
+              />
+            </div>
+            <p className="text-2xl font-normal text-white">Add to Cart</p>
+          </>
+        )}
       </button>
       <ToastContainer containerId="A" />
       <ToastContainer containerId="B" />

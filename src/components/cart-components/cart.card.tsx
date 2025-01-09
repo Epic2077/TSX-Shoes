@@ -1,116 +1,132 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Product } from "../../types/Product.type";
 import DeleteProductFromCart from "./deleting.product.cart";
-import ProductQuantity from "../../modules/product page/ProductQuantity.modules";
-import { CartContext } from "../../providers/CartProvider";
 
 interface CartCardProps {
   product: Product;
+  quantity: number;
+  size: number;
+  color: string;
+  onUpdateQuantity?: (newQuantity: number) => void;
 }
-// bg-gray-700 bg-red-700 bg-teal-700 bg-green-700 bg-yellow-700 bg-rose-700
 
-const CartCard: React.FC<CartCardProps> = ({ product }) => {
+const CartCard: React.FC<CartCardProps> = ({
+  product,
+  quantity: initialQuantity,
+  size,
+  color,
+  onUpdateQuantity,
+}) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [deleteCart, setDeleteCart] = useState<boolean>(false);
-  const [ProductQuantity, setProductQuantity] = useState<number>();
+  const [quantity, setQuantity] = useState<number>(initialQuantity);
 
-  // const cartLocal = localStorage.getItem("cart");
-  // if (!cartLocal) {
-  //   console.error("No cart in local storage");
-  // }
+  const handleDeleteClick = () => setShowDeleteModal(true);
+  const handleCloseModal = () => setShowDeleteModal(false);
 
-  // console.log(cartLocal);
-
-  // const parsedCartLocal = JSON.parse(cartLocal);
-
-  // console.log(parsedCartLocal);
-
-  // const productInCart = parsedCartLocal?.find(
-  //   (p) => p?.product?.id === product.id
-  // );
-
-  // console.log(productInCart);
-
-  const handleDeleteClick = () => {
-    setShowDeleteModal(true);
+  const handleQuantityChange = (change: number) => {
+    const newQuantity = Math.max(1, quantity + change);
+    setQuantity(newQuantity);
+    onUpdateQuantity?.(newQuantity);
   };
-
-  const handleCloseModal = () => {
-    setShowDeleteModal(false);
-  };
-
-  const { cart, dispatch } = useContext(CartContext);
 
   return (
     <>
       <div className="bg-slate-50 rounded-[25px] w-full p-5 flex gap-3">
+        {/* Product Image */}
         <img
-          src={product.images}
-          alt={product.title}
-          className="rounded-[25px] min-w-32 h-32"
+          src={product.images[0]}
+          alt={product.name}
+          className="rounded-[25px] min-w-32 h-32 object-cover"
         />
+
+        {/* Product Details */}
         <div className="flex flex-col justify-between w-full">
+          {/* Title and Delete Button */}
           <div className="flex w-full items-center justify-between">
-            <h1 className="font-semibold text-[24px]">{product.title}</h1>
-            <img
-              src="../../../src/assets/icons/trash.svg"
-              alt="trash"
-              className="w-5"
-              onClick={handleDeleteClick}
-            />
+            <h1 className="font-semibold text-[24px] max-w-44 truncate">
+              {product.name}
+            </h1>
+            <button onClick={handleDeleteClick}>
+              <img
+                src="/src/assets/icons/trash.svg"
+                alt="Remove from cart"
+                className="w-5 h-5"
+              />
+            </button>
           </div>
+
+          {/* Color and Size */}
           <div className="flex gap-2 items-center">
             <div
-              className={`bg-${product.selectedColor}-700 w-4 h-4 rounded-full`}
-            ></div>
-            <p className="text-sm text-gray-500">{product.selectedColor}</p>
-            <p className="text-sm text-gray-500">|</p>
-            <p className="text-sm text-gray-500">
-              Size = {product.selectedSize}
-            </p>
-          </div>
-          <div className="flex">
-            <p className="text-xl font-semibold">${product.price}.00</p>
-            {/* <div className="flex">
-              <button onClick={() => dispatch({ type: "ADD" })}>+</button>
-              <p>{product.quantity}</p>
-              <button onClick={() => dispatch({ type: "REMOVE" })}>-</button>
-            </div> */}
-          </div>
-        </div>
-      </div>
-      {showDeleteModal && (
-        <div>
-          <div onClick={handleCloseModal}>
-            <DeleteProductFromCart
-              product={product}
-              deletingCart={deleteCart}
+              className={`bg-${color}-700 w-4 h-4 rounded-full`}
+              aria-label={`Color: ${color}`}
             />
+            <p className="text-sm text-gray-500">{color}</p>
+            <span className="text-sm text-gray-500">|</span>
+            <p className="text-sm text-gray-500">Size = {size}</p>
           </div>
-          <div className="px-5 bg-white w-full grid gap-5 absolute left-0 bottom-0 opacity-100 z-30 rounded-t-3xl pb-10 pt-3">
-            <div className="w-8 h-[3px] rounded-full mx-auto bg-gray-300"></div>
-            <h2 className="text-2xl text-center font-semibold">
-              Remove From Cart?
-            </h2>
-            <div className="w-full h-[1px] bg-gray-300"></div>
-            <CartCard product={product} />
-            <div className="w-full h-[1px] bg-gray-300"></div>
-            <div className="flex gap-2">
-              <div
-                className="w-full bg-gray-300 grid justify-center items-center h-12 text-lg font-semibold rounded-full cursor-pointer"
-                onClick={handleCloseModal}
+
+          {/* Price and Quantity */}
+          <div className="flex justify-between items-center">
+            <p className="text-xl font-semibold">
+              ${(product.price * quantity).toFixed(2)}
+            </p>
+            <div className="flex items-center gap-3 bg-gray-200 rounded-full px-2 py-1">
+              <button
+                onClick={() => handleQuantityChange(-1)}
+                className="w-6 h-6 flex items-center justify-center rounded-full text-black bg-gray-200"
+                disabled={quantity <= 1}
               >
-                Cancel
-              </div>
-              <div
-                className="w-full bg-black grid justify-center items-center h-12 text-lg font-semibold text-white rounded-full cursor-pointer"
-                onClick={() => setDeleteCart(true)}
+                -
+              </button>
+              <p className="text-sm text-black">{quantity}</p>
+              <button
+                onClick={() => handleQuantityChange(1)}
+                className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200"
               >
-                Yes, Remove
-              </div>
+                +
+              </button>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Delete Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+          <div className="px-5 bg-white w-full fixed bottom-0 left-0 rounded-t-3xl pb-10 pt-3">
+            <div className="w-8 h-[3px] rounded-full mx-auto bg-gray-300 mb-5" />
+
+            <h2 className="text-2xl text-center font-semibold mb-5">
+              Remove From Cart?
+            </h2>
+
+            <div className="w-full h-[1px] bg-gray-300 mb-5" />
+
+            <div className="flex gap-2">
+              <button
+                className="w-full bg-gray-300 h-12 text-lg font-semibold rounded-full"
+                onClick={handleCloseModal}
+              >
+                Cancel
+              </button>
+              <button
+                className="w-full bg-black text-white h-12 text-lg font-semibold rounded-full"
+                onClick={() => {
+                  setDeleteCart(true);
+                  handleCloseModal();
+                }}
+              >
+                Yes, Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {deleteCart && (
+        <DeleteProductFromCart product={product} deletingCart={deleteCart} />
       )}
     </>
   );

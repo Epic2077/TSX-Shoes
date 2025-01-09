@@ -1,12 +1,19 @@
 import { Product } from "../types/Product.type";
 import Api from "./Base";
+import { AxiosError } from "axios";
 
 export async function getProducts(params?: object) {
-  return (
-    await Api.get<Product[]>("api/products", {
+  try {
+    console.log("Before API call");
+    const response = await Api.get<Product[]>("/api/products", {
       params,
-    })
-  ).data;
+    });
+    console.log("API Response:", response);
+    return response.data;
+  } catch (err) {
+    console.error("API Error:", err);
+    return [];
+  }
 }
 
 export async function getPopularProducts() {
@@ -19,7 +26,16 @@ export async function getProductById(id: string) {
 }
 
 export async function getProductByBrand(brand: string) {
-  const res = await Api.get<Product>("api/products?brands=" + brand);
-  return res.data;
+  try {
+    const res = await Api.get<Product>("api/products?brands=" + brand);
+    return res.data;
+  } catch (error: unknown) {
+    const err = error as AxiosError<{ message: string }>;
+    console.error("Error fetching products by brand:", {
+      status: err.response?.status,
+      message: err.response?.data?.message || err.message,
+      brand,
+    });
+    throw error; // or return [] depending on your error handling strategy
+  }
 }
-

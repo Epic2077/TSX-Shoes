@@ -1,4 +1,11 @@
 import React from "react";
+import { useQuery } from "react-query";
+import { useSelector } from "react-redux";
+
+import axios from "axios";
+import { BASE_URL } from "../../api/Base";
+import { RootState } from "../../store";
+import { Address } from "node:cluster";
 import { useNavigate } from "react-router-dom";
 
 interface addressProps {
@@ -6,8 +13,24 @@ interface addressProps {
   address: string;
 }
 
-const AddressCart: React.FC<addressProps> = ({ title, address }) => {
+const AddressCart: React.FC<addressProps> = () => {
   const navigate = useNavigate();
+  const accessToken = useSelector((state: RootState) => state.auth.token);
+  const selectedAddressName = localStorage.getItem("selectedAddress");
+
+  const { data: addresses } = useQuery({
+    queryKey: ["addresses", selectedAddressName], // Add selectedAddressName to trigger refresh
+    queryFn: async () => {
+      const response = await axios.get<Address[]>(`${BASE_URL}/api/address`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      return response.data;
+    },
+  });
+
+  const selectedAddress = addresses?.find(
+    (addr) => addr.name === selectedAddressName
+  );
 
   return (
     <div className="bg-slate-50 w-full h-28 mt-6 rounded-3xl p-5 flex gap-4 items-center">
@@ -16,19 +39,26 @@ const AddressCart: React.FC<addressProps> = ({ title, address }) => {
           <img src="../../../src/assets/icons/location.svg" alt="location" />
         </div>
       </div>
-      <div className="grid justify-between">
-        <p className="text-lg font-semibold">{title}</p>
-        <p className="text-base text-gray-500">{address}</p>
+      <div>
+        <h1 className="font-semibold text-[24px]">
+          {selectedAddress?.name || "Add address"}
+        </h1>
+        <p className="text-gray-500">
+          {selectedAddress?.address || "Please select an address"}
+        </p>
       </div>
-      <div className="ml-auto flex gap-2">
+      <div
+        onClick={() => navigate("/Checkout/address")}
+        className="w-10 h-10 ml-auto rounded-full grid place-items-center cursor-pointer"
+      >
         <img
           src="../../../src/assets/icons/pen.svg"
-          alt="pen"
-          className="w-7 h-7"
-          onClick={() => navigate("/Checkout/Address")}
+          alt="edit"
+          className="w-6 h-6"
         />
       </div>
     </div>
   );
 };
+
 export default AddressCart;
