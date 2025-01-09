@@ -20,6 +20,7 @@ import Wishlist from "../components/wishlist/wishlist";
 import ShippingDelivery from "../modules/Shipping/Delivery";
 import SearchBox from "../layout/search-box/searchBox";
 import MostPopular from "../modules/most-popular/MostPopular.modules";
+import Profile from "../pages/profile/Profile";
 
 const RouterPage: React.FC = () => {
   return (
@@ -52,6 +53,8 @@ const RouterPage: React.FC = () => {
           <Route path="/Checkout/Address" element={<ShippingAddress />} />
           <Route path="/Checkout/Delivery" element={<ShippingDelivery />} />
         </Route>
+        <Route path="/Checkout/Payment" />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/Wishlist" element={<Wishlist />} />
       </Routes>
     </Router>
