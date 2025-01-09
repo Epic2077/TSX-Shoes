@@ -16,3 +16,5 @@ export async function getFromCart(accessToken: string): Promise<CartItem[]> {
     throw error;
   }
 }
+
+
