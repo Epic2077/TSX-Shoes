@@ -1,72 +1,15 @@
-// import React from "react";
-// import { LoginSchema } from "./LoginSchema";
-
-// // Define the form data structure
-// type FormData = {
-//   email: string;
-//   password: string;
-// };
-
-// // Define the error structure
-// type ErrorType = {
-//   email?: string;
-//   password?: string;
-// };
-
-// export const handleChange = (
-//   e: React.ChangeEvent<HTMLInputElement>,
-//   setFormData: React.Dispatch<React.SetStateAction<FormData>>,
-//   setError: React.Dispatch<React.SetStateAction<ErrorType>>,
-//   setIsButtonEnabled: React.Dispatch<React.SetStateAction<boolean>>
-// ) => {
-//   const { name, value } = e.target;
-
-//   setFormData((prev) => ({ ...prev, [name]: value }));
-
-//   setError((prev) => ({ ...prev, [name]: "" }));
-
-//   setIsButtonEnabled(value.length > 0);
-// };
-
-// // Handle form submission
-// export const handleSubmit = (
-//   e: React.FormEvent,
-//   formData: FormData,
-//   setError: React.Dispatch<React.SetStateAction<ErrorType>>
-// ) => {
-//   e.preventDefault();
-
-//   // Validate the form data using Zod schema
-//   const validResult = LoginSchema.safeParse(formData);
-//   if (!validResult.success) {
-//     const fieldError: { [key: string]: string } = {};
-//     validResult.error.errors.forEach((error) => {
-//       if (error.path[0]) {
-//         fieldError[error.path[0]] = error.message;
-//       }
-//     });
-
-//     // Update the error state
-//     setError(fieldError);
-//     return;
-//   }
-//   // Perform login action (e.g., API call or state update)
-//   console.log("Login successful", formData);
-// };
-
-
 import React from "react";
 import { LoginSchema } from "./LoginSchema";
 
 // Define the form data structure
 type FormData = {
-  email: string;
+  username: string;
   password: string;
 };
 
 // Define the error structure
 type ErrorType = {
-  email?: string;
+  username?: string;
   password?: string;
 };
 
@@ -79,9 +22,14 @@ export const handleChange = (
 ) => {
   const { name, value } = e.target;
 
-  setFormData((prev) => ({ ...prev, [name]: value }));
+  setFormData((prev) => {
+    const newData = { ...prev, [name]: value };
+    // Enable button only if both fields have values
+    setIsButtonEnabled(Boolean(newData.username && newData.password));
+    return newData;
+  });
+
   setError((prev) => ({ ...prev, [name]: "" }));
-  setIsButtonEnabled(value.length > 0);
 };
 
 // Handle form submission
@@ -94,7 +42,9 @@ export const handleSubmit = (
 
   // Retrieve lock time and failed attempts from localStorage
   const lockTimeFromStorage = localStorage.getItem("lockTime");
-  const failedAttemptsFromStorage = parseInt(localStorage.getItem("failedAttempts") || "0");
+  const failedAttemptsFromStorage = parseInt(
+    localStorage.getItem("failedAttempts") || "0"
+  );
 
   // If the account is locked
   if (lockTimeFromStorage) {

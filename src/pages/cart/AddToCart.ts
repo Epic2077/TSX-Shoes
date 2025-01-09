@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import axios, { AxiosError } from "axios";
 import { BASE_URL } from "../../api/Base";
+=======
+import axios from "axios";
+>>>>>>> Develop
 import { CartItem } from "../../types/CartItem.type";
+import { store } from "../../store";
 
+<<<<<<< HEAD
 export async function addToCart(
   cartItem: CartItem,
   accessToken: string
@@ -31,9 +37,18 @@ export async function addToCart(
       console.error("Unexpected error occurred:", error);
     }
     throw new Error("Failed to add item to cart. Please try again.");
-  }
-}
+=======
+const BASE_URL = "http://localhost:8000";
 
+export const addToCart = async (cartItem: CartItem) => {
+  const token = store.getState().auth.token;
+
+  if (!token) {
+    throw new Error("No authentication token found");
+>>>>>>> Develop
+  }
+
+<<<<<<< HEAD
 function handleAxiosError(error: AxiosError): void {
   const status = error.response?.status;
   const data = error.response?.data;
@@ -58,3 +73,14 @@ function handleAxiosError(error: AxiosError): void {
       console.error("An error occurred:", data || error.message);
   }
 }
+=======
+  const response = await axios.post(`${BASE_URL}/api/cart`, cartItem, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  return response.data;
+};
+>>>>>>> Develop

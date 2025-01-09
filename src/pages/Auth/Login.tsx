@@ -1,14 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { handleChange } from "../../components/Auth-components/loginFunction/FormHandler";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../../api/UserAuth";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/slices/AuthSlice";
+
+type LoginError = {
+  message: string;
+  status?: number;
+  errors?: Record<string, string>;
+};
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const message = location.state?.message;
 
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState<{ username?: string; password?: string }>(
@@ -60,33 +68,74 @@ const LoginPage: React.FC = () => {
         })
       );
 
-      const storage = document.getElementById("remember")?.checked
+      const storage = (document.getElementById("remember") as HTMLInputElement)
+        ?.checked
         ? localStorage
         : sessionStorage;
 
       storage.setItem("user", formData.username);
 
       navigate("/Home");
-    } catch (err: any) {
-      //Handle Errors
+    } catch (err: unknown) {
+      const error = err as LoginError;
 
-      if (err.message === "Invalid credentials") {
-        setError((prev) => ({
-          ...prev,
-          username: "Invalid credentials",
-          password: "Invalid credentials",
-        }));
-      } else {
-        console.error("An unexpected error occurred: ", err);
+      switch (error.status) {
+        case 401:
+          setError((prev) => ({
+            ...prev,
+            username: "Invalid UserName or Password",
+            password: "Invalid UserName or Password",
+          }));
+          break;
+
+        case 429:
+          setError((prev) => ({
+            ...prev,
+            username: "Too many attempts. Please try again later.",
+          }));
+          break;
+
+        case 400:
+          // Handle validation errors from server
+          if (error.errors) {
+            setError((prev) => ({
+              ...prev,
+              ...error.errors,
+            }));
+          }
+          break;
+
+        default:
+          setError((prev) => ({
+            ...prev,
+            username:
+              error.message ||
+              "An unexpected error occurred. Please try again.",
+          }));
+          console.error("Login error:", {
+            status: error.status,
+            message: error.message,
+            details: error,
+          });
       }
     }
   };
   return (
     <div className="px-6 py-[67px]">
+      {message && (
+        <div className="mb-4 p-4 bg-yellow-100 text-yellow-800 rounded-lg">
+          {message}
+        </div>
+      )}
       <h1 className="text-center font-semibold text-[32px] text-black">
         Login to Your Account
       </h1>
       <form action="" className="mt-11" onSubmit={handleSubmit}>
+        {error.username && (
+          <p className="text-[#C50A0A] text-sm mt-1 text-center">
+            {error.username}
+          </p>
+        )}
         {/* username Input */}
         <div className="mb-4">
           <div className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded mb-[21px]">
@@ -103,9 +152,6 @@ const LoginPage: React.FC = () => {
               placeholder="Username"
             />
           </div>
-          {error.username && (
-            <p className="text-[#C50A0A] text-sm mt-1">{error.username}</p>
-          )}
         </div>
 
         {/* Password Input */}
