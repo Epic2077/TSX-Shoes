@@ -56,11 +56,7 @@ const FormLayout: React.FC = () => {
         lastName: formData.lastName,
         password: formData.password,
         phone: formData.phone,
-<<<<<<< HEAD
         });
-=======
-      });
->>>>>>> Develop
 
       toast.success("Signup successful!", {
         position: "top-center",
