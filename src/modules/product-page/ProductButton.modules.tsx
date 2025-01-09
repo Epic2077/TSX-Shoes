@@ -1,5 +1,19 @@
-import { Product } from "../../types/Product.type";
-import { Flip, toast, ToastContainer } from "react-toastify";
+import { useContext } from "react";
+import { useSelector } from "react-redux";
+import { CartContext } from "../../providers/CartProvider";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import {
+  notifyA,
+  notifyB,
+  notifyC,
+} from "../../components/cart-components/Cart.Toastifies";
+
+interface RootState {
+  auth: {
+    token: string;
+  };
+}
 
 type Props = {
   product: Product;
@@ -10,52 +24,42 @@ type Props = {
 };
 
 const ProductButton = ({
+  productId,
   selectedSize,
   selectedColor,
   onClick,
   isLoading,
 }: Props) => {
-  //   ======== React Toastify ==========
+  const { cart } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  const notifyA = () => {
-    toast.success("Product Added to Cart Successfully", {
-      position: "bottom-center",
-      autoClose: 3000,
-      containerId: "A",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Flip,
-    });
-  };
-
-  const notifyB = () => {
-    toast.warn("Please Select Size and Color !", {
-      position: "bottom-center",
-      autoClose: 3000,
-      containerId: "B",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Flip,
-    });
-  };
-
+  const accessToken = useSelector((state: RootState) => state.auth.token);
+  
   // =========== Handlers ============
 
   const handleAddToCart = () => {
-    if (selectedSize === null || selectedColor === null) {
-      notifyB();
+    if (!accessToken) {
+      console.log("User is not authenticated");
+      notifyC();
+      setTimeout(() => {
+        navigate("/Auth/Login");
+      }, 3000);
       return;
+    } else {
+      if (selectedSize === null || selectedColor === null) {
+        console.log("Selected size or color is missing");
+        notifyB();
+        return;
+      }
+
+      console.log("Adding product to cart:", {
+        productId,
+        selectedSize,
+        selectedColor,
+      });
+      onClick();
+      notifyA();
     }
-    onClick();
-    notifyA();
   };
 
   return (
@@ -82,6 +86,7 @@ const ProductButton = ({
       </button>
       <ToastContainer containerId="A" />
       <ToastContainer containerId="B" />
+      <ToastContainer containerId="C" />
     </>
   );
 };

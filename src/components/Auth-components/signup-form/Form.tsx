@@ -47,7 +47,7 @@ const FormLayout: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    console.log(formData)
     try {
       await userSignup({
         username: formData.username,
@@ -56,7 +56,7 @@ const FormLayout: React.FC = () => {
         lastName: formData.lastName,
         password: formData.password,
         phone: formData.phone,
-      });
+        });
 
       toast.success("Signup successful!", {
         position: "top-center",

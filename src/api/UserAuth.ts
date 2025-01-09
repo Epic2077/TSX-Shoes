@@ -29,6 +29,7 @@ export type UserRegisterData = {
   phone: string;
 };
 export const userSignup = async (data: UserRegisterData) => {
+  console.log(data)
   try {
     const response = await axios.post(`${BASE_URL}/auth/register`, data);
     return response.data;

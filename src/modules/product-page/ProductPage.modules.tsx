@@ -12,6 +12,7 @@ import ProductImages from "./ProductImages.modules";
 import { useMutation } from "react-query";
 import { addToCart } from "../../pages/cart/AddToCart";
 import { CartItem } from "../../types/CartItem.type";
+import { notifyA, notifyB, notifyC } from "../../components/cart-components/Cart.Toastifies";
 
 // ======== Error Component ========
 const ErrorComponent = ({ message }: { message: string }) => (
@@ -35,29 +36,43 @@ const ProductPage = () => {
   if (!product) return <ErrorComponent message="No product found." />;
 
   const handleCartMutation = () => {
-    if (!selectedSize || !selectedColor) {
-      return; // Don't proceed if size or color isn't selected
+    try {
+      if (!product?.id) {
+        console.error("Product or Product ID is undefined");
+        notifyB();
+        return;
+      }
+  
+      if (!selectedSize || !selectedColor) {
+        console.error("Selected size or color is missing");
+        notifyB();
+        return;
+      }
+  
+      const newCartItem = {
+        productId: product.id,
+        count: 1,
+        size: selectedSize,
+        color: selectedColor,
+      };
+
+      mutate(newCartItem, {
+        onSuccess: (data) => {
+          console.log("Item added to cart successfully", data);
+          notifyA();
+        },
+        onError: (error) => {
+          console.error("Error adding item to cart", error);
+          notifyC();
+        },
+      });
+    } catch (error) {
+      console.error("Unexpected error during cart mutation", error);
+      notifyC();
     }
-
-    const newCartItem: CartItem = {
-      productId: Number(product.id),
-      count: 1,
-      size: selectedSize,
-      color: selectedColor,
-    };
-
-    mutate(newCartItem, {
-      onSuccess: (data) => {
-        console.log("Item added to cart", data);
-        // Add success toast notification here
-      },
-      onError: (error) => {
-        console.error("Error adding item to cart", error);
-        // Add error toast notification here
-      },
-    });
   };
-
+  
+  
   return (
     <>
       {/* ======== Product Image ======== */}
