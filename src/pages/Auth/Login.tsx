@@ -81,8 +81,8 @@ const LoginPage: React.FC = () => {
         case 401:
           setError((prev) => ({
             ...prev,
-            username: "Invalid credentials",
-            password: "Invalid credentials",
+            username: "Invalid UserName or Password",
+            password: "Invalid UserName or Password",
           }));
           break;
 
@@ -124,6 +124,11 @@ const LoginPage: React.FC = () => {
         Login to Your Account
       </h1>
       <form action="" className="mt-11" onSubmit={handleSubmit}>
+        {error.username && (
+          <p className="text-[#C50A0A] text-sm mt-1 text-center">
+            {error.username}
+          </p>
+        )}
         {/* username Input */}
         <div className="mb-4">
           <div className="w-full h-[37px] bg-[#FAFAFA] flex p-[13px] items-center rounded mb-[21px]">
@@ -140,9 +145,6 @@ const LoginPage: React.FC = () => {
               placeholder="Username"
             />
           </div>
-          {error.username && (
-            <p className="text-[#C50A0A] text-sm mt-1">{error.username}</p>
-          )}
         </div>
 
         {/* Password Input */}
