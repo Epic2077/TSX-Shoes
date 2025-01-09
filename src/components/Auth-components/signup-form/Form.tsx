@@ -9,7 +9,6 @@ const FormLayout: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    id: "",
     username: "",
     email: "",
     name: "",
@@ -17,7 +16,6 @@ const FormLayout: React.FC = () => {
     password: "",
     confirmPass: "",
     phone: "",
-    gender: "",
   });
   const [error, setError] = useState<{
     username?: string;
@@ -43,16 +41,16 @@ const FormLayout: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    console.log(formData)
     try {
-      await userSignup(
-        formData.username,
-        formData.email,
-        formData.name,
-        formData.lastName,
-        formData.password,
-        formData.phone
-      );
+      await userSignup({
+        username: formData.username,
+        email: formData.email,
+        firstName: formData.name,
+        lastName: formData.lastName,
+        password: formData.password,
+        phone: formData.phone,
+        });
 
       toast.success("Signup successful!", {
         position: "top-center",
