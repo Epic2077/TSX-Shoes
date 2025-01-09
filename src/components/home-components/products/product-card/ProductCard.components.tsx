@@ -13,7 +13,7 @@ const ProductCard = ({ product }: Props) => {
     >
       <div className="rounded-3xl w-[182px] h-[182px]">
         <img
-          src={product.images[1]}
+          src={product.images[0]}
           alt={product.name}
           className="w-full h-full rounded-3xl"
         />

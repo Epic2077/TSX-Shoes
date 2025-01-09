@@ -22,9 +22,14 @@ export const handleChange = (
 ) => {
   const { name, value } = e.target;
 
-  setFormData((prev) => ({ ...prev, [name]: value }));
+  setFormData((prev) => {
+    const newData = { ...prev, [name]: value };
+    // Enable button only if both fields have values
+    setIsButtonEnabled(Boolean(newData.username && newData.password));
+    return newData;
+  });
+
   setError((prev) => ({ ...prev, [name]: "" }));
-  setIsButtonEnabled(value.length > 0);
 };
 
 // Handle form submission

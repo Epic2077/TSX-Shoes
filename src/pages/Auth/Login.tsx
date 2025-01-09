@@ -1,9 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { handleChange } from "../../components/Auth-components/loginFunction/FormHandler";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../api/UserAuth";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/slices/AuthSlice";
+
+type LoginError = {
+  message: string;
+  status?: number;
+};
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -60,24 +65,26 @@ const LoginPage: React.FC = () => {
         })
       );
 
-      const storage = document.getElementById("remember")?.checked
+      const storage = (document.getElementById("remember") as HTMLInputElement)
+        ?.checked
         ? localStorage
         : sessionStorage;
 
       storage.setItem("user", formData.username);
 
       navigate("/Home");
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const error = err as LoginError;
       //Handle Errors
 
-      if (err.message === "Invalid credentials") {
+      if (error.message === "Invalid credentials") {
         setError((prev) => ({
           ...prev,
           username: "Invalid credentials",
           password: "Invalid credentials",
         }));
       } else {
-        console.error("An unexpected error occurred: ", err);
+        console.error("An unexpected error occurred: ", error);
       }
     }
   };
