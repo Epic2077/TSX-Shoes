@@ -8,7 +8,11 @@ const PagesLayout: React.FC = () => {
   const name = location.pathname.toLowerCase();
   return (
     <div>
-      <header className={`${name.includes("home") ? "hidden" : "block"}`}>
+      <header
+        className={`${
+          name.includes("home") || name.includes("profile") ? "hidden" : "block"
+        }`}
+      >
         <CartOrderHeader
           name={name.includes("cart") ? "My Cart" : "My Orders"}
         />

@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto">
+    <div className="p-6 max-w-lg mx-auto min-h-screen">
       {/* Profile Header */}
       <div className="flex flex-col items-center mb-8">
         <div className="w-32 h-32 rounded-full bg-gray-200 overflow-hidden mb-4">
@@ -58,7 +58,7 @@ const Profile: React.FC = () => {
       {/* Sign Out Button */}
       <button
         onClick={handleSignOut}
-        className="w-full bg-black text-white rounded-full py-4 mt-6"
+        className="w-full bg-black text-white rounded-full py-4 mt-80"
       >
         Sign Out
       </button>
