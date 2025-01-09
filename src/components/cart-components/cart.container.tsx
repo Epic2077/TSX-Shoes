@@ -125,24 +125,27 @@ const CartContainer: React.FC = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-lg border-t border-gray-200">
-        <div className="px-6 py-4 space-y-4">
+      <div className="fixed bottom-[66px] left-0 right-0 bg-white rounded-t-3xl shadow-lg border-t border-gray-200">
+        <div className="px-6 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-gray-500 text-sm">Total Price</p>
-              <p className="text-2xl font-bold">${cartTotal.toFixed(2)}</p>
+              <p className="text-[15px] text-slate-400">Total Price</p>
+              <p className="font-semibold text-[30px]">
+                ${cartTotal.toFixed(2)}
+              </p>
             </div>
-            <div className="text-right">
-              <p className="text-gray-500 text-sm">{cartItems.length} items</p>
-            </div>
+            <button
+              onClick={() => navigate("/Checkout")}
+              className="bg-black flex text-white px-8 h-14 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors w-full ml-6 justify-center items-center gap-4 "
+            >
+              CheckOut{" "}
+              <img
+                src="../../../src/assets/icons/right-flash.svg"
+                alt="right-arrow"
+                className="w-6 h-6"
+              />
+            </button>
           </div>
-
-          <button
-            onClick={() => navigate("/Checkout")}
-            className="w-full bg-black text-white h-12 rounded-full text-lg font-semibold hover:bg-gray-800 transition-colors"
-          >
-            Proceed to Checkout
-          </button>
         </div>
       </div>
     </div>
