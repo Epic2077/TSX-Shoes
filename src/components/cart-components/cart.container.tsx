@@ -1,5 +1,5 @@
-import React from "react";
-import { useQuery } from "react-query";
+import React, { useEffect, useRef } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,6 +15,8 @@ const CartContainer: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const accessToken = useSelector((state: RootState) => state.auth.token);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const queryClient = useQueryClient();
 
   const {
     data: cartItems,
@@ -62,6 +64,75 @@ const CartContainer: React.FC = () => {
       },
     }
   );
+
+  const handleUpdateQuantity = (productId: number, newQuantity: number) => {
+    console.log(`Updating quantity for product ${productId} to ${newQuantity}`);
+
+    queryClient.setQueryData<CartItem[]>(["cart", accessToken], (prevItems) =>
+      prevItems?.map((item) =>
+        item.productId === productId.toString()
+          ? { ...item, count: newQuantity }
+          : item
+      )
+    );
+
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    // Set new timeout for server update
+    timeoutRef.current = setTimeout(async () => {
+      try {
+        // Log the current cart data for debugging
+        const currentCart = queryClient.getQueryData<CartItem[]>([
+          "cart",
+          accessToken,
+        ]);
+        console.log("Current cart data:", currentCart);
+
+        const currentItem = currentCart?.find(
+          (item) => item.productId === productId.toString()
+        );
+
+        if (!currentItem) {
+          console.error(
+            `Item with productId ${productId} not found in cart data`
+          );
+          throw new Error("Item not found in cart");
+        }
+
+        console.log("Found item:", currentItem); // Debug log
+
+        await axios.put(
+          `${BASE_URL}/api/cart/${productId}`,
+          {
+            count: newQuantity,
+            color: currentItem.color,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("Successfully updated quantity on server");
+      } catch (error) {
+        console.error("Failed to update quantity:", error);
+        // Optionally handle error (e.g., revert quantity)
+      }
+    }, 3000);
+  };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -119,6 +190,9 @@ const CartContainer: React.FC = () => {
                 quantity={item.count}
                 size={item.size}
                 color={item.color}
+                onUpdateQuantity={(newQuantity) =>
+                  handleUpdateQuantity(item.productId, newQuantity)
+                }
               />
             );
           })}

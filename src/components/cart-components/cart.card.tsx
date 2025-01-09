@@ -7,19 +7,28 @@ interface CartCardProps {
   quantity: number;
   size: number;
   color: string;
+  onUpdateQuantity?: (newQuantity: number) => void;
 }
 
 const CartCard: React.FC<CartCardProps> = ({
   product,
-  quantity,
+  quantity: initialQuantity,
   size,
   color,
+  onUpdateQuantity,
 }) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [deleteCart, setDeleteCart] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState<number>(initialQuantity);
 
   const handleDeleteClick = () => setShowDeleteModal(true);
   const handleCloseModal = () => setShowDeleteModal(false);
+
+  const handleQuantityChange = (change: number) => {
+    const newQuantity = Math.max(1, quantity + change);
+    setQuantity(newQuantity);
+    onUpdateQuantity?.(newQuantity);
+  };
 
   return (
     <>
@@ -63,8 +72,21 @@ const CartCard: React.FC<CartCardProps> = ({
             <p className="text-xl font-semibold">
               ${(product.price * quantity).toFixed(2)}
             </p>
-            <div className="flex items-center gap-3">
-              <p className="text-sm text-gray-500">Quantity: {quantity}</p>
+            <div className="flex items-center gap-3 bg-gray-200 rounded-full px-2 py-1">
+              <button
+                onClick={() => handleQuantityChange(-1)}
+                className="w-6 h-6 flex items-center justify-center rounded-full text-black bg-gray-200"
+                disabled={quantity <= 1}
+              >
+                -
+              </button>
+              <p className="text-sm text-black">{quantity}</p>
+              <button
+                onClick={() => handleQuantityChange(1)}
+                className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200"
+              >
+                +
+              </button>
             </div>
           </div>
         </div>
