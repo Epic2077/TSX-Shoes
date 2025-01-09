@@ -125,6 +125,43 @@ const CartContainer: React.FC = () => {
     }, 3000);
   };
 
+  const handleRemoveFromCart = async (productId: number) => {
+    console.log(`Removing product ${productId} from cart`);
+
+    try {
+      const response = await axios.delete(`${BASE_URL}/api/cart/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Log the response to see what we're getting
+      console.log("Server response:", response);
+
+      // Only invalidate if the request was successful
+      if (response.status === 200 || response.status === 204) {
+        console.log("Successfully removed item from cart");
+
+        // Update local cache first
+        queryClient.setQueryData<CartItem[]>(
+          ["cart", accessToken],
+          (prevItems) =>
+            prevItems?.filter((item) => item.productId !== productId.toString())
+        );
+
+        // Then refetch from server
+        await queryClient.invalidateQueries(["cart", accessToken]);
+      }
+    } catch (error) {
+      console.error("Failed to remove item from cart:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Response data:", error.response?.data);
+        console.error("Response status:", error.response?.status);
+      }
+    }
+  };
+
   // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
@@ -155,7 +192,7 @@ const CartContainer: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh] px-6">
         <img
-          src="/src/assets/icons/empty-cart.svg"
+          src="/src/assets/footer-icons/Cart.svg"
           alt="Empty Cart"
           className="w-32 h-32 mb-4"
         />
@@ -193,6 +230,7 @@ const CartContainer: React.FC = () => {
                 onUpdateQuantity={(newQuantity) =>
                   handleUpdateQuantity(item.productId, newQuantity)
                 }
+                onRemove={() => handleRemoveFromCart(Number(item.productId))}
               />
             );
           })}

@@ -41,9 +41,7 @@ const ProductsContainer = ({ products: propProducts, activeFilter }: Props) => {
   return (
     <div className="flex flex-wrap gap-4 justify-center mt-4">
       {filterProducts.map((product) => (
-        <>
-          <ProductCard key={product.id} product={product} />
-        </>
+        <ProductCard key={product.id} product={product} />
       ))}
     </div>
   );
