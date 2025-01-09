@@ -97,7 +97,7 @@ const CartContainer: React.FC = () => {
 
         if (!currentItem) {
           console.error(
-            `Item with productId ${productId} not found in cart data`
+            `Item with productId ${productId} not found in cart data. With the link of ${BASE_URL}/api/cart/${productId}`
           );
           throw new Error("Item not found in cart");
         }
