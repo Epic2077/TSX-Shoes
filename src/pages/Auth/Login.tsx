@@ -8,6 +8,7 @@ import { setCredentials } from "../../store/slices/AuthSlice";
 type LoginError = {
   message: string;
   status?: number;
+  errors?: Record<string, string>;
 };
 
 const LoginPage: React.FC = () => {
@@ -75,16 +76,45 @@ const LoginPage: React.FC = () => {
       navigate("/Home");
     } catch (err: unknown) {
       const error = err as LoginError;
-      //Handle Errors
 
-      if (error.message === "Invalid credentials") {
-        setError((prev) => ({
-          ...prev,
-          username: "Invalid credentials",
-          password: "Invalid credentials",
-        }));
-      } else {
-        console.error("An unexpected error occurred: ", error);
+      switch (error.status) {
+        case 401:
+          setError((prev) => ({
+            ...prev,
+            username: "Invalid credentials",
+            password: "Invalid credentials",
+          }));
+          break;
+
+        case 429:
+          setError((prev) => ({
+            ...prev,
+            username: "Too many attempts. Please try again later.",
+          }));
+          break;
+
+        case 400:
+          // Handle validation errors from server
+          if (error.errors) {
+            setError((prev) => ({
+              ...prev,
+              ...error.errors,
+            }));
+          }
+          break;
+
+        default:
+          setError((prev) => ({
+            ...prev,
+            username:
+              error.message ||
+              "An unexpected error occurred. Please try again.",
+          }));
+          console.error("Login error:", {
+            status: error.status,
+            message: error.message,
+            details: error,
+          });
       }
     }
   };
