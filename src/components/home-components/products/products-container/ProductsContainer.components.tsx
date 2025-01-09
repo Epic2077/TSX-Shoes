@@ -8,7 +8,11 @@ interface Props {
 }
 
 const ProductsContainer = ({ products: propProducts, activeFilter }: Props) => {
-  const { data: apiProducts, isLoading, isError } = useProducts(propProducts || []);
+  const {
+    data: apiProducts,
+    isLoading,
+    isError,
+  } = useProducts(propProducts || []);
 
   const products = propProducts || apiProducts;
 
@@ -30,12 +34,16 @@ const ProductsContainer = ({ products: propProducts, activeFilter }: Props) => {
   const filterProducts =
     (activeFilter || []).length === 0
       ? products
-      : products.filter((product) => activeFilter?.includes(product.brand.name));
+      : products.filter((product) =>
+          activeFilter?.includes(product.brand.name)
+        );
 
   return (
     <div className="flex flex-wrap gap-4 justify-center mt-4">
       {filterProducts.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <>
+          <ProductCard key={product.id} product={product} />
+        </>
       ))}
     </div>
   );
