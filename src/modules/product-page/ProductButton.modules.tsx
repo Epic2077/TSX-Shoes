@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { CartContext } from "../../providers/CartProvider";
@@ -15,10 +14,6 @@ interface RootState {
     token: string;
   };
 }
-=======
-import { Product } from "../../types/Product.type";
-import { Flip, toast, ToastContainer } from "react-toastify";
->>>>>>> Develop
 
 type Props = {
   product: Product;
@@ -29,55 +24,17 @@ type Props = {
 };
 
 const ProductButton = ({
-<<<<<<< HEAD
   productId,
-=======
->>>>>>> Develop
   selectedSize,
   selectedColor,
   onClick,
   isLoading,
 }: Props) => {
-<<<<<<< HEAD
   const { cart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const accessToken = useSelector((state: RootState) => state.auth.token);
   
-=======
-  //   ======== React Toastify ==========
-
-  const notifyA = () => {
-    toast.success("Product Added to Cart Successfully", {
-      position: "bottom-center",
-      autoClose: 3000,
-      containerId: "A",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Flip,
-    });
-  };
-
-  const notifyB = () => {
-    toast.warn("Please Select Size and Color !", {
-      position: "bottom-center",
-      autoClose: 3000,
-      containerId: "B",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Flip,
-    });
-  };
-
->>>>>>> Develop
   // =========== Handlers ============
 
   const handleAddToCart = () => {

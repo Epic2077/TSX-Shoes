@@ -36,7 +36,6 @@ const ProductPage = () => {
   if (!product) return <ErrorComponent message="No product found." />;
 
   const handleCartMutation = () => {
-<<<<<<< HEAD
     try {
       if (!product?.id) {
         console.error("Product or Product ID is undefined");
@@ -74,31 +73,6 @@ const ProductPage = () => {
   };
   
   
-=======
-    if (!selectedSize || !selectedColor) {
-      return; // Don't proceed if size or color isn't selected
-    }
-
-    const newCartItem: CartItem = {
-      productId: Number(product.id),
-      count: 1,
-      size: selectedSize,
-      color: selectedColor,
-    };
-
-    mutate(newCartItem, {
-      onSuccess: (data) => {
-        console.log("Item added to cart", data);
-        // Add success toast notification here
-      },
-      onError: (error) => {
-        console.error("Error adding item to cart", error);
-        // Add error toast notification here
-      },
-    });
-  };
-
->>>>>>> Develop
   return (
     <>
       {/* ======== Product Image ======== */}
