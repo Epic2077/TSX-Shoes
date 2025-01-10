@@ -10,7 +10,11 @@ const PagesLayout: React.FC = () => {
     <div>
       <header
         className={`${
-          name.includes("home") || name.includes("profile") ? "hidden" : "block"
+          name.includes("home") ||
+          name.includes("profile") ||
+          name.includes("wallet")
+            ? "hidden"
+            : "block"
         }`}
       >
         <CartOrderHeader

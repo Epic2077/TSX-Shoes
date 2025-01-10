@@ -21,6 +21,7 @@ import ShippingDelivery from "../modules/Shipping/Delivery";
 import SearchBox from "../layout/search-box/searchBox";
 import MostPopular from "../modules/most-popular/MostPopular.modules";
 import Profile from "../pages/profile/Profile";
+import Wallet from "../pages/Wallet/Wallet";
 
 const RouterPage: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const RouterPage: React.FC = () => {
           <Route path="/Cart" element={<CartPage />} />
           <Route path="/Orders" />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/Wallet" element={<Wallet />} />
         </Route>
         <Route path="/Home/search" element={<SearchBox />} />
         <Route path="/Auth" element={<AuthLayout address="/Home" />}>
@@ -54,7 +56,6 @@ const RouterPage: React.FC = () => {
           <Route path="/Checkout/Address" element={<ShippingAddress />} />
           <Route path="/Checkout/Delivery" element={<ShippingDelivery />} />
         </Route>
-        <Route path="/Checkout/Payment" />
         <Route path="/Wishlist" element={<Wishlist />} />
       </Routes>
     </Router>

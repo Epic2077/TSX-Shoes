@@ -6,6 +6,7 @@ import { BASE_URL } from "../../api/Base";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 interface Discount {
   discount: number;
@@ -17,6 +18,7 @@ interface CartItem {
 }
 
 const PromoCode: React.FC = () => {
+  const navigate = useNavigate();
   const [promoCode, setPromoCode] = useState("");
   const [appliedDiscount, setAppliedDiscount] = useState<Discount | null>(null);
   const accessToken = useSelector((state: RootState) => state.auth.token);
@@ -137,7 +139,10 @@ const PromoCode: React.FC = () => {
         </div>
       </div>
 
-      <button className="w-full bg-black text-white rounded-full py-4 mt-6">
+      <button
+        className="w-full bg-black text-white rounded-full py-4 mt-6"
+        onClick={() => navigate("/Wallet")}
+      >
         Continue to Payment
       </button>
     </div>

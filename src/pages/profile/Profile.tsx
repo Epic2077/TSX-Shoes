@@ -8,7 +8,7 @@ import { logout } from "../../store/slices/AuthSlice";
 const Profile: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, token } = useSelector((state: RootState) => state.auth);
+  const { username, token } = useSelector((state: RootState) => state.auth);
 
   const handleSignOut = () => {
     // Clear redux state
@@ -35,16 +35,14 @@ const Profile: React.FC = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <h1 className="text-2xl font-semibold">
-          {user} {user}
-        </h1>
+        <h1 className="text-2xl font-semibold">{username}</h1>
       </div>
 
       {/* Profile Details */}
       <div className="bg-slate-50 rounded-3xl p-6 space-y-4">
         <div>
           <label className="text-gray-600 text-sm">UserName</label>
-          <p className="font-semibold">{user || "Not provided"}</p>
+          <p className="font-semibold">{username || "Not provided"}</p>
         </div>
 
         <div>
