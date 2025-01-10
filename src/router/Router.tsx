@@ -20,6 +20,9 @@ import Wishlist from "../components/wishlist/wishlist";
 import ShippingDelivery from "../modules/Shipping/Delivery";
 import SearchBox from "../layout/search-box/searchBox";
 import MostPopular from "../modules/most-popular/MostPopular.modules";
+import Profile from "../pages/profile/Profile";
+import Wallet from "../pages/Wallet/Wallet";
+import Order from "../pages/Order/Order";
 
 const RouterPage: React.FC = () => {
   return (
@@ -30,7 +33,9 @@ const RouterPage: React.FC = () => {
         <Route path="" element={<PagesLayout />}>
           <Route path="/Home" element={<Home />} />
           <Route path="/Cart" element={<CartPage />} />
-          <Route path="/Orders" />
+          <Route path="/Orders" element={<Order />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/Wallet" element={<Wallet />} />
         </Route>
         <Route path="/Home/search" element={<SearchBox />} />
         <Route path="/Auth" element={<AuthLayout address="/Home" />}>

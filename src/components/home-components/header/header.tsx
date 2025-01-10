@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-// import { isUserLoggedIn } from "../../../api/UserAuth";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
 const HomeHeader: React.FC = () => {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState<string | null>(null);
+  const user = useSelector((state: RootState) => state.auth.username);
 
-  useEffect(() => {
-    const checkLoginStatus = () => {
-      const storedUser =
-        localStorage.getItem("user") || sessionStorage.getItem("user");
-
-      if (storedUser) {
-        setUserName(storedUser);
-      }
-    };
-    checkLoginStatus();
-  }, []);
+  const handleUserClick = () => {
+    if (user) {
+      navigate("/profile"); // Navigate to profile if user exists
+    } else {
+      navigate("/Auth/Login"); // Navigate to login if no user
+    }
+  };
 
   return (
     <header className="flex justify-between items-center">
@@ -34,9 +31,9 @@ const HomeHeader: React.FC = () => {
           </p>
           <p
             className="font-bold text-base cursor-pointer"
-            onClick={() => navigate("/Auth/Login")}
+            onClick={handleUserClick}
           >
-            {userName ? userName : "Sign In"}
+            {user ? user : "Sign In"}
           </p>
         </div>
       </div>
